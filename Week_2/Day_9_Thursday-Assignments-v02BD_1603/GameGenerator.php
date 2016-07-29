@@ -3,14 +3,14 @@ class GameGenerator
 {
 	private $numbers_1 = array(25, 50, 75, 100);
 	private	$numbers_2 = array(1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10);
+	private $_3_digit_number;
 	//random number of tobe selected from first list
 	private $tobe_selected_first ;
 	private $tobe_selected_second ;
 	private $all_selected = array();
 
 	function __construct()
-	{
-		
+	{	
 		$this->tobe_selected_first = rand( 1, 4);
 		$this->tobe_selected_second = (6-$this->tobe_selected_first);	
 
@@ -48,11 +48,25 @@ class GameGenerator
 			$this->tobe_selected_second--;
 		}
 
+		$this->_3_digit_number = rand(101,999);
+
 	}
 
-	function _print()
+	function _print_numbers_list()
 	{
 		print_r($this->all_selected);
+	}
+
+//to have an object for transfer data-------------------------------------
+
+	function _get_numbers_list()
+	{
+		return $this->all_selected ;
+	}
+
+	function _get_3digit_number()
+	{
+		return $this->_3_digit_number ;
 	}
 }
 ?>
