@@ -13,15 +13,38 @@ class GameOutput
 		echo "}\n";
 		echo "Target:".$solved_game->_get_3dnumber()."\n";
 		$status="";
-		//if()
-		echo "Solution [Exact]:\n";
-		echo $solved_game->_get_solution()."\n";
+		if($solved_game->_get_3dnumber() == $solved_game->_get_solution())
+			echo "Solution [Exact]:\n";
+		else
+			echo "[Remaining: +".($solved_game->_get_3dnumber() - $solved_game->_get_solution() )."]:\n";
+		echo $this->infix($solved_game->_get_solution_postfix())."\n";
 		echo "------\n";
 
 		$number++;
 	}
 
+
+	private function infix($exp) 
+	{
+		$stack = new SplStack();
+		for($i=0; $i<sizeof($exp); $i++)
+		{
+		    if(is_numeric($exp[$i]))
+		    $stack->push($exp[$i]);
+		    else
+		    {
+
+		        $second_operand =  $stack->pop();
+		        $first_operand =  $stack->pop();
+		        $stack->push(("(".$first_operand.$exp[$i].$second_operand.")"));
+
+		    }
+		}
+
+		return ($stack->pop());
+	}
  
+   
  
 
 }

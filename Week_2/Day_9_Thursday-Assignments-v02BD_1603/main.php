@@ -8,7 +8,6 @@ if(!is_numeric($number_of_games) || $number_of_games<1)
 	exit("Bad input!\n");
 
 $games = array();
-$solved_games = array();
 
 while($number_of_games>0)
 {
@@ -20,12 +19,8 @@ while($number_of_games>0)
 while(!empty($games))
 {
 	$game = array_pop($games);
-	array_push($solved_games,new GameSolver($game));
+	new GameSolver($game);
 }
-//sending solved_games to gameoutput to print results
-while(!empty($solved_games))
-{	
-	$solved_game = array_pop($solved_games);
-	new GameOutput($solved_game);
-}
+
+
 ?>
