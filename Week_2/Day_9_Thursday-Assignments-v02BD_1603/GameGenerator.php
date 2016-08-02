@@ -48,15 +48,11 @@ class GameGenerator
 		$this->_3_digit_number = rand(101,999);
 	}
 
-	function _print_numbers_list()
-	{
-		print_r($this->all_selected);
-	}
-	function _get_numbers_list()
+	function getNumbersList()
 	{
 		return $this->all_selected ;
 	}
-	function _get_3digit_number()
+	function get3digitNumber()
 	{
 		return $this->_3_digit_number ;
 	}

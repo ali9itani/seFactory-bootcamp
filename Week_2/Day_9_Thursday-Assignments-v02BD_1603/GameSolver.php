@@ -3,21 +3,18 @@ class GameSolver
 {
 	private $numbers_list;
 	private $_3digit_number;
-	private $solution;
+	private $solution=0;
 	private $solution_postfix;
 	private $GameGenerator_Object;
-	
+		
 	function GameSolver(GameGenerator $game)
 	{
-		$this->solution=0;
-		$this->solution_postfix="";
-		$this->numbers_list = $game->_get_numbers_list();
-		$this->_3digit_number = $game->_get_3digit_number();
-		
+		$this->numbers_list = $game->getNumbersList();
+		$this->_3digit_number = $game->get3digitNumber();
 		//sending one digit and remaining digits
 		for($i=0;$i<sizeof($this->numbers_list);$i++)
 		{	
-		 	$exp=array();
+			$exp=array();
 			array_push($exp, $this->numbers_list[$i]);
 			$left_nbs = array();
 			for($j=0;$j<sizeof($this->numbers_list);$j++)
@@ -31,38 +28,38 @@ class GameSolver
 		//using game output to print results
 		new GameOutput($this);
 	}
-	function _numbers_list()
+	function getNumbersList()
 	{
 		return $this->numbers_list;
 	}
-	function _get_3dnumber()
+	function get3dNumber()
 	{
 		return $this->_3digit_number;
 	}
-	function _get_solution()
+	function getSolution()
 	{
 		return $this->solution;
 	}
-	function _get_solution_postfix()
+	function getSolutionPostfix()
 	{
 		return $this->solution_postfix;
 	}
-	private function accepts_operator($exp)
+	private function acceptsOperator($exp)
 	{
 		$n = 0;
 		//count of digits must more than operators by 2 to allow new operator
-	    for($i=0; $i<sizeof($exp); $i++)
+		for($i=0; $i<sizeof($exp); $i++)
 		{
 			if(is_numeric($exp[$i]))
-			$n++;
+				$n++;
 			else
 			{
 				$n--;
 			}
 		}
-	    return $n > 1;
+		    return $n > 1;
 	}
-	//search for all possible solutions in postfix notation
+		//search for all possible solutions in postfix notation
 	private function finder($exp, $list)
 	{
 		//to stop all running recurison functions if a solution found 
@@ -72,12 +69,12 @@ class GameSolver
 		}
 		$list2=array('+','*','-','/');
 		//if accepts add from array2(+,-,*,/)
-		if($this->accepts_operator($exp))
+		if($this->acceptsOperator($exp))
 		{
 			for($i=0;$i<sizeof($list2);$i++)
 			{
 				array_push($exp, $list2[$i]);
-				$value = $this->compute($exp);
+				$value = $this->compute($exp); 
 				if($value>0 && !is_float($value))
 				{
 					$new_distance = abs($value - $this->_3digit_number);
@@ -139,7 +136,6 @@ class GameSolver
 			      }
 			}
 		}
-
 		return $stack->pop();
 	}
 

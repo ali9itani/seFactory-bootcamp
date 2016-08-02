@@ -4,13 +4,15 @@ class MyStack
 	private $arr=array();
 	function push($value)
 	{
-		array_push($this->arr,$value);
+		 $this->arr[]=$value;
 	}
 	function pop()
 	{
-		if(!empty ($this->arr))
+		try 
 		{
-			return array_pop($this->arr);
+   			 return array_pop($this->arr);
+		} catch (Exception $e) {
+		    echo "Caught exception: empty stack\n";
 		}
 	}
 }
