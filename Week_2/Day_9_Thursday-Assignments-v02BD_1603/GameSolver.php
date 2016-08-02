@@ -13,11 +13,7 @@ class GameSolver
 		$this->solution_postfix="";
 		$this->numbers_list = $game->_get_numbers_list();
 		$this->_3digit_number = $game->_get_3digit_number();
-
-		//testing
-		 //$this->numbers_list =  array(100, 1, 5, 8, 9, 10);
-		// $this->_3digit_number = 553;
-
+		
 		//sending one digit and remaining digits
 		for($i=0;$i<sizeof($this->numbers_list);$i++)
 		{	
@@ -26,17 +22,15 @@ class GameSolver
 			$left_nbs = array();
 			for($j=0;$j<sizeof($this->numbers_list);$j++)
 			{
-					if($i==$j)
-						continue;
-					array_push($left_nbs, $this->numbers_list[$j]);
+				if($i==$j)
+					continue;
+				array_push($left_nbs,$this->numbers_list[$j]);
 			}
 			$this->finder($exp, $left_nbs);
 		}
-
 		//using game output to print results
 		new GameOutput($this);
 	}
-
 	function _numbers_list()
 	{
 		return $this->numbers_list;
@@ -53,7 +47,6 @@ class GameSolver
 	{
 		return $this->solution_postfix;
 	}
-
 	private function accepts_operator($exp)
 	{
 		$n = 0;
@@ -75,7 +68,7 @@ class GameSolver
 		//to stop all running recurison functions if a solution found 
 		if($this->solution == $this->_3digit_number)
 		{
-				return;
+			return;
 		}
 		$list2=array('+','*','-','/');
 		//if accepts add from array2(+,-,*,/)
@@ -83,13 +76,13 @@ class GameSolver
 		{
 			for($i=0;$i<sizeof($list2);$i++)
 			{
-				array_push($exp, $list2[$i]);		
+				array_push($exp, $list2[$i]);
 				$value = $this->compute($exp);
 				if($value>0 && !is_float($value))
 				{
 					$new_distance = abs($value - $this->_3digit_number);
 					$old_distance =  abs($this->solution - $this->_3digit_number);
-
+					//is new one closer to 3_digit_number
 					if($new_distance < $old_distance)
 					{
 						//replace old solution with new better ones
@@ -103,11 +96,12 @@ class GameSolver
 			}
 		}
 		else
-		{
+		{	//no remaining digits to add
 			if(empty($list))
 				return;
 			else
-			{	 
+			{	
+				//add a new digitfrom the list
 				for($i=0;$i<sizeof($list);$i++)
 				{	
 					array_push($exp, $list[$i]);
@@ -130,24 +124,24 @@ class GameSolver
 		$stack = new MyStack();
 		for($i=0; $i<sizeof($exp); $i++)
 		{
-		  if(is_numeric($exp[$i]))
-		    $stack->push($exp[$i]);
-		  else
-		  {
-		      $second_operand =  $stack->pop();
-		      $first_operand =  $stack->pop();
-		      switch($exp[$i])
-		      {
-		              case "+": $stack->push($first_operand + $second_operand); break;
-		              case "-": $stack->push($first_operand - $second_operand); break;
-		              case "*": $stack->push($first_operand * $second_operand); break;
-		              case "/": $stack->push($first_operand / $second_operand); break;
-		      }
-		  }
+			if(is_numeric($exp[$i]))
+			$stack->push($exp[$i]);
+			else
+			{
+			    $second_operand =  $stack->pop();
+			    $first_operand =  $stack->pop();
+			    switch($exp[$i])
+			    {
+			        case "+": $stack->push($first_operand + $second_operand); break;
+			        case "-": $stack->push($first_operand - $second_operand); break;
+			        case "*": $stack->push($first_operand * $second_operand); break;
+			        case "/": $stack->push($first_operand / $second_operand); break;
+			      }
+			}
 		}
-		  return $stack->pop();
-	}
 
+		return $stack->pop();
+	}
 
 }
 ?>

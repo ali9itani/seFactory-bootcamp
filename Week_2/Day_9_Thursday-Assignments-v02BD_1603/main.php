@@ -22,6 +22,4 @@ while(!empty($games))
 	$game = array_pop($games);
 	new GameSolver($game);
 }
-
-
 ?>
