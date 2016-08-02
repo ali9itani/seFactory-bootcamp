@@ -60,12 +60,12 @@ class GameSolver
 		//count of digits must more than operators by 2 to allow new operator
 	    for($i=0; $i<sizeof($exp); $i++)
 		{
-		  if(is_numeric($exp[$i]))
-		  $n++;
-		  else
-		  {
-		  	$n--;
-		  }
+			if(is_numeric($exp[$i]))
+			$n++;
+			else
+			{
+				$n--;
+			}
 		}
 	    return $n > 1;
 	}
@@ -74,10 +74,9 @@ class GameSolver
 	{
 		//to stop all running recurison functions if a solution found 
 		if($this->solution == $this->_3digit_number)
-			{
+		{
 				return;
-			}
-
+		}
 		$list2=array('+','*','-','/');
 		//if accepts add from array2(+,-,*,/)
 		if($this->accepts_operator($exp))
@@ -98,7 +97,6 @@ class GameSolver
 						$this->solution_postfix=$exp;
 					}
 				}
-
 				$this->finder($exp, $list);
 				//to add another digit ex: 143(50) -- remove 50 to add another 143(9)
 				array_pop($exp);
@@ -129,7 +127,7 @@ class GameSolver
 	//get the output of the postfix expression
 	private function compute($exp)
 	{
-		$stack = new SplStack();
+		$stack = new MyStack();
 		for($i=0; $i<sizeof($exp); $i++)
 		{
 		  if(is_numeric($exp[$i]))

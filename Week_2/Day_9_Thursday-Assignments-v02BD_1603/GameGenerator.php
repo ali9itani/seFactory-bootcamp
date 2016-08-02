@@ -13,7 +13,6 @@ class GameGenerator
 	{	
 		$this->tobe_selected_first = rand( 1, 4);
 		$this->tobe_selected_second = (6-$this->tobe_selected_first);	
-
 		while($this->tobe_selected_first>0)
 		{
 			//select random indexes from list 1
@@ -27,9 +26,7 @@ class GameGenerator
 			array_push($this->all_selected,$this->numbers_1[$index]);
 			//make the value 0 at that index to not reselect it again
 			$this->numbers_1[$index] = 0;
-
-
-		$this->tobe_selected_first--;
+			$this->tobe_selected_first--;
 		}
 
 		while($this->tobe_selected_second>0)
@@ -49,21 +46,16 @@ class GameGenerator
 		}
 
 		$this->_3_digit_number = rand(101,999);
-
 	}
 
 	function _print_numbers_list()
 	{
 		print_r($this->all_selected);
 	}
-
-//to have an object for transfer data-------------------------------------
-
 	function _get_numbers_list()
 	{
 		return $this->all_selected ;
 	}
-
 	function _get_3digit_number()
 	{
 		return $this->_3_digit_number ;

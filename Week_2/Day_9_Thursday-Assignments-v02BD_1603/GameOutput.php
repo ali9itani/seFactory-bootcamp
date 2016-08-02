@@ -26,7 +26,7 @@ class GameOutput
 
 	private function infix($exp) 
 	{
-		$stack = new SplStack();
+		$stack = new MyStack();
 		for($i=0; $i<sizeof($exp); $i++)
 		{
 		    if(is_numeric($exp[$i]))
