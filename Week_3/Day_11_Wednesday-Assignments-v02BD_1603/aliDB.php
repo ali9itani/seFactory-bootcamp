@@ -27,7 +27,7 @@ function queryExecuter($query)
 	//do database operations
 	elseif($query_array[1]=="DATABASE"){
 
-		if(checkNameValidity($query_array[2])){
+		if(checkFieldValidity($query_array[2])){
 			//remove ""
 			$db_name = extractName($query_array[2]);
 			if($query_array[0]=="CREATE"){
@@ -41,14 +41,14 @@ function queryExecuter($query)
 	//do table operations
 	elseif($query_array[1]=="TABLE"){
 			$check_for_valid =true;
-		if(checkNameValidity($query_array[2])){
+		if(checkFieldValidity($query_array[2])){
 			//remove ""
 			$table_name = extractName($query_array[2]);
 			$columns_list = array();
 
 			if($query_array[0]=="CREATE" && $query_array[3]=="COLUMNS"){
 				for($i=4;$i<count($query_array);$i++){
-					if(!checkNameValidity($query_array[$i])){
+					if(!checkFieldValidity($query_array[$i])){
 						$check_for_valid = false;
 						break;
 					}
@@ -65,13 +65,52 @@ function queryExecuter($query)
 			}
 		}
 	}
-	 
-}
-	
+	//do records operations
+	elseif($query_array[0]=="GET" || $query_array[0]=="DELETE" || $query_array[0]=="ADD"){
+		if($query_array[0]=="ADD"){
+			$last_added_db = unserialize(end(getDbList()));
+			$last_added_table = unserialize(end($last_added_db->getTablesList()));
+			print_r($last_added_table);
+			//check if data are less/more than needed
+			if(count($query_array)-1 == $last_added_table->getColumnsCount())
+			{
+				$data_array = array();
+				$valid_data = true;
+				for($i=1;$i<count($query_array);$i++){
+					//check if namevalid not empty not null
+					if(!checkFieldValidity($query_array[$i])){
+						$valid_data = false;
+						break;
+					}
+					else{
+						array_push($data_array, extractName($query_array[$i]));
+					}
+				}
+				if($valid_data){
+					$last_added_table->addRecord($data_array);
+					print_r($last_added_table->getTableData());	
+				}
+				else
+				{
+					echo "invalid data\n";
+				}
+			}
+			else
+			{
+				echo "check columns count\n";
+			}
+		}
+	} 
+}	
  //check name field validity
-function checkNameValidity($word)
+function checkFieldValidity($word)
 {
-	return preg_match("/\".*\"/",$word);
+	  if(preg_match("/\".*\"/",$word)){
+	  	return (!empty(extractName($word)) || is_numeric(extractName($word)));
+	  }
+	  else{
+	  	return false;
+	  }
 }
 function extractName($word)
 {
@@ -140,8 +179,6 @@ function checkDatabaseExistence($db_name)
 	}
 	return false;
 }
-
-
 function getDbList()
 {
 	//JSON serializing. It is human readable and you'll get better performance (file is smaller and faster to load/save)

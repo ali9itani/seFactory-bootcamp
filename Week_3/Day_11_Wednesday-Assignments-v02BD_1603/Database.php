@@ -2,7 +2,7 @@
 class Database
 {
 	private $db_name;
-
+	
 	public function Database($db_name)
 	{
 		$this->db_name = $db_name; 
@@ -49,7 +49,7 @@ class Database
 		//encode array of databases and save it in file
 		file_put_contents("./databases/".$this->db_name."/tables_list.json", json_encode($tables_list));
 	}
-	private function getTablesList()
+	public function getTablesList()
 	{
 		//JSON serializing. It is human readable and you'll get better performance (file is smaller and faster to load/save)
 		$tables_list = json_decode(file_get_contents("./databases/".$this->db_name."/tables_list.json"), true);
@@ -69,7 +69,5 @@ class Database
 		}
 		return false;
 	}
-
- 
 }
 ?>
