@@ -44,5 +44,17 @@ class Table
 		}
 		return $table_data ;
 	}
+	public function deleteRecord($key)
+	{
+		
+		$this->table = $this->getTableData();
+		for($i=0;$i<count($this->table);$i++){
+			if($this->table[$i][0]==$key)
+			{
+				unset($this->table[$i]);
+			}
+		}
+		$this->saveTableToFile();
+	}
 }
 ?>

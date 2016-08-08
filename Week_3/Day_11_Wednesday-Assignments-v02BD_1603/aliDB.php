@@ -7,9 +7,6 @@ function queryExecuter($query)
 
 
 		/*
-		-- Create a table (Number of columns is indefinite)
-		CREATE,TABLE,"TABLENAME",COLUMNS,"Column1","Column2","Column3"
-		-- Add a record (The table has a non-null constraint on all columns)
 		ADD,"10","Bassem","Dghaidi","SEF Instructor"
 		-- Retrieve a record
 		GET,"10"
@@ -67,40 +64,27 @@ function queryExecuter($query)
 	}
 	//do records operations
 	elseif($query_array[0]=="GET" || $query_array[0]=="DELETE" || $query_array[0]=="ADD"){
-		if($query_array[0]=="ADD"){
-			$last_added_db = unserialize(end(getDbList()));
+		$db_list = getDbList();
+
+		if(empty($db_list)){
+			echo "first create a database \n";
+		}
+		else{
+			$last_added_db = unserialize(end($db_list));
 			$last_added_table = unserialize(end($last_added_db->getTablesList()));
-			print_r($last_added_table);
-			//check if data are less/more than needed
-			if(count($query_array)-1 == $last_added_table->getColumnsCount())
-			{
-				$data_array = array();
-				$valid_data = true;
-				for($i=1;$i<count($query_array);$i++){
-					//check if namevalid not empty not null
-					if(!checkFieldValidity($query_array[$i])){
-						$valid_data = false;
-						break;
-					}
-					else{
-						array_push($data_array, extractName($query_array[$i]));
-					}
-				}
-				if($valid_data){
-					$last_added_table->addRecord($data_array);
-					print_r($last_added_table->getTableData());	
-				}
-				else
-				{
-					echo "invalid data\n";
-				}
+			if(empty($last_added_table)){
+				echo "first create a table \n";
 			}
-			else
-			{
-				echo "check columns count\n";
+			else{
+				if($query_array[0]=="ADD"){			
+					insertTableRecord($last_added_table,$query_array);
+				}
+				elseif($query_array[0] == "DELETE" &&  $query_array[1]== "ROW"){
+					deleteTableRecord($last_added_table,$query_array[2]);
+				}	
 			}
 		}
-	} 
+	}
 }	
  //check name field validity
 function checkFieldValidity($word)
@@ -190,6 +174,47 @@ function getDbList()
 	return $databases_list ;
 }
 
+function insertTableRecord($last_added_table,$query_array)
+{
+
+	//check if data are less/more than needed
+	if(count($query_array)-1 == $last_added_table->getColumnsCount()){	
+		$data_array = array();
+		$valid_data = true;
+		for($i=1;$i<count($query_array);$i++){
+			//check if namevalid not empty not null
+			if(!checkFieldValidity($query_array[$i])){
+				$valid_data = false;
+				break;
+			}
+			else{
+				array_push($data_array, extractName($query_array[$i]));
+			}
+		}
+
+		if($valid_data){
+			$last_added_table->addRecord($data_array);
+		}
+		else
+		{
+			echo "invalid data\n";
+		}
+	}
+	else
+	{
+		echo "check columns count\n";
+	}
+}
+function deleteTableRecord($last_added_table,$key)
+{
+	if(!checkFieldValidity($key)){
+		echo "invalid data\n";
+	}
+	else{
+			$last_added_table->deleteRecord(extractName($key));
+	}	
+}
+
 
 //$databases_list = getDbList();
 
@@ -203,8 +228,5 @@ queryExecuter($user_query);
 /*foreach ($databases_list as $entry) {
     echo unserialize($entry)->getDatabaseName();
 }*/
-
- 
-    
 
 ?>
