@@ -24,6 +24,10 @@ class Table
 		//encode array of databases and save it in file
 		file_put_contents($path, json_encode($this->table));
 	}
+	public function getTableName()
+	{
+		return $this->table_name;
+	}
 
 }
 

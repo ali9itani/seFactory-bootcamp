@@ -114,9 +114,14 @@ function deleteDatabase($db_name)
 function addTable($table_name,$columns_list)
 {
 	$db_list = getDbList();
+	if(empty($db_list)){
+		echo "first create a database \n";
+	}
+	else{
 	//get last created database and add a tableto it
 	$last_db = unserialize(end($db_list));
 	$last_db->createTable($table_name,$columns_list);
+	}
 }
 function saveDbListToFile($databases_list)
 {
