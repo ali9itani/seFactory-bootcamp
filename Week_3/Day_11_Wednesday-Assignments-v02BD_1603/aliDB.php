@@ -1,15 +1,12 @@
 <?php
 require_once("Database.php");
-
+require_once("Table.php");
 
 function queryExecuter($query)
 {
 
 
-	/*-- Create a Database
-		CREATE,DATABASE,"Database Name"
-		-- Delete a Database
-		DELETE,DATABASE,"Database Name"
+		/*
 		-- Create a table (Number of columns is indefinite)
 		CREATE,TABLE,"TABLENAME",COLUMNS,"Column1","Column2","Column3"
 		-- Add a record (The table has a non-null constraint on all columns)
@@ -20,17 +17,15 @@ function queryExecuter($query)
 		DELETE,ROW,"10"*/
 
 
-
-
 	// to escape "db name"
 	$query_array = explode(",",addslashes($query));
 	$operations = array("CREATE", "ADD", "DELETE", "GET");
 
-	if (!in_array($query_array[0], $operations)){
+	if(!in_array($query_array[0], $operations)){
 		echo "not a query\n";
 	}
 	//do database operations
-	elseif ($query_array[1]=="DATABASE"){
+	elseif($query_array[1]=="DATABASE"){
 
 		if(checkNameValidity($query_array[2])){
 			//remove ""
@@ -42,11 +37,35 @@ function queryExecuter($query)
 				deleteDatabase($db_name);
 			}
 		}
-		  
+	}
+	//do table operations
+	elseif($query_array[1]=="TABLE"){
+			$check_for_valid =true;
+		if(checkNameValidity($query_array[2])){
+			//remove ""
+			$table_name = extractName($query_array[2]);
+			$columns_list = array();
+
+			if($query_array[0]=="CREATE" && $query_array[3]=="COLUMNS"){
+				for($i=4;$i<count($query_array);$i++){
+					if(!checkNameValidity($query_array[$i])){
+						$check_for_valid = false;
+						break;
+					}
+					else{
+						array_push($columns_list, extractName($query_array[$i]));
+					}
+				}
+			}
+			if($check_for_valid){
+				addTable($table_name,$columns_list);	
+			}
+			else{
+				echo "Invalid Query";
+			}
+		}
 	}
 	 
-
-
 }
 	
  //check name field validity
@@ -83,13 +102,21 @@ function deleteDatabase($db_name)
 		foreach ($databases_list as $key => $value) {
 			$db = unserialize($value);
 			if($db->getDatabaseName() == $db_name){
-				$db->deleteDir();
+				$db->deleteDatabaseDir();
+				//remove from list
 				unset($databases_list[$key]);
 				saveDbListToFile($databases_list);
 				break;
 			}
 		}
 	}
+}
+function addTable($table_name,$columns_list)
+{
+	$db_list = getDbList();
+	//get last created database and add a tableto it
+	$last_db = unserialize(end($db_list));
+	$last_db->createTable($table_name,$columns_list);
 }
 function saveDbListToFile($databases_list)
 {
