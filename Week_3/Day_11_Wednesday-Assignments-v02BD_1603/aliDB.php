@@ -4,15 +4,9 @@ require_once("Table.php");
 
 function queryExecuter($query)
 {
-
-
 		/*
-		ADD,"10","Bassem","Dghaidi","SEF Instructor"
-		-- Retrieve a record
 		GET,"10"
-		-- Delete a record
-		DELETE,ROW,"10"*/
-
+		*/
 
 	// to escape "db name"
 	$query_array = explode(",",addslashes($query));
@@ -55,7 +49,7 @@ function queryExecuter($query)
 				}
 			}
 			if($check_for_valid){
-				addTable($table_name,$columns_list);	
+				addTable($table_name, $columns_list);	
 			}
 			else{
 				echo "Invalid Query";
@@ -65,7 +59,6 @@ function queryExecuter($query)
 	//do records operations
 	elseif($query_array[0]=="GET" || $query_array[0]=="DELETE" || $query_array[0]=="ADD"){
 		$db_list = getDbList();
-
 		if(empty($db_list)){
 			echo "first create a database \n";
 		}
@@ -76,11 +69,14 @@ function queryExecuter($query)
 				echo "first create a table \n";
 			}
 			else{
-				if($query_array[0]=="ADD"){			
+				if($query_array[0]=="ADD"){
 					insertTableRecord($last_added_table,$query_array);
 				}
-				elseif($query_array[0] == "DELETE" &&  $query_array[1]== "ROW"){
-					deleteTableRecord($last_added_table,$query_array[2]);
+				elseif($query_array[0] == "DELETE" && $query_array[1] == "ROW"){
+					deleteOrSearchTableRecord("del",$last_added_table,$query_array[2]);
+				}
+				elseif($query_array[0] == "GET"){
+					deleteOrSearchTableRecord("search",$last_added_table, $query_array[1]);		
 				}	
 			}
 		}
@@ -151,7 +147,6 @@ function saveDbListToFile($databases_list)
 	//encode array of databases and save it in file
 	file_put_contents("./databases/db_list.json", json_encode($databases_list));
 }
-
 //check if db exists
 function checkDatabaseExistence($db_name)
 {
@@ -176,7 +171,6 @@ function getDbList()
 
 function insertTableRecord($last_added_table,$query_array)
 {
-
 	//check if data are less/more than needed
 	if(count($query_array)-1 == $last_added_table->getColumnsCount()){	
 		$data_array = array();
@@ -205,28 +199,21 @@ function insertTableRecord($last_added_table,$query_array)
 		echo "check columns count\n";
 	}
 }
-function deleteTableRecord($last_added_table,$key)
+function deleteOrSearchTableRecord($operation,$last_added_table,$key)
 {
 	if(!checkFieldValidity($key)){
 		echo "invalid data\n";
 	}
 	else{
+		if($operation=="del"){
 			$last_added_table->deleteRecord(extractName($key));
+		}
+		else{
+			$result = $last_added_table->searchRecord((extractName($key)));
+		}
 	}	
 }
 
-
-//$databases_list = getDbList();
-
 $user_query = readline("> ");
 queryExecuter($user_query);
-
-
-//addNewDb("ali-db1",$databases_list );
-
- 
-/*foreach ($databases_list as $entry) {
-    echo unserialize($entry)->getDatabaseName();
-}*/
-
 ?>

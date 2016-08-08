@@ -46,7 +46,6 @@ class Table
 	}
 	public function deleteRecord($key)
 	{
-		
 		$this->table = $this->getTableData();
 		for($i=0;$i<count($this->table);$i++){
 			if($this->table[$i][0]==$key)
@@ -55,6 +54,30 @@ class Table
 			}
 		}
 		$this->saveTableToFile();
+	}
+	public function searchRecord($search_key)
+	{
+		$results= [];
+		$this->table = $this->getTableData();
+		foreach ($this->table as $i => $row) {
+			foreach ($row as $key => $record) {
+				if($record==$search_key)
+				{
+					array_push($results, $row);
+				}
+			}
+		}
+
+		if(empty($results))
+		{
+			echo "no results found \n";
+		}
+		else
+		{
+			foreach ($results as $key => $value) {
+				echo implode(" ",$value)."\n";
+			}
+		}
 	}
 }
 ?>
