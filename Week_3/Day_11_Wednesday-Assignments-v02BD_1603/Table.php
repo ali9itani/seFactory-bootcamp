@@ -10,7 +10,7 @@ class Table
 		$this->table_name = $table_name; 
 		$this->createTable($db_name,$columns_list);
 	}
-	private function createTable($db_name,$columns_list)
+	private function createTable($db_name,$columns_list) 
 	{
 		array_push($this->table, $columns_list);
 		$this->path = "./databases/".$db_name."/".$this->table_name;
@@ -32,9 +32,22 @@ class Table
 	public function addRecord($row_data)
 	{
 		$this->table = $this->getTableData();
-		array_push($this->table, $row_data);
-		$this->saveTableToFile();
-		echo "Record ADDED\n";
+
+		$primary_keys=array();
+		foreach ($this->table as $key => $row) {
+			array_push($primary_keys, $row[0]);
+		}
+
+		//check if primary_key already used
+		if(!in_array($row_data[0], $primary_keys)){
+			array_push($this->table, $row_data);
+			$this->saveTableToFile();
+			echo "Record ADDED\n";
+		}
+		else{
+			echo "primary key exists\n";
+		}
+		
 	}
 	public function getTableData()
 	{
@@ -63,8 +76,7 @@ class Table
 		$this->table = $this->getTableData();
 		foreach ($this->table as $i => $row) {
 			foreach ($row as $key => $record) {
-				if($record==$search_key)
-				{
+				if($record==$search_key){
 					array_push($results, $row);
 				}
 			}
@@ -74,7 +86,8 @@ class Table
 			echo "no results found \n";
 		}
 		else
-		{
+		{	
+			//output results
 			foreach ($results as $key => $value) {
 				echo implode(" ",$value)."\n";
 			}

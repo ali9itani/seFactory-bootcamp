@@ -56,7 +56,14 @@ function queryExecuter($query)
 			}
 			else{
 				if($query_array[0]=="ADD"){
-					insertTableRecord($last_added_table,$query_array);
+					
+					//check if primary key is a number
+					if(is_numeric(extractName($query_array[1]))){
+						insertTableRecord($last_added_table,$query_array);
+					}
+					else{
+						echo "primary key should be a number\n";
+					}
 				}
 				elseif($query_array[0] == "DELETE" && $query_array[1] == "ROW"){
 					deleteOrSearchTableRecord("del",$last_added_table,$query_array[2]);
@@ -71,12 +78,12 @@ function queryExecuter($query)
  //check name field validity
 function checkFieldValidity($word)
 {
-	if(preg_match("/\".*\"/",$word)){
-		return (!empty(extractName($word)) || is_numeric(extractName($word)));
-	}
-	else{
-		return false;
-	}
+	  if(preg_match("/\".*\"/",$word)){
+	  	return (!empty(extractName($word)) || is_numeric(extractName($word)));
+	  }
+	  else{
+	  	return false;
+	  }
 }
 function checkArrayFieldsValidity($index_to_start,$fields_array)
 {
@@ -197,6 +204,7 @@ function deleteOrSearchTableRecord($operation,$last_added_table,$key)
 		}
 	}	
 }
+echo "q to exit\n";
 do{
 $user_query = readline("> ");
 queryExecuter($user_query);
