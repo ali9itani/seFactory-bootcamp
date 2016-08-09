@@ -32,7 +32,6 @@ class Table
 	public function addRecord($row_data)
 	{
 		$this->table = $this->getTableData();
-
 		$primary_keys=array();
 		foreach ($this->table as $key => $row) {
 			array_push($primary_keys, $row[0]);
