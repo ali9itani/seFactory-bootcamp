@@ -29,28 +29,16 @@ function queryExecuter($query)
 	}
 	elseif($query_array[1]=="TABLE"){
 	//do table operations
-		$check_for_valid =true;
 		if(checkFieldValidity($query_array[2])){
-			//remove ""
 			$table_name = extractName($query_array[2]);
-			$columns_list = array();
-
 			if($query_array[0]=="CREATE" && $query_array[3]=="COLUMNS"){
-				for($i=4;$i<count($query_array);$i++){
-					if(!checkFieldValidity($query_array[$i])){
-						$check_for_valid = false;
-						break;
-					}
-					else{
-						array_push($columns_list, extractName($query_array[$i]));
-					}
+				$columns_list_or_null = checkArrayFieldsValidity(4,$query_array);
+				if($columns_list_or_null){
+					addTable($table_name, $columns_list_or_null);	
 				}
-			}
-			if($check_for_valid){
-				addTable($table_name, $columns_list);	
-			}
-			else{
-				echo "Invalid Query";
+				else{
+					echo "Invalid Query";
+				}
 			}
 		}
 	}
@@ -89,6 +77,19 @@ function checkFieldValidity($word)
 	  else{
 	  	return false;
 	  }
+}
+function checkArrayFieldsValidity($index_to_start,$fields_array)
+{
+	$data_array = array();
+	for($i=$index_to_start;$i<count($fields_array);$i++){
+		if(!checkFieldValidity($fields_array[$i])){
+			return [];
+		}
+		else{
+			array_push($data_array, extractName($fields_array[$i]));
+		}
+	}
+	return $data_array;
 }
 function extractName($word)
 {
@@ -160,7 +161,6 @@ function getDbList()
 {
 	//JSON serializing. It is human readable and you'll get better performance (file is smaller and faster to load/save)
 	$databases_list = json_decode(file_get_contents('./databases/db_list.json'), true);
-
 	if($databases_list == null){
 		$databases_list = array();
 	}
@@ -171,29 +171,15 @@ function insertTableRecord($last_added_table,$query_array)
 {
 	//check if data are less/more than needed
 	if(count($query_array)-1 == $last_added_table->getColumnsCount()){	
-		$data_array = array();
-		$valid_data = true;
-		for($i=1;$i<count($query_array);$i++){
-			//check if namevalid not empty not null
-			if(!checkFieldValidity($query_array[$i])){
-				$valid_data = false;
-				break;
-			}
-			else{
-				array_push($data_array, extractName($query_array[$i]));
-			}
+		$valid_data_or_null = checkArrayFieldsValidity(1,$query_array);
+		if($valid_data_or_null){
+			$last_added_table->addRecord($valid_data_or_null);
 		}
-
-		if($valid_data){
-			$last_added_table->addRecord($data_array);
-		}
-		else
-		{
+		else{
 			echo "invalid data\n";
 		}
 	}
-	else
-	{
+	else{
 		echo "check columns count\n";
 	}
 }

@@ -69,7 +69,6 @@ class Table
 				}
 			}
 		}
-
 		if(empty($results))
 		{
 			echo "no results found \n";
