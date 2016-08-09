@@ -4,20 +4,18 @@ require_once("Table.php");
 
 function queryExecuter($query)
 {
-		/*
-		GET,"10"
-		*/
-
 	// to escape "db name"
 	$query_array = explode(",",addslashes($query));
 	$operations = array("CREATE", "ADD", "DELETE", "GET");
 
 	if(!in_array($query_array[0], $operations)){
-		echo "not a query\n";
+		//q to stop execution
+		if($query_array[0] != 'q'){
+			echo "not a query\n";
+		}
 	}
-	//do database operations
 	elseif($query_array[1]=="DATABASE"){
-
+	//do database operations
 		if(checkFieldValidity($query_array[2])){
 			//remove ""
 			$db_name = extractName($query_array[2]);
@@ -29,9 +27,9 @@ function queryExecuter($query)
 			}
 		}
 	}
-	//do table operations
 	elseif($query_array[1]=="TABLE"){
-			$check_for_valid =true;
+	//do table operations
+		$check_for_valid =true;
 		if(checkFieldValidity($query_array[2])){
 			//remove ""
 			$table_name = extractName($query_array[2]);
@@ -213,7 +211,9 @@ function deleteOrSearchTableRecord($operation,$last_added_table,$key)
 		}
 	}	
 }
-
+do{
 $user_query = readline("> ");
 queryExecuter($user_query);
+}
+while($user_query != 'q');
 ?>

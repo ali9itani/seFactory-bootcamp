@@ -34,6 +34,7 @@ class Table
 		$this->table = $this->getTableData();
 		array_push($this->table, $row_data);
     	$this->saveTableToFile();
+    	echo "Record ADDED\n";
 	}
 	public function getTableData()
 	{
@@ -51,6 +52,7 @@ class Table
 			if($this->table[$i][0]==$key)
 			{
 				unset($this->table[$i]);
+				echo "Record DELETED\n";
 			}
 		}
 		$this->saveTableToFile();

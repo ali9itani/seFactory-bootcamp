@@ -20,6 +20,7 @@ class Database
 		}
 		//create empty tables file
 		$this->saveTablesListToFile([]);
+		echo $this->db_name." CREATED \n";
 	}
 	public function deleteDatabaseDir()
 	{
@@ -29,6 +30,7 @@ class Database
 		unlink ( $file);
 		}
 		rmdir($path);
+		echo $this->db_name." DELETED \n";
 	}
 	public function createTable($table_name,$columns_list)
 	{	
@@ -38,6 +40,7 @@ class Database
 			$tables_list = $this->getTablesList();
 			array_push($tables_list, serialize($new_table));
 			$this->saveTablesListToFile($tables_list);
+			echo $table_name." CREATED \n";
 		}
 		else
 		{
