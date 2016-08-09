@@ -58,7 +58,8 @@ function queryExecuter($query)
 				if($query_array[0]=="ADD"){
 					
 					//check if primary key is a number
-					if(is_numeric(extractName($query_array[1]))){
+					$primary_key = extractName($query_array[1]);
+					if(filter_var($primary_key, FILTER_VALIDATE_INT) !== false ){
 						insertTableRecord($last_added_table,$query_array);
 					}
 					else{
@@ -79,7 +80,7 @@ function queryExecuter($query)
 function checkFieldValidity($word)
 {
 	  if(preg_match("/\".*\"/",$word)){
-	  	return (!empty(extractName($word)) || is_numeric(extractName($word)));
+	  	return (!empty(extractName($word)));
 	  }
 	  else{
 	  	return false;
