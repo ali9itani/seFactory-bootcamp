@@ -10,11 +10,11 @@ class Table
 		$this->table_name = $table_name; 
 		$this->createTable($db_name,$columns_list);
 	}
-	private function createTable($db_name,$columns_list) 
-    {
-    	array_push($this->table, $columns_list);
-    	$this->path = "./databases/".$db_name."/".$this->table_name;
-    	$this->saveTableToFile();
+	private function createTable($db_name,$columns_list)
+	{
+		array_push($this->table, $columns_list);
+		$this->path = "./databases/".$db_name."/".$this->table_name;
+		$this->saveTableToFile();
 	}
 	private function saveTableToFile()
 	{
@@ -33,8 +33,8 @@ class Table
 	{
 		$this->table = $this->getTableData();
 		array_push($this->table, $row_data);
-    	$this->saveTableToFile();
-    	echo "Record ADDED\n";
+		$this->saveTableToFile();
+		echo "Record ADDED\n";
 	}
 	public function getTableData()
 	{

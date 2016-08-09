@@ -71,12 +71,12 @@ function queryExecuter($query)
  //check name field validity
 function checkFieldValidity($word)
 {
-	  if(preg_match("/\".*\"/",$word)){
-	  	return (!empty(extractName($word)) || is_numeric(extractName($word)));
-	  }
-	  else{
-	  	return false;
-	  }
+	if(preg_match("/\".*\"/",$word)){
+		return (!empty(extractName($word)) || is_numeric(extractName($word)));
+	}
+	else{
+		return false;
+	}
 }
 function checkArrayFieldsValidity($index_to_start,$fields_array)
 {

@@ -16,7 +16,7 @@ class Database
 	{
 		$path = "./databases/".$this->db_name;
 		if (!mkdir($path, 0700, true)) {
-		    die('Failed to create database...');
+			die('Failed to create database...');
 		}
 		//create empty tables file
 		$this->saveTablesListToFile([]);
@@ -26,7 +26,7 @@ class Database
 	{
 		$path = "./databases/".$this->db_name."/";
 		//loop through file of the db to remove
-	    foreach((glob($path.'*')) as $file){
+		foreach((glob($path.'*')) as $file){
 		unlink ( $file);
 		}
 		rmdir($path);
