@@ -65,6 +65,7 @@ class Table
 			{
 				unset($this->table[$i]);
 				echo "Record DELETED\n";
+				break;
 			}
 		}
 		$this->saveTableToFile();
