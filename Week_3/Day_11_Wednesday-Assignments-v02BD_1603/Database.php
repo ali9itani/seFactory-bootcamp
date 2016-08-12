@@ -49,7 +49,6 @@ class Database
 		if (!$this->checkTableExistence($table_name)) {
 			$new_table = new Table($this->db_name, $table_name, $columns_list);
 			$tables_list = $this->getTablesList();
-			//JSON serializing. It is human readable and you'll get better performance (file is smaller and faster to load/save)
 			array_push($tables_list, serialize($new_table));
 			$this->saveTablesListToFile($tables_list);
 			echo $table_name." CREATED \n";
@@ -60,6 +59,7 @@ class Database
 
 	public function getTablesList()
 	{
+		//JSON serializing. It is human readable and you'll get better performance (file is smaller and faster to load/save)
 		$tables_list = json_decode(file_get_contents("./databases/".$this->db_name."/tables_list.json"), true);
 
 		if ($tables_list == null) {
