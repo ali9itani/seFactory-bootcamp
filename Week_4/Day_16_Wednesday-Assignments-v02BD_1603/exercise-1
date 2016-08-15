@@ -1,0 +1,33 @@
+create database FinanceDB;
+USE FinanceDB;
+CREATE TABLE FiscalYearTable (fiscal_year YEAR NOT NULL, start_date DATE NOT NULL, end_date DATE NOT NULL);
+INSERT INTO FiscalYearTable (fiscal_year, start_date, end_date) VALUES ('2015','2015-12-1','2016-11-30');
+INSERT INTO FiscalYearTable (fiscal_year, start_date, end_date) VALUES ('2014','2014-12-1','2015-11-30');
+INSERT INTO FiscalYearTable (fiscal_year, start_date, end_date) VALUES ('2013','2013-12-1','2014-11-30');
+DELIMITER $$
+CREATE TRIGGER before_FiscalYearTable_insert BEFORE INSERT ON FiscalYearTable
+FOR EACH ROW
+BEGIN
+
+set @start_day = DAY(NEW.start_date); 
+set @end_day =  DAY(NEW.end_date); 
+set @year = NEW.fiscal_year;
+
+IF (!(@year+1 > 1901 And @year-1 < 2155) or @end_day = 0 or @start_day = 0) THEN
+SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'invalid dates';
+ELSE
+set @days_count = DATEDIFF(NEW.end_date, NEW.start_date)+1;
+IF ( @days_count !=366 AND @days_count !=365  ) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'not a full year';
+ELSE
+IF (NEW.fiscal_year != DATE_FORMAT(NEW.start_date, '%X')) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'start_date year doesnt belong to fiscal year';
+ELSE
+IF  NEW.fiscal_year in (
+select FiscalYearTable.fiscal_year
+From FiscalYearTable 
+where (NEW.fiscal_year = FiscalYearTable.fiscal_year)) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Fiscal Year alreadyy exists';
+END IF;
+END IF;
+END IF;
+END IF;
+END$$
+DELIMITER ;
