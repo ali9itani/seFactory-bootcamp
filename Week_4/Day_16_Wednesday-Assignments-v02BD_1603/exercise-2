@@ -1,0 +1,32 @@
+CREATE DATABASE HospitalRecords;
+USE HospitalRecords;
+CREATE TABLE AnestProcedures (proc_id int NOT NULL, anest_name varchar(255) NOT NULL, start_time TIME NOT NULL, end_time TIME NOT NULL, PRIMARY KEY (proc_id));
+INSERT INTO AnestProcedures VALUES ('1', 'Albert', '08:00', '11:00');
+INSERT INTO AnestProcedures VALUES ('2', 'Albert', '09:00', '13:00');
+INSERT INTO AnestProcedures VALUES ('3', 'Kamal', '08:00', '13:30');
+INSERT INTO AnestProcedures VALUES ('4', 'Kamal', '09:00', '15:30');
+INSERT INTO AnestProcedures VALUES ('5', 'Kamal', '10:00', '11:30');
+INSERT INTO AnestProcedures VALUES ('6', 'Kamal', '12:30', '13:30');
+INSERT INTO AnestProcedures VALUES ('7', 'Kamal', '13:30', '14:30');
+INSERT INTO AnestProcedures VALUES ('8', 'Kamal', '18:30', '19:00');
+
+CREATE VIEW virtual_table (first_proc_id, second_proc_id, total)
+AS SELECT t1.proc_id as first_proc_id,
+t2.proc_id as second_proc_id,
+COUNT(*)
+FROM AnestProcedures as t1, AnestProcedures as t2,  AnestProcedures as t3
+where 
+t1.end_time > t2.start_time 
+AND t1.start_time <= t2.start_time 
+AND t1.anest_name = t2.anest_name 
+AND t3.end_time > t2.start_time 
+AND t3.anest_name = t2.anest_name 
+AND t3.start_time <= t2.start_time
+group by 
+t1.proc_id, t2.proc_id;
+
+
+SELECT first_proc_id AS proc_id, MAX(total) AS max_proc_count
+FROM virtual_table 
+GROUP BY first_proc_id;
+
