@@ -62,7 +62,28 @@ INSERT INTO LegalEvents Values ('2' , 'Radwan Sameh', 'OR', '2016-02-01');
 INSERT INTO LegalEvents Values ('2' , 'Paul Syoufi', 'AP', '2016-01-01');
 INSERT INTO LegalEvents Values ('3', 'Issam Awwad', 'AP', '2016-01-01');
 
-
+SELECT 
+    Claims.claim_id,
+    Claims.patient_name,
+    Def_Claim_Status.claim_status
+FROM
+    Claims
+        INNER JOIN
+    (SELECT 
+        claim_id, claim_status
+    FROM
+        (SELECT 
+        *
+    FROM
+        (SELECT 
+        LE . *, CS.claim_seq
+    FROM
+        LegalEvents AS LE
+    INNER JOIN ClaimStatusCodes AS CS ON LE.claim_status = CS.claim_status
+    ORDER BY claim_seq DESC) AS LE_CS
+    GROUP BY claim_id , defendant_name
+    ORDER BY claim_seq) Cid_DefName_Cseq
+    GROUP BY claim_id) AS Def_Claim_Status ON Def_Claim_Status.claim_id = Claims.claim_id;  
 
 
 
