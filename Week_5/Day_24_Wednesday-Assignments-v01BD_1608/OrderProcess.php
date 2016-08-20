@@ -20,7 +20,7 @@
  *
  *To rent a movie,first confirm that the given inventory item is in stock
  *and then insert a row into the rental table. 
- *After the rental table is created, insert a row into the payment table. 
+ *After the rental record is created, insert a row into the payment table. 
  *Depending on business rules, you may also need to check whether the customer
  *has an outstanding balance before processing the rental. 
  *
@@ -32,6 +32,7 @@ require_once('MySQLWrap.php');
 $ordered_film_id = 6;
 $default_store_id = 1;
 $default_customer_id = 1;
+$default_staff_d = 1;
 
 if(filter_var($ordered_film_id, FILTER_VALIDATE_INT))
 {
@@ -40,7 +41,13 @@ if(filter_var($ordered_film_id, FILTER_VALIDATE_INT))
 	//check if film_id exist
 	if($wrapper->checkMovieId($ordered_film_id))
 	{
-		echo 'movie exist';
+		//check if inventory item exist and return inventory_id
+		$inventory_id = $wrapper->checkInventory($ordered_film_id, $default_store_id);
+
+		if($inventory_id){
+			$wrapper->insertRentalRecord($inventory_id, $default_customer_id, $default_staff_d);
+			
+		}
 	}
 
 }else{
