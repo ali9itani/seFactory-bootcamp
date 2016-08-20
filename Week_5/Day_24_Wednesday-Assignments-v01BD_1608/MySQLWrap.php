@@ -34,7 +34,7 @@ class MySQLWrap
 		return $this->status;
 	}
 
-	public function getmoviesList()
+	public function getMoviesList()
 	{
 		$query = "SELECT 
 					    film.film_id,film.title
@@ -43,6 +43,24 @@ class MySQLWrap
 
 		$result = $this->executeQuery($query);
 		return $result;
+	}
+	public function checkMovieId($id)
+	{
+		$query = "SELECT 
+					    film.film_id
+					FROM
+					    sakila.film
+					WHERE 
+						film.film_id = '{$id}';";
+
+		$result = $this->executeQuery($query);
+		
+		if($result)
+		{
+			return true;
+		}else{
+			return false;
+		}
 	}
 //????????????????need to fix fetching!! -- 
 	private function executeQuery($query)
