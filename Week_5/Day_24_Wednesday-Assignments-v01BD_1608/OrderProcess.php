@@ -28,8 +28,7 @@
 
 require_once('MySQLWrap.php');
 
-//$ordered_film_id = $_POST['select_movie'];
-$ordered_film_id = 6;
+$ordered_film_id = $_POST['select_movie'];
 $default_store_id = 1;
 $default_customer_id = 1;
 $default_staff_d = 1;
@@ -45,8 +44,10 @@ if(filter_var($ordered_film_id, FILTER_VALIDATE_INT))
 		$inventory_id = $wrapper->checkInventory($ordered_film_id, $default_store_id);
 
 		if($inventory_id){
-			$wrapper->insertRentalRecord($inventory_id, $default_customer_id, $default_staff_d);
-			
+			$rental_id = $wrapper->insertRentalRecord($inventory_id, $default_customer_id, $default_staff_d);
+			$amount = $wrapper->getFilmRentalRate($ordered_film_id);
+			$wrapper->insertPaymentRecord($rental_id, $default_customer_id, $default_staff_d, $amount);
+			echo '<br>succeed</br>';
 		}
 	}
 

@@ -24,9 +24,9 @@ if(!empty($movies)){
 <form action="/OrderProcess.php" id="submitorder"  method="post">
   <input type="submit"  value="order"/>
 </form>
+
 <?php
 echo $wrapper->closeConnection();
-
 ?>
 </body>
 </html>
