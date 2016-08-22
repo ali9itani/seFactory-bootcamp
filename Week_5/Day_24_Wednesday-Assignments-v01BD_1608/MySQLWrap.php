@@ -4,7 +4,6 @@ require_once ("Config.php");
 class MySQLWrap
 {
 	private $connection;
-	private $status = '';
 
 	public function __construct()
 	{
@@ -25,11 +24,6 @@ class MySQLWrap
 	public function closeConnection()
 	{
 		 mysqli_close($this->connection);
-	}
-
-	public function getStatus()
-	{
-		return $this->status;
 	}
 
 	public function getMoviesList()
