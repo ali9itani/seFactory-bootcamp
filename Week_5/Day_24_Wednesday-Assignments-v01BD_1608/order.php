@@ -25,7 +25,7 @@ if(!empty($movies)){
 </form>
 
 <?php
-echo $wrapper->closeConnection();
+$wrapper->closeConnection();
 ?>
 </body>
 </html>
