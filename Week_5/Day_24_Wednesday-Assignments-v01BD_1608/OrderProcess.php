@@ -52,6 +52,7 @@ if(filter_var($ordered_film_id, FILTER_VALIDATE_INT))
 			$amount = $wrapper->getFilmRentalRate($ordered_film_id);
 			$wrapper->insertPaymentRecord($rental_id, $default_customer_id, $default_staff_id, $amount);
 			echo 'succeed</br>';
+			echo "rental_rate: {$amount}$";
 		}
 	}
 
