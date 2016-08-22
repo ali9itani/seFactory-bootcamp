@@ -6,7 +6,6 @@
 require_once('MySQLWrap.php');
 
 $wrapper = new MySQLWrap();
-echo $wrapper->getStatus()."<br/>";
 
 $movies = $wrapper->getMoviesList();
 

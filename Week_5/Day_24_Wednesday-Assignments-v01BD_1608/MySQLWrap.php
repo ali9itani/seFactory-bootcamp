@@ -5,28 +5,26 @@ class MySQLWrap
 {
 	private $connection;
 	private $status = '';
+
 	public function __construct()
+	{
+		$this->dbConnect();
+	}
+
+	private function dbConnect()
 	{
 		// Create connection
 		$this->connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
 		// Check connection
 		if ($this->connection->connect_error) {
-		    $this->status =  "Connection to database failed \n";
-		}else{
-			$this->status = "Connected successfully\n";	
-		}	
+		    $this->status =  "Service failure \n";
+		}
 
 	}
-
 	public function closeConnection()
 	{
-		if(mysqli_close($this->connection))
-		{
-			return "Connection Closed \n";
-		}else{
-			return "Error in Closing Connection \n";
-		}
+		 mysqli_close($this->connection);
 	}
 
 	public function getStatus()
