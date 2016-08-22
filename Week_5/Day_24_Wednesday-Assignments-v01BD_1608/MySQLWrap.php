@@ -118,7 +118,7 @@ class MySQLWrap
 
 		return $result[0]['rental_rate'];
 	}
-//????????????????need to fix fetching!! -- 
+
 	private function executeQuery($query, $notRead = false)
 	{
 		$result = $this->connection->query($query);
@@ -145,8 +145,5 @@ class MySQLWrap
 	}
 
 }
-
-
-
 
 ?>
