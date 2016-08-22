@@ -1,3 +1,7 @@
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<html>
+<head></head>
+<body>
 <?php
 
 /**
@@ -47,7 +51,7 @@ if(filter_var($ordered_film_id, FILTER_VALIDATE_INT))
 			$rental_id = $wrapper->insertRentalRecord($inventory_id, $default_customer_id, $default_staff_id);
 			$amount = $wrapper->getFilmRentalRate($ordered_film_id);
 			$wrapper->insertPaymentRecord($rental_id, $default_customer_id, $default_staff_id, $amount);
-			echo '<br>succeed</br>';
+			echo 'succeed</br>';
 		}
 	}
 
@@ -56,3 +60,5 @@ if(filter_var($ordered_film_id, FILTER_VALIDATE_INT))
 }
 
 ?>
+</body>
+</html>
