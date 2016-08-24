@@ -58,8 +58,8 @@ textarea {
 #header {
     height: 675px;
     background: linear-gradient(0deg, rgba(46,29,85,0.85), rgba(49,29,94,0.85)), url("../img/background.jpg") no-repeat;
-    background-size: cover;}
-
+    background-size: cover;
+}
 .section-inner {
     width: 960px;
     height: 100%;
@@ -113,25 +113,24 @@ textarea {
 #header-third {
 	margin-top: 50px;
 }
-.my-button {
-	border: 1px #00e0d0 solid; 
+
+.my-button{
 	margin: 0 auto;
-	padding:10px;
-	width:105px;
-}
-.my-button a {
 	color: #00e0d0;
+	width: 105px;
+	display: block;
 	font-weight: bold;
 	font-size: 14px;
+	padding:10px;
 	text-decoration: none;
+	border:  #00e0d0 1px solid
 }
-.my-button:hover{
+.my-button:hover {
+	color:white;
 	background: #00e0d0;
 	border: 1px white solid; 
 }
-.my-button:hover a{
-	color:white;
-}
+ 
 #header-dots ul {
 	width: 12%;
 	margin: 125px auto 0 auto;
@@ -299,14 +298,15 @@ textarea {
 	float:left;
 	width: 16.66%;
 	height:200px;
-	background-color: #acacac;
-}
-.projects-image:nth-child(even) {
-	background-color: #b6b6b6;
-}
-.projects-image:nth-child(3n+1) {
 	background-color: #9e9e9e;
 }
+#projects-images-group1 div:nth-child(even) {
+	background-color: #acacac;
+}
+#projects-images-group2 div:nth-child(odd) {
+	background-color: #acacac;
+}
+
 #projects .my-button{
 	width: 86px;
 }
@@ -404,8 +404,6 @@ textarea {
 	margin: 0;
 	border-color: #c6c5c9;
 	width: 60%;
-}
-.footer-sections .my-button a {
 	color: #c6c5c9;
 }
 
