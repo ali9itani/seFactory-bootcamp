@@ -60,7 +60,7 @@ textarea {
     background: linear-gradient(0deg, rgba(46,29,85,0.85), rgba(49,29,94,0.85)), url("../img/background.jpg") no-repeat;
     background-size: cover;}
 
-#header-main, #about-main, #video-main, #expertise-main, #team-main, #projects-main, #testimonials-main, .section-inner {
+.section-inner {
     width: 960px;
     height: 100%;
     margin: 0 auto;
