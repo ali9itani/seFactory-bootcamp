@@ -55,10 +55,42 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+#container {
+    margin: 0 auto;
+    border: 1px black solid;
+    width: 980px;
+}
+#animation-display {
+    height: 400px;
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+.towers {
+    height: 100%;
+    width: 30%;
+    float: left;
+    margin: 1%;
+    border: 2px black solid;
+    border-top: none;
 
+}
+.towers_names {
+    border: 1px green solid;
+    text-align: center;
+    margin: 0 1%;
 
-
-
+} 
+#status-box {
+    margin: 0 auto;
+    width: 50%;
+    height: 130px;
+    overflow-y: scroll;
+    background-color: black;
+}
+#status-box p:first-child {
+    color:red;
+}
 
 
 
