@@ -91,13 +91,29 @@ textarea {
 #status-box p:first-child {
     color:red;
 }
-
-
-
-
-
-
-
+.oval {
+   /* width: 75px;
+    height: 50px; */
+    background: blue;
+    -moz-border-radius: 100px / 50px;
+    -webkit-border-radius: 100px / 50px;
+    border-radius: 100px / 50px;
+    margin: 0 10px;
+    position: relative;
+    border: 1px black solid;
+}
+#o2 {
+    position: relative;
+    top: 25px;
+    left: 8px;
+/* width: 60px;
+    height: 40px; */
+    background-color: red;
+}
+#test {
+    margin-bottom: 0px;
+    position: relative;
+}
 
 
 
