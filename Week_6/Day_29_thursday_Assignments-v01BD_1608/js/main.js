@@ -22,20 +22,19 @@ function drawDisks() {
 	}
 }
 
+var interval = 0;
 function hanoi (disc, source, temp, destination) {
 
 	if (disc > 0) {
-
+		
 		hanoi(disc - 1, source, destination, temp);
 
 		//moving disk from one place to another
 		var status = 'Move disc ' + disc + ' from ' + source + ' to ' + destination;
 
-		changeDiskPlace(disc, destination);
-
-		PrintNewStatus(status);
-		//hanoi(disc - 1, temp, source, destination);
-		setTimeout(function() {hanoi(disc - 1, temp, source, destination); }, 1000)
+		setTimeout(function() {changeDiskPlace(disc, destination);PrintNewStatus(status); }, interval)
+		interval+=300;
+		hanoi(disc - 1, temp, source, destination);
 	}
 }
 
@@ -55,6 +54,7 @@ function changeDiskPlace(disc, destination) {
 
 	//adding it as first element in its new destinantion
 	var destination_display = document.getElementById(destination);
+
 	destination_display.insertBefore(disk_display, destination_display.firstChild);
 }
 
