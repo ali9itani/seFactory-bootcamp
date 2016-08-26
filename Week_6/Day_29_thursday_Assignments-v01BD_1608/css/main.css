@@ -73,7 +73,7 @@ textarea {
     margin: 1%;
     border: 2px black solid;
     border-top: none;
-
+    position: relative;
 }
 .towers_names {
     border: 1px green solid;
@@ -99,7 +99,7 @@ textarea {
     -webkit-border-radius: 100px / 50px;
     border-radius: 100px / 50px;
     margin: 0 10px;
-    position: relative;
+    position: absolute;
     border: 1px black solid;
 }
 #o2 {
