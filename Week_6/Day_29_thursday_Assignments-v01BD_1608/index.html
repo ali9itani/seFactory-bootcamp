@@ -15,28 +15,26 @@
     </head>
     <body>
         <div id="container">
-            <input  type="button" value="start" onclick="startGame();" />
             <!-- box for the animation of the process -->
             <div id="animation-display">
                 <div class="towers">
-                    <h5 class="towers_names">Source Tower</h5>
+                    <h2 class="towers_names">Source Tower</h2>
                     <div id="tower-source"></div>
                 </div>
                 <div class="towers">
-                    <h5 class="towers_names">Destination Tower</h5>
+                    <h2 class="towers_names">Destination Tower</h2>
                     <div id="tower-destination"></div>
                 </div>
                 <div class="towers">
-                    <h5 class="towers_names">Temporary Tower</h5>
+                    <h2 class="towers_names">Temporary Tower</h2>
                     <div id="tower-temporary"></div>
                 </div>
             </div>
             <!-- box for displaying status -->
             <div id="status-box">
-             
             </div>
-            
-            
+            <!-- start button -->
+            <input  type="button" id="start-button" value="start" onclick="startGame();" />   
         </div>
 
         <script src="js/main.js"></script>

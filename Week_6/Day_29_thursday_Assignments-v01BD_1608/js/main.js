@@ -4,12 +4,12 @@
 //this function intialize the disks in the source tower
 function drawDisks() {
 	var disk_number = 8
-	var colors = ['yellow','red','blue','green','gray','black','pink','violet'];
- 
+	var colors = ['#006495','pink','#0093D1','#F2635F','#F4D00C','#E0A025','#004C70','violet'];
+
 	while(disk_number >0) {
-		//setting width-height of disk acc to its number
-		var height = disk_number * 10;
-		var width = disk_number * 15;
+		//setting width-height of disk acc to its number,width 1.5 times height
+		var height = disk_number * 12;
+		var width = disk_number * 18;
 
 		//creating the new disk and insert it before first element in src tower
 		var new_disk = document.createElement('div');
@@ -42,7 +42,7 @@ function hanoi (disc, source, temp, destination) {
 
 		setTimeout(function() {changeDiskPlace(disc, destination);PrintNewStatus(status); }, interval)
 		interval+=500;
-		
+
 		hanoi(disc - 1, temp, source, destination);
 	}
 }
@@ -56,7 +56,6 @@ function PrintNewStatus(status) {
 	var status_box = document.getElementById("status-box");
 	status_box.insertBefore(new_paragraph, status_box.firstChild);
 }
-
 
 function changeDiskPlace(disc, destination)
 {
@@ -87,7 +86,20 @@ function calculateBottom(first_child)
 	return bottom;
 }
 
-function startGame(){
+function getStatusBox()
+{
+	//put status box & hide start button
+	status_box = document.getElementById('status-box');
+	status_box.style.display = "block";
+
+	start_buttom = document.getElementById('start-button');
+	start_buttom.style.display = "none";
+}
+
+function startGame()
+{
+	getStatusBox();
+
 	hanoi(8, 'tower-source', 'tower-temporary', 'tower-destination');
 }
 

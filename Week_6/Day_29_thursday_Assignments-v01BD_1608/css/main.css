@@ -57,11 +57,10 @@ textarea {
    ========================================================================== */
 #container {
     margin: 0 auto;
-    border: 1px black solid;
     width: 980px;
 }
 #animation-display {
-    height: 600px;
+    height: 400px;
     width: 60%;
     margin: 0 auto;
     margin-bottom: 20px;
@@ -79,7 +78,6 @@ textarea {
     border: 1px green solid;
     text-align: center;
     margin: 0 1%;
-
 } 
 #status-box {
     margin: 0 auto;
@@ -87,13 +85,17 @@ textarea {
     height: 130px;
     overflow-y: scroll;
     background-color: black;
+    display: none;
 }
 #status-box p:first-child {
     color:red;
 }
+#start-button {
+    margin: 0 39%;
+    width: 20%;
+    height: 50px;
+}
 .oval {
-   /* width: 75px;
-    height: 50px; */
     background: blue;
     -moz-border-radius: 100px / 50px;
     -webkit-border-radius: 100px / 50px;
