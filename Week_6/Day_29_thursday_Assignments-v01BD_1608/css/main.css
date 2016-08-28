@@ -61,8 +61,8 @@ textarea {
     width: 980px;
 }
 #animation-display {
-    height: 400px;
-    width: 50%;
+    height: 600px;
+    width: 60%;
     margin: 0 auto;
     margin-bottom: 20px;
 }
@@ -102,21 +102,6 @@ textarea {
     position: absolute;
     border: 1px black solid;
 }
-#o2 {
-    position: relative;
-    top: 25px;
-    left: 8px;
-/* width: 60px;
-    height: 40px; */
-    background-color: red;
-}
-#test {
-    margin-bottom: 0px;
-    position: relative;
-}
-
-
-
 
 /* ==========================================================================
    Media Queries

@@ -1,24 +1,32 @@
 <!-- 
 //comment tag to "hide" scripts from browsers without support
 
+//this function intialize the disks in the source tower
 function drawDisks() {
-	var disk_number = 1;
-
-	while(disk_number < 9) {
+	var disk_number = 8
+	var colors = ['yellow','red','blue','green','gray','black','pink','violet'];
+ 
+	while(disk_number >0) {
 		//setting width-height of disk acc to its number
 		var height = disk_number * 10;
 		var width = disk_number * 15;
 
-		//creating the disk and placing it above the larger disks
+		//creating the new disk and insert it before first element in src tower
 		var new_disk = document.createElement('div');
+		var source_tower = document.getElementById("tower-source");
+		var srctower_first_child = source_tower.firstChild;
+
+		//setting disk id, class, shape/color/place properties
 		new_disk.setAttribute("class", "oval");
 		new_disk.setAttribute("id", "disk"+disk_number);
-		new_disk.setAttribute("style", "width: "+width+"px ;" + "height: "+height+"px ; z-index:"+(8-disk_number)+"; left:"+7*(8-disk_number)+"px;bottom:"+20*(8-disk_number)+"px ;");
+		new_disk.setAttribute("style", "background-color:"+colors.pop()+
+								" ; width: "+width+"px; "+ "height: "+height+"px; z-index:"+
+								(8-disk_number)+"; left:"+7*(8-disk_number)+"px; bottom:"+
+								calculateBottom(srctower_first_child)+";");
 
-		var source_tower = document.getElementById("tower-source");
-		source_tower.appendChild(new_disk);
+		source_tower.insertBefore(new_disk, srctower_first_child);
 
-		disk_number++;
+		disk_number--;
 	}
 }
 
@@ -33,7 +41,8 @@ function hanoi (disc, source, temp, destination) {
 		var status = 'Move disc ' + disc + ' from ' + source + ' to ' + destination;
 
 		setTimeout(function() {changeDiskPlace(disc, destination);PrintNewStatus(status); }, interval)
-		interval+=300;
+		interval+=500;
+		
 		hanoi(disc - 1, temp, source, destination);
 	}
 }
@@ -48,14 +57,34 @@ function PrintNewStatus(status) {
 	status_box.insertBefore(new_paragraph, status_box.firstChild);
 }
 
-function changeDiskPlace(disc, destination) {
-	//get the disk using id name ex: disk1
-	var disk_display = document.getElementById("disk"+disc);
 
-	//adding it as first element in its new destinantion
+function changeDiskPlace(disc, destination)
+{
+	/**
+	*get the disk using id name ex: disk1 
+	*get destination tower
+	*get first child of destination to use its height and bottom to push disk before
+	*/
+
+	var disk_display = document.getElementById("disk"+disc);
 	var destination_display = document.getElementById(destination);
+	var first_child = destination_display.firstChild;
+	
+	disk_display.style.bottom = calculateBottom(first_child);
 
 	destination_display.insertBefore(disk_display, destination_display.firstChild);
+}
+
+function calculateBottom(first_child)
+{
+	var bottom;
+
+	if(first_child)
+	bottom = (parseInt(first_child.style.height.replace(/px/,""))/2 + parseInt(first_child.style.bottom.replace(/px/,"")) )+ "px";
+	else
+		bottom = '5px';
+
+	return bottom;
 }
 
 function startGame(){
