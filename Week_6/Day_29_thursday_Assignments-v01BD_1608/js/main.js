@@ -2,7 +2,8 @@
 //comment tag to "hide" scripts from browsers without support
 
 //this function intialize the disks in the source tower
-function drawDisks() {
+function drawDisks()
+{
 	var disk_number = 8
 	var colors = ['#006495','pink','#0093D1','#F2635F','#F4D00C','#E0A025','#004C70','violet'];
 
@@ -31,23 +32,31 @@ function drawDisks() {
 }
 
 var interval = 0;
-function hanoi (disc, source, temp, destination) {
-
+function hanoi (disc, source, temp, destination)
+{
 	if (disc > 0) {
 		
 		hanoi(disc - 1, source, destination, temp);
 
-		//moving disk from one place to another
+		//print status and move disk from one place to another
 		var status = 'Move disc ' + disc + ' from ' + source + ' to ' + destination;
 
-		setTimeout(function() {changeDiskPlace(disc, destination);PrintNewStatus(status); }, interval)
+		setTimeout(
+			function() 
+			{	
+				changeDiskPlace(disc, destination);
+				PrintNewStatus(status);
+			}
+			, interval)
+
 		interval+=500;
 
 		hanoi(disc - 1, temp, source, destination);
 	}
 }
 
-function PrintNewStatus(status) {
+function PrintNewStatus(status)
+{
 	//creating new paragraph
 	var new_paragraph = document.createElement('p');
 	new_paragraph.textContent = status;
@@ -78,10 +87,11 @@ function calculateBottom(first_child)
 {
 	var bottom;
 
-	if(first_child)
-	bottom = (parseInt(first_child.style.height.replace(/px/,""))/2 + parseInt(first_child.style.bottom.replace(/px/,"")) )+ "px";
-	else
+	if(first_child) {
+		bottom = (parseInt(first_child.style.height.replace(/px/,""))/2 + parseInt(first_child.style.bottom.replace(/px/,"")) )+ "px";
+	} else {
 		bottom = '5px';
+	}
 
 	return bottom;
 }
