@@ -15,15 +15,16 @@ function getInputData()
 	//get list of todo to add to it
 	var todo_list = document.getElementById('display-todo-list');
 
-	//add data to the display
-	addNewToDoDisplay(todo_list, input_title, input_description, date_time_added);
-	
+	//add data to the display and storage
+	addNewToDoItemDisplay(todo_list, input_title, input_description, date_time_added);
+	addNewToDoItemStorage(input_title, input_description, date_time_added) 
+
 	//clear inputs
 	title_element.value = "";
 	description_element.value =  "";
 }
 
-function addNewToDoDisplay(todo_list, input_title, input_description, date_time_added)
+function addNewToDoItemDisplay(todo_list, input_title, input_description, date_time_added)
 {
 	//create todo content
 	var display_todo_title = document.createElement("h2");
@@ -48,7 +49,7 @@ function addNewToDoDisplay(todo_list, input_title, input_description, date_time_
 	display_todo_deletebutton.type = 'button';
 	display_todo_deletebutton.value = 'X';
 	display_todo_deletebutton.className = "delete-button"
-	display_todo_deletebutton.addEventListener("click",removeTodo);
+	display_todo_deletebutton.addEventListener("click",removeTodoItem);
 
 	var display_todo_deletebox = document.createElement("div");
 	display_todo_deletebox.className = "delete-one";
@@ -71,7 +72,42 @@ function addNewToDoDisplay(todo_list, input_title, input_description, date_time_
 	todo_list.insertBefore(display_todo_box, todo_list.firstChild);
 }
 
-function removeTodo() 
+//stores new todo-item 
+function addNewToDoItemStorage(input_title, input_description, date_time_added) 
+{
+	//create todo-item prototype
+	function TodoItem(id, title, description, added_date) {
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.added_date = added_date;
+	}
+
+	//get stored items to add to it - get last used id 
+	var stored_todo_list = 	getArrayOfStoredItems();
+	var new_item_id = stored_todo_list[stored_todo_list.length - 1].id  + 1;
+
+	//create new item object and added it to array
+	var new_todo_item = new TodoItem(new_item_id, input_title, input_description, date_time_added);
+	stored_todo_list.push(new_todo_item);
+
+	storeTodoList(stored_todo_list);
+}
+
+//get from todolist as string from storage make it array and return
+function getArrayOfStoredItems()
+{
+	return JSON.parse(localStorage.getItem("todo_list"));
+}
+
+//make the array string and store it in the storage
+function storeTodoList(todo_list)
+{
+	localStorage.setItem("todo_list", JSON.stringify(todo_list));
+}
+
+//deletes a todo-item
+function removeTodoItem() 
 {
 	var confirmed = confirm("Are you sure!");
 
@@ -82,4 +118,26 @@ function removeTodo()
 		todo_box.parentElement.removeChild(todo_box);
 	}
 	
+}
+//function check if storage is available
+function storageAvailable(type) {
+	try {
+		var storage = window[type],
+			x = '__storage_test__';
+		storage.setItem(x, x);
+		storage.removeItem(x);
+		return true;
+	}
+	catch(e) {
+		return false;
+	}
+}
+
+
+if (storageAvailable('localStorage')) {
+	localStorage.lastname = "Smith";
+	console.log(localStorage.lastname);
+}
+else {	
+	document.write('Cant serve you, try to upgrade or change your browser');
 }
