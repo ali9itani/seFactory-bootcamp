@@ -43,10 +43,13 @@ function displayTodoList()
 {
 	//get stored items  from localStorage to loop over and get data to display it
 	var stored_todo_list = 	getArrayOfStoredItems();
-
-	for (var i = 0; i < stored_todo_list.length; i++) {
-		var todo_item = stored_todo_list[i];
-		addNewToDoItemDisplay(todo_item.id, todo_item.title, todo_item.description, todo_item.added_date);
+	
+	//if empty storage - dont do any thing
+	if(stored_todo_list) {
+		for (var i = 0; i < stored_todo_list.length; i++) {
+			var todo_item = stored_todo_list[i];
+			addNewToDoItemDisplay(todo_item.id, todo_item.title, todo_item.description, todo_item.added_date);
+		}
 	}
 }
 
@@ -116,8 +119,12 @@ function addNewToDoItemStorage(input_title, input_description, date_time_added)
 	//get stored items to add to it - get last used id 
 	var new_item_id = 0;
 	var stored_todo_list = 	getArrayOfStoredItems();
-	if(!stored_todo_list) {
+	
+	if(stored_todo_list && stored_todo_list[0] != null) {
 		new_item_id = stored_todo_list[stored_todo_list.length - 1].id  + 1;
+	}
+	else {
+		stored_todo_list = [];
 	}
 	
 	//create new item object and added it to array
