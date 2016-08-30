@@ -12,10 +12,10 @@ function getInputData()
 	input_description = description_element.value;
 	date_time_added = "added: "+currentdate.toDateString()+ " " + currentdate.toTimeString();
 
-	//add data to the display and storage
-	addNewToDoItemDisplay(input_title, input_description, date_time_added);
-	addNewToDoItemStorage(input_title, input_description, date_time_added) 
-
+	//add data to storage, get its id and add it to display
+	var new_item_id = addNewToDoItemStorage(input_title, input_description, date_time_added) 
+	addNewToDoItemDisplay(new_item_id, input_title, input_description, date_time_added);
+	
 	//clear inputs
 	title_element.value = "";
 	description_element.value =  "";
@@ -29,13 +29,13 @@ function displayTodoList()
 
 	for (var i = 0; i < stored_todo_list.length; i++) {
 		var todo_item = stored_todo_list[i];
-		addNewToDoItemDisplay(todo_item.title, todo_item.description, todo_item.added_date);
+		addNewToDoItemDisplay(todo_item.id, todo_item.title, todo_item.description, todo_item.added_date);
 	}
 
 	
 }
 
-function addNewToDoItemDisplay(input_title, input_description, date_time_added)
+function addNewToDoItemDisplay(new_item_id, input_title, input_description, date_time_added)
 {
 	//get list of diisplayed todo to add to it
 	var todo_list = document.getElementById('display-todo-list');
@@ -62,6 +62,7 @@ function addNewToDoItemDisplay(input_title, input_description, date_time_added)
 	var display_todo_deletebutton = document.createElement("input");
 	display_todo_deletebutton.type = 'button';
 	display_todo_deletebutton.value = 'X';
+	display_todo_deletebutton.name = new_item_id;
 	display_todo_deletebutton.className = "delete-button"
 	display_todo_deletebutton.addEventListener("click",removeTodoItem);
 
@@ -98,14 +99,20 @@ function addNewToDoItemStorage(input_title, input_description, date_time_added)
 	}
 
 	//get stored items to add to it - get last used id 
+	var new_item_id = 0;
 	var stored_todo_list = 	getArrayOfStoredItems();
-	var new_item_id = stored_todo_list[stored_todo_list.length - 1].id  + 1;
-
+	if(!stored_todo_list) {
+		new_item_id = stored_todo_list[stored_todo_list.length - 1].id  + 1;
+	}
+	
 	//create new item object and added it to array
 	var new_todo_item = new TodoItem(new_item_id, input_title, input_description, date_time_added);
 	stored_todo_list.push(new_todo_item);
 
 	storeTodoList(stored_todo_list);
+
+	//returns todo-item id to use it for delete
+	return new_item_id;
 }
 
 //get from todolist as string from storage make it array and return
@@ -126,6 +133,24 @@ function removeTodoItem()
 	var confirmed = confirm("Are you sure!");
 
 	if(confirmed) {
+
+		/*get stored items  from localStorage to loop over and 
+		get all that dont have the id to delete*/
+		var stored_todo_list = 	getArrayOfStoredItems();
+		var new_todo_list = [];
+
+		for (var i = 0; i < stored_todo_list.length; i++) {
+			var todo_item = stored_todo_list[i];
+			if(todo_item.id != this.name) {
+				new_todo_list.push(todo_item);
+			}
+		}
+
+		storeTodoList(new_todo_list);
+
+		//get list of displayed todo to add to it
+		var todo_list = document.getElementById('display-todo-list');
+
 		//getting the todo-box and its parent 
 		var deleteDiv = this.parentElement;
 		var todo_box = deleteDiv.parentElement;
