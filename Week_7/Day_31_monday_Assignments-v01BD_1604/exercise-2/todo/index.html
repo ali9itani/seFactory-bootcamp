@@ -13,8 +13,36 @@
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
+	    <div id="container">
+	    	<h2 id="title" >SEF ToDo List</h2>
+	    	<!-- add section: title, description and add button -->
+	    	<div id="add-section">
+		    		<h2>Item</h2>
+		    		<input type="text"  id="input-todo-title"  placeholder="title"/>
+		    		<input  id="add-button"  type="button"  value="Add" onclick="getInputData()" />
+		    		<textarea  id="input-todo-description"  placeholder="description"></textarea>
+	    	</div>
+	    	<!-- separates add from list -->
+	    	<div id="separator">
+	    	</div>
+	    	<!-- list todo -->
+	    	<div id="display-todo-list">
+	    		<!-- todo one -->
+	    		<div class="todo-boxes"> 
+	    			<div class="todo-content">
+	    				<h2>Title example</h2>
+	    				<h5>added: tuesday, 19 2016 11:44:22</h5>
+	    				<p>description jdjcj3eofn cjdchimjnnnnnnnnnnnnnnnnnnjjnlj f hejdnf uujkenfujn jnhjnfem hjnfn jpf jv  vjjiekd c  </p>
+	    			</div>
+	    			<!-- delete one -->
+	    			<div class="delete-one">
+	    				<input type="button" name="delete-button" value="X" class="delete-button" />
+	    			</div>
+	    			<div class="clear"></div>
+	    		</div>
 
-        <p>Hello world! This is HTML5 Boilerplate.</p>
+	    	</div>
+	    </div>
 
         <script src="js/main.js"></script>
     </body>

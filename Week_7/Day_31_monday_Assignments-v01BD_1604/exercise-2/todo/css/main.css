@@ -55,14 +55,92 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-
-
-
-
-
-
-
-
+#container {
+    width: 600px;
+    margin: 0 auto;
+    padding: 15px;
+    border: 2px solid gray;
+}
+#title {
+    height: 5%;
+    text-align: center;
+    margin: 0px;
+}
+#add-section {
+    height: 28%;
+}
+#input-todo-title {
+    width: 80%;
+    height: 40px;
+}
+#add-section h2 {
+    margin: 5px;
+}
+#input-todo-description {
+    margin-top: 10px;
+    width: 96%;
+    font-size: 13px;
+    color: gray;
+    height: 60px;
+}
+#add-button {
+    width: 15%;
+    height: 30px;
+    background-color: #a8a8a8;
+    border-radius: 8px;
+}
+#separator {
+    border-bottom: 2px gray solid;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-bottom: 2%;
+}
+.todo-content, .delete-one {
+    float: left;
+}
+.todo-boxes {
+    position: relative;
+    border: 2px solid gray;
+    width: 97%;
+    margin-bottom: 10px;
+}
+.todo-content {
+    width: 84%;
+    padding: 15px 15px 20px 15px;
+    margin-bottom: 10px;
+}
+/*paragraph in the todo list */
+.todo-content p {
+    font-size: 17px;
+    font-weight: bold;
+    word-break: break-all;
+}
+.todo-content h2, .todo-content h5, .todo-content p {
+    margin: 0px;
+}
+.todo-content h5 {
+    color: gray;
+    margin: 10px 0px
+}
+/*div that conatins the delete button*/
+.delete-one {
+    border-left: 2px gray solid;
+    padding: 12px 0px;
+    width: 10%;
+    position: absolute;
+    top: 20%;
+    right: 5px;
+}
+.delete-button {
+    height: 30px;
+    background-color: #a8a8a8;
+    border-radius: 8px;  
+    margin: 10px;  
+}
+.clear {
+    clear: both;   
+}
 
 
 
