@@ -48,12 +48,7 @@ function addNewToDoDisplay(todo_list, input_title, input_description, date_time_
 	display_todo_deletebutton.type = 'button';
 	display_todo_deletebutton.value = 'X';
 	display_todo_deletebutton.className = "delete-button"
-
-// <!-- delete one -->
-// 	    			<div class="delete-one">
-// 	    				<input type="button" name="delete-button" value="X" class="delete-button" />
-// 	    			</div>
-// 	    			//
+	display_todo_deletebutton.addEventListener("click",removeTodo);
 
 	var display_todo_deletebox = document.createElement("div");
 	display_todo_deletebox.className = "delete-one";
@@ -74,5 +69,17 @@ function addNewToDoDisplay(todo_list, input_title, input_description, date_time_
 
 	//insert new todo first in todo list
 	todo_list.insertBefore(display_todo_box, todo_list.firstChild);
+}
 
+function removeTodo() 
+{
+	var confirmed = confirm("Are you sure!");
+
+	if(confirmed) {
+		//getting the todo-box and its parent 
+		var deleteDiv = this.parentElement;
+		var todo_box = deleteDiv.parentElement;
+		todo_box.parentElement.removeChild(todo_box);
+	}
+	
 }
