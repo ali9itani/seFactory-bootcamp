@@ -12,11 +12,8 @@ function getInputData()
 	input_description = description_element.value;
 	date_time_added = "added: "+currentdate.toDateString()+ " " + currentdate.toTimeString();
 
-	//get list of todo to add to it
-	var todo_list = document.getElementById('display-todo-list');
-
 	//add data to the display and storage
-	addNewToDoItemDisplay(todo_list, input_title, input_description, date_time_added);
+	addNewToDoItemDisplay(input_title, input_description, date_time_added);
 	addNewToDoItemStorage(input_title, input_description, date_time_added) 
 
 	//clear inputs
@@ -24,8 +21,25 @@ function getInputData()
 	description_element.value =  "";
 }
 
-function addNewToDoItemDisplay(todo_list, input_title, input_description, date_time_added)
+//retrieves all the todo item from storage and displays it
+function displayTodoList() 
 {
+	//get stored items  from localStorage to loop over and get data to display it
+	var stored_todo_list = 	getArrayOfStoredItems();
+
+	for (var i = 0; i < stored_todo_list.length; i++) {
+		var todo_item = stored_todo_list[i];
+		addNewToDoItemDisplay(todo_item.title, todo_item.description, todo_item.added_date);
+	}
+
+	
+}
+
+function addNewToDoItemDisplay(input_title, input_description, date_time_added)
+{
+	//get list of diisplayed todo to add to it
+	var todo_list = document.getElementById('display-todo-list');
+
 	//create todo content
 	var display_todo_title = document.createElement("h2");
 	display_todo_title.innerHTML = input_title;
@@ -135,8 +149,7 @@ function storageAvailable(type) {
 
 
 if (storageAvailable('localStorage')) {
-	localStorage.lastname = "Smith";
-	console.log(localStorage.lastname);
+	displayTodoList();
 }
 else {	
 	document.write('Cant serve you, try to upgrade or change your browser');
