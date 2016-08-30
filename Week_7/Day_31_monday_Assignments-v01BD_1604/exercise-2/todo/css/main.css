@@ -106,7 +106,7 @@ textarea {
     margin-bottom: 10px;
 }
 .todo-content {
-    width: 84%;
+    width: 86%;
     padding: 15px 15px 20px 15px;
     margin-bottom: 10px;
 }
@@ -126,17 +126,18 @@ textarea {
 /*div that conatins the delete button*/
 .delete-one {
     border-left: 2px gray solid;
-    padding: 12px 0px;
-    width: 10%;
+    width: 7%;
     position: absolute;
-    top: 20%;
     right: 5px;
+    top: 15%;
+    height: 70px;
+    padding-top: 7%;
 }
 .delete-button {
     height: 30px;
     background-color: #a8a8a8;
-    border-radius: 8px;  
-    margin: 10px;  
+    border-radius: 8px; 
+    margin: 5px;
 }
 .clear {
     clear: both;   

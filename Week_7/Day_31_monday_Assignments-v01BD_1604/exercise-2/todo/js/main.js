@@ -10,15 +10,32 @@ function getInputData()
 	//setting data values
 	input_title = title_element.value;
 	input_description = description_element.value;
-	date_time_added = "added: "+currentdate.toDateString()+ " " + currentdate.toTimeString();
+	date_time_added = "added: "+currentdate.toDateString()+ " " + currentdate.getHours()+":"+currentdate.getMinutes();
 
-	//add data to storage, get its id and add it to display
-	var new_item_id = addNewToDoItemStorage(input_title, input_description, date_time_added) 
-	addNewToDoItemDisplay(new_item_id, input_title, input_description, date_time_added);
-	
-	//clear inputs
-	title_element.value = "";
-	description_element.value =  "";
+	if(checkInputDataValidity(input_title) && checkInputDataValidity(input_description)) {
+
+		//add data to storage, get its id and add it to display
+		var new_item_id = addNewToDoItemStorage(input_title, input_description, date_time_added) 
+		addNewToDoItemDisplay(new_item_id, input_title, input_description, date_time_added);
+		
+		//clear inputs
+		title_element.value = "";
+		description_element.value =  "";
+	} 
+}
+
+function checkInputDataValidity(input_data)
+{
+	switch(input_data) {
+		case "":
+			window.alert('input values cant be empty');
+			return false;
+		case null:
+			window.alert('input values cant be empty');
+			return false;
+		default:
+			return true;
+	}
 }
 
 //retrieves all the todo item from storage and displays it
@@ -31,8 +48,6 @@ function displayTodoList()
 		var todo_item = stored_todo_list[i];
 		addNewToDoItemDisplay(todo_item.id, todo_item.title, todo_item.description, todo_item.added_date);
 	}
-
-	
 }
 
 function addNewToDoItemDisplay(new_item_id, input_title, input_description, date_time_added)
@@ -156,8 +171,8 @@ function removeTodoItem()
 		var todo_box = deleteDiv.parentElement;
 		todo_box.parentElement.removeChild(todo_box);
 	}
-	
 }
+
 //function check if storage is available
 function storageAvailable(type) {
 	try {
@@ -172,10 +187,10 @@ function storageAvailable(type) {
 	}
 }
 
-
+//check if browser supports html5 storage
 if (storageAvailable('localStorage')) {
 	displayTodoList();
 }
 else {	
-	document.write('Cant serve you, try to upgrade or change your browser');
+	document.getElementById('container').innerHTML = 'Cant serve you, try to upgrade or change your browser';
 }
