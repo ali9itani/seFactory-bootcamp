@@ -1,4 +1,4 @@
-function getInputData()
+function processInputData()
 {
 	//to get time and date from
 	var currentdate = new Date(); 
@@ -15,9 +15,12 @@ function getInputData()
 	if(checkInputDataValidity(input_title) && checkInputDataValidity(input_description)) {
 
 		//add data to storage, get its id and add it to display
-		var new_item_id = addNewToDoItemStorage(input_title, input_description, date_time_added) 
-		addNewToDoItemDisplay(new_item_id, input_title, input_description, date_time_added);
-		
+		var new_item_id = addNewToDoItemStorage(input_title, input_description, date_time_added)
+		//acc to returned id - if it was <0 then there is an error
+		if(new_item_id >= 0 ) {
+			addNewToDoItemDisplay(new_item_id, input_title, input_description, date_time_added);
+		}
+
 		//clear inputs
 		title_element.value = "";
 		description_element.value =  "";
@@ -131,10 +134,13 @@ function addNewToDoItemStorage(input_title, input_description, date_time_added)
 	var new_todo_item = new TodoItem(new_item_id, input_title, input_description, date_time_added);
 	stored_todo_list.push(new_todo_item);
 
-	storeTodoList(stored_todo_list);
-
-	//returns todo-item id to use it for delete
-	return new_item_id;
+	//return -1 if return of storing was false or item_id if return was true
+	var storingResult = storeTodoList(stored_todo_list);
+	if(storingResult){
+		return new_item_id;
+	} else {
+		return -1;
+	}
 }
 
 //get from todolist as string from storage make it array and return
@@ -146,7 +152,17 @@ function getArrayOfStoredItems()
 //make the array string and store it in the storage
 function storeTodoList(todo_list)
 {
-	localStorage.setItem("todo_list", JSON.stringify(todo_list));
+	var result = true;
+	// limit 10 mb per domain
+	try {
+		localStorage.setItem("todo_list", JSON.stringify(todo_list));
+	} catch (e) {	
+		result = false;
+		//cant use QUOTA_EXCEEDED_ERR since differe from browser to another
+		window.alert("limit reached, no more is allowed");
+	} finally {
+		return result;
+	}
 }
 
 //deletes a todo-item
