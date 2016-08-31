@@ -55,12 +55,15 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+body {
+    background-image: url('../img/background.jpg');
+}
 #container {
     width: 600px;
     margin: 0 auto;
     padding: 15px;
     border: 2px solid gray;
-    background-color: aliceblue;
+    background-color: whitesmoke;
 }
 #title {
     height: 5%;
@@ -106,7 +109,7 @@ textarea {
     border: 2px solid gray;
     width: 97%;
     margin-bottom: 10px;
-    background-color: blanchedalmond;
+    background-color: white;
 }
 .todo-content {
     width: 86%;
