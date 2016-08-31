@@ -7,9 +7,9 @@ function processInputData()
 	var title_element = document.getElementById('input-todo-title');
 	var description_element = document.getElementById('input-todo-description');
 
-	//setting data values
-	input_title = title_element.value;
-	input_description = description_element.value;
+	//setting data values and preventing xss injection
+	input_title = (title_element.value).replace(/</g, "&lt;").replace(/>/g, "&gt;");;
+	input_description = (description_element.value).replace(/</g, "&lt;").replace(/>/g, "&gt;");;
 	date_time_added = "added: "+currentdate.toDateString()+ " " + currentdate.getHours()+":"+currentdate.getMinutes();
 
 	if(checkInputDataValidity(input_title) && checkInputDataValidity(input_description)) {
