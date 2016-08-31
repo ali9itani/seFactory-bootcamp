@@ -28,17 +28,19 @@ function processInputData()
 }
 
 function checkInputDataValidity(input_data)
-{
-	switch(input_data) {
-		case "":
-			window.alert('input values cant be empty');
-			return false;
-		case null:
-			window.alert('input values cant be empty');
-			return false;
-		default:
-			return true;
+{	
+	var error_msgs = ['input values cant be empty', 'input characters count must not exceed 200'];
+	var passed_test = true;
+
+	if(input_data == "" || input_data == null) {
+		window.alert(error_msgs[0]);
+		passed_test = false;
+	} else if(input_data.length > 200) {
+		window.alert(error_msgs[1]);
+		passed_test = false;
 	}
+
+	return passed_test;
 }
 
 //retrieves all the todo item from storage and displays it
@@ -156,15 +158,38 @@ function storeTodoList(todo_list)
 	// limit 10 mb per domain
 	try {
 		localStorage.setItem("todo_list", JSON.stringify(todo_list));
-	} catch (e) {	
-		result = false;
-		//cant use QUOTA_EXCEEDED_ERR since differe from browser to another
-		window.alert("limit reached, no more is allowed");
+	} catch (e) {
+		if (isQuotaExceeded(e)) {
+			result = false;
+			window.alert("limit reached, no more is allowed");
+		}
 	} finally {
 		return result;
 	}
 }
-
+//check qoute exceeded for all browsers
+function isQuotaExceeded(e) {
+  var quotaExceeded = false;
+  if (e) {
+    if (e.code) {
+      switch (e.code) {
+        case 22:
+          quotaExceeded = true;
+          break;
+        case 1014:
+          // Firefox
+          if (e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+            quotaExceeded = true;
+          }
+          break;
+      }
+    } else if (e.number === -2147024882) {
+      // Internet Explorer 8
+      quotaExceeded = true;
+    }
+  }
+  return quotaExceeded;
+}
 //deletes a todo-item
 function removeTodoItem() 
 {

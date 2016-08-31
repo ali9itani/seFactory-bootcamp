@@ -142,7 +142,11 @@ textarea {
 .clear {
     clear: both;   
 }
-
+#hint {
+    margin: 0px;
+    color: red;
+    font-size: 10px;
+}
 
 
 
