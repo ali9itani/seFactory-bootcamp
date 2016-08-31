@@ -124,6 +124,7 @@ body {
 }
 .todo-content h2, .todo-content h5, .todo-content p {
     margin: 0px;
+    word-wrap: break-word;
 }
 .todo-content h5 {
     color: gray;
