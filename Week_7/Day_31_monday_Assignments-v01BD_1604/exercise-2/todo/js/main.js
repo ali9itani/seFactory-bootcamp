@@ -83,7 +83,7 @@ function addNewToDoItemDisplay(new_item_id, input_title, input_description, date
 	var display_todo_deletebutton = document.createElement("input");
 	display_todo_deletebutton.type = 'button';
 	display_todo_deletebutton.value = 'X';
-	display_todo_deletebutton.name = new_item_id;
+	display_todo_deletebutton.setAttribute('record-id', new_item_id);
 	display_todo_deletebutton.className = "delete-button"
 	display_todo_deletebutton.addEventListener("click",removeTodoItem);
 
@@ -179,7 +179,7 @@ function removeTodoItem()
 
 		for (var i = 0; i < stored_todo_list.length; i++) {
 			var todo_item = stored_todo_list[i];
-			if(todo_item.id != this.name) {
+			if(todo_item.id != this.getAttribute('record-id')) {
 				new_todo_list.push(todo_item);
 			}
 		}
