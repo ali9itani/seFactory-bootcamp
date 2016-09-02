@@ -8,35 +8,47 @@ $(document).ready(function(){
 	        url: 'getBlogContent.php',
 	        data: { "blog-link" : blog_link },
 	        success: function(response) {
-	           $('#result-section').html(extractContent(response));
+	        	var text_to_summarize  = extractContent(response);
+	           summarizeIt(text_to_summarize);
 	        }
 	    });
 	});
 
-function extractContent(word)
-{
-	var start_index = word.search('<div class="section-inner layoutSingleColumn">');
-	word  = word.substring(start_index);
-	var end_index = word.search('</main>');
+	function extractContent(text)
+	{
+		var start_index = text.search('<div class="section-inner layoutSingleColumn">');
+		text  = text.substring(start_index);
+		var end_index = text.search('</main>')-6;
 
-	word = word.substring(0, end_index+6);
+		text = text.substring(0, end_index+6);
 
-	return filterIt(word);
-}
-function filterIt(word)
-{
-	//removing images
-	word = word.replace(/<figure\b[^>]*>(.*?)<\/figure>/g , '');
-	//remove titles
-	word = word.replace(/<h1\b[^>]*>(.*?)<\/h1>/g, '').replace(/<h2\b[^>]*>(.*?)<\/h2>/g, '');
-	//remove <p> tag and spans
-	//
-	word = word.replace(/<p[^>]*.>/g , '').replace(/<\/p>/g , ' ').replace(/<span[^>]*.>/g , ' ').replace(/<\/span>/g , ' '); 
-	//remove last section and div of this section
-	word = word.replace(/<section\b[^>]*>(.*?)<\/section>/g, '').replace(/<div[^>]*.>/g , ' ').replace(/<\/div>/g , ' ');
-	word = word.replace(/<[^>]*.>/g, ' ');
-	return word;
+		return filterIt(text);
+	}
 
-}
+	function filterIt(text)
+	{
+		//removing images
+		text = text.replace(/<figure\b[^>]*>(.*?)<\/figure>/g , '');
+		//remove titles
+		text = text.replace(/<h1\b[^>]*>(.*?)<\/h1>/g, '').replace(/<h2\b[^>]*>(.*?)<\/h2>/g, '');
+		//remove <p> tag and spans
+		text = text.replace(/<p[^>]*.>/g , '').replace(/<\/p>/g , ' ').replace(/<span[^>]*.>/g , ' ').replace(/<\/span>/g , ' '); 
+		//remove last section and div of this section
+		text = text.replace(/<section\b[^>]*>(.*?)<\/section>/g, '').replace(/<div[^>]*.>/g , ' ').replace(/<\/div>/g , ' ');
+		text = text.replace(/<[^>]*.>/g, ' ');
+		return text;
+	}
+
+	function summarizeIt(text_to_summarize) {
+		$.ajax({
+			type: 'POST',
+			url: 'summarizeIt.php',
+			data: { "text" : text_to_summarize },
+			success: function(response) {
+			$('#result-section').html(response);
+	        }
+	    });
+	}
+
 });
 // 
