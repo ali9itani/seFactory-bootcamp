@@ -14,10 +14,14 @@
     </head>
     <body>
     	<div id="container">
+            <h1>SUMMARIZER</h1>
+            <!--loader or errors status -->
+            <div id="status-section">
+            </div>
             <!-- input section -->
             <div>
                 <form name="url-form" action="getBlogContent.php" method="post">
-                    <input id="input-url" name="blog-link" type="url" value="https://medium.freecodecamp.com/the-art-of-computer-programming-by-donald-knuth-82e275c8764f#.s554lfph6"
+                    <input id="input-url" name="blog-link" type="url"
                     placeholder="https://medium.freecodecamp.com/example" />
 
                     <input id="grab-button" type="button" value="grab">
@@ -25,7 +29,6 @@
             </div>  
             <!-- result section where loading/results are displayed -->
             <div id="result-section">
-
             </div>
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

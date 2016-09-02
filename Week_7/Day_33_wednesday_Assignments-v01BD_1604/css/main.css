@@ -55,6 +55,11 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+/*title*/
+h1 {
+    text-align: center;
+    width: 100%;
+}
 #container {
     width: 960px;
     margin: 0 auto;
@@ -62,8 +67,21 @@ textarea {
 #input-url {
     width:90%;
 }
-
-
+#status-section {
+    height:20px;
+    margin-bottom: 2px;
+    color: red;
+}
+#result-section {
+    width: 91%;
+    background-color: aliceblue;
+    margin: 20px 0px 0px 0px;
+}
+#loader-img {
+    height: 10px;
+    width: 90%;
+    margin-left: 4px;
+}
 
 
 

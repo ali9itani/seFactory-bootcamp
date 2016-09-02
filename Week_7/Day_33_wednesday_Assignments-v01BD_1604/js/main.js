@@ -1,17 +1,21 @@
 $(document).ready(function(){
-	var website_content = '';
 	$('#grab-button').click(function() {
-	    var blog_link = $('#input-url').val();
-
-	    $.ajax({
-	    	type: 'POST',
-	        url: 'getBlogContent.php',
-	        data: { "blog-link" : blog_link },
-	        success: function(response) {
-	        	var text_to_summarize  = extractContent(response);
-	           summarizeIt(text_to_summarize);
-	        }
-	    });
+		var blog_link = $('#input-url').val();
+		if(validateUrl(blog_link)) {
+			$.ajax({
+				type: 'POST',
+				url: 'getBlogContent.php',
+				data: { "blog-link" : blog_link },
+				success: function(response) {
+					var text_to_summarize  = extractContent(response);
+					summarizeIt(text_to_summarize);
+				}
+			});
+			//add loader bar
+			$('#status-section').replaceWith('<div id="status-section" ><img id="loader-img" src="/img/loader256x16.gif" /></div>')
+		} else {
+			$('#status-section').replaceWith('<div id="status-section" >Invalid URL</div>')
+		}
 	});
 
 	function extractContent(text)
@@ -45,9 +49,19 @@ $(document).ready(function(){
 			url: 'summarizeIt.php',
 			data: { "text" : text_to_summarize },
 			success: function(response) {
-			$('#result-section').html(response);
+				$('#result-section').html(response);
+				//remove loader bar
+				$('#loader-img').remove()
 	        }
 	    });
+	}
+
+	function validateUrl(link) {
+		if(link.match(/https\:\/\/medium\.freecodecamp\.com\//i)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 });
