@@ -1,7 +1,9 @@
 $(document).ready(function(){
+
 	$('#grab-button').click(function() {
 		//to empty resulted text from previous process
 		clearFields();
+
 		var blog_link = $('#input-url').val();
 		if(validateUrl(blog_link)) {
 			$.ajax({
@@ -9,16 +11,16 @@ $(document).ready(function(){
 				url: 'API.php',
 				data: { "blog-link" : blog_link },
 				success: function(response) {
-					//console.log(response);
-						if(response == "-1"){
-							$('#status-section').text('Invalid Blog Link');
-						} else if(response == "-2") {
-							$('#status-section').text('Something Went Wrong');
+							if(response == "-1"){
+								changeStatus('Invalid Blog Link'); 
+							} else if(response == "-2") {
+								changeStatus('Something Went Wrong'); 
+							} else {
+								var text_to_summarize  = extractContent(response);
+								$('#original-text-section').html(text_to_summarize);
+								summarizeIt(text_to_summarize);
+							}
 						}
-							var text_to_summarize  = extractContent(response);
-							$('#original-text-section').html(text_to_summarize);
-							summarizeIt(text_to_summarize);
-					}
 				});
 			}
 			//add loader bar
@@ -30,6 +32,10 @@ $(document).ready(function(){
 		$('.resulted-texts').empty();
 	}
 
+	function changeStatus(text) 
+	{
+		$('#status-section').text(text);
+	}
 	function extractContent(text)
 	{
 		var result = '';
@@ -37,7 +43,6 @@ $(document).ready(function(){
 		dummyDiv.innerHTML = text;
 
 		var pTags = dummyDiv.querySelectorAll('.section-content p,.section-content ul');
-
 		for (var i = 0 ; i < pTags.length ; i++) {
 			result += " "+pTags[i].innerHTML ;
 		}
@@ -57,8 +62,8 @@ $(document).ready(function(){
 				$('#result-section').html(result['sentences']);
 				//remove loader bar
 				loaderImage();
-	        }
-	    });
+			}
+		});
 	}
 
 	function validateUrl(link)
@@ -81,8 +86,6 @@ $(document).ready(function(){
 		} else {
 			$('#loader-img').css('display','block'); 
 		}
-
 	}
 
 });
-// 
