@@ -6,23 +6,23 @@ $(document).ready(function(){
 		if(validateUrl(blog_link)) {
 			$.ajax({
 				type: 'POST',
-				url: 'getBlogContent.php',
+				url: 'API.php',
 				data: { "blog-link" : blog_link },
 				success: function(response) {
-					console.log(response);
-					if(response == "-1")
-					{
-						$('#status-section').text('Invalid Blog Link');
-					} else {
-						var text_to_summarize  = extractContent(response);
-						$('#original-text-section').html(text_to_summarize);
-						summarizeIt(text_to_summarize);
+					//console.log(response);
+						if(response == "-1"){
+							$('#status-section').text('Invalid Blog Link');
+						} else if(response == "-2") {
+							$('#status-section').text('Something Went Wrong');
+						}
+							var text_to_summarize  = extractContent(response);
+							$('#original-text-section').html(text_to_summarize);
+							summarizeIt(text_to_summarize);
 					}
-				}
-			});
+				});
+			}
 			//add loader bar
 			loaderImage();
-		}
 	});
 
 	function clearFields()
@@ -50,7 +50,7 @@ $(document).ready(function(){
 	{
 		$.ajax({
 			type: 'POST',
-			url: 'summarizeIt.php',
+			url: 'API.php',
 			data: { "text" : text_to_summarize },
 			success: function(response) {
 				var result = JSON.parse(response);
