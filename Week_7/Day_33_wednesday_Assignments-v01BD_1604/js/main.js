@@ -8,6 +8,8 @@ $(document).ready(function(){
 				data: { "blog-link" : blog_link },
 				success: function(response) {
 					var text_to_summarize  = extractContent(response);
+
+					$('#original-text-section').html(text_to_summarize);
 					summarizeIt(text_to_summarize);
 				}
 			});
@@ -49,7 +51,8 @@ $(document).ready(function(){
 			url: 'summarizeIt.php',
 			data: { "text" : text_to_summarize },
 			success: function(response) {
-				$('#result-section').html(response);
+				var result = JSON.parse(response);
+				$('#result-section').html(result['sentences']);
 				//remove loader bar
 				$('#loader-img').remove()
 	        }
