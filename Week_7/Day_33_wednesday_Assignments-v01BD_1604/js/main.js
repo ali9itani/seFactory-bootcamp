@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	$('#grab-button').click(function() {
+		//to empty resulted text from previous process
+		clearFields();
 		var blog_link = $('#input-url').val();
 		if(validateUrl(blog_link)) {
 			$.ajax({
@@ -7,45 +9,45 @@ $(document).ready(function(){
 				url: 'getBlogContent.php',
 				data: { "blog-link" : blog_link },
 				success: function(response) {
-					var text_to_summarize  = extractContent(response);
-
-					$('#original-text-section').html(text_to_summarize);
-					summarizeIt(text_to_summarize);
+					console.log(response);
+					if(response == "-1")
+					{
+						$('#status-section').text('Invalid Blog Link');
+					} else {
+						var text_to_summarize  = extractContent(response);
+						$('#original-text-section').html(text_to_summarize);
+						summarizeIt(text_to_summarize);
+					}
 				}
 			});
 			//add loader bar
-			$('#status-section').replaceWith('<div id="status-section" ><img id="loader-img" src="/img/loader256x16.gif" /></div>')
-		} else {
-			$('#status-section').replaceWith('<div id="status-section" >Invalid URL</div>')
+			loaderImage();
 		}
 	});
 
+	function clearFields()
+	{
+		$('.resulted-texts').empty();
+	}
+
 	function extractContent(text)
 	{
-		var start_index = text.search('<div class="section-inner layoutSingleColumn">');
-		text  = text.substring(start_index);
-		var end_index = text.search('</main>')-6;
+		var result = '';
+		var dummyDiv = document.createElement("div"); 
+		dummyDiv.innerHTML = text;
 
-		text = text.substring(0, end_index+6);
+		var pTags = dummyDiv.querySelectorAll('.section-content p,.section-content ul');
 
-		return filterIt(text);
+		for (var i = 0 ; i < pTags.length ; i++) {
+			result += " "+pTags[i].innerHTML ;
+		}
+
+		//remove any html tag : a li ul span ...
+		return  result.replace(/<[^>]*.>/g, ' ');
 	}
 
-	function filterIt(text)
+	function summarizeIt(text_to_summarize)
 	{
-		//removing images
-		text = text.replace(/<figure\b[^>]*>(.*?)<\/figure>/g , '');
-		//remove titles
-		text = text.replace(/<h1\b[^>]*>(.*?)<\/h1>/g, '').replace(/<h2\b[^>]*>(.*?)<\/h2>/g, '');
-		//remove <p> tag and spans
-		text = text.replace(/<p[^>]*.>/g , '').replace(/<\/p>/g , ' ').replace(/<span[^>]*.>/g , ' ').replace(/<\/span>/g , ' '); 
-		//remove last section and div of this section
-		text = text.replace(/<section\b[^>]*>(.*?)<\/section>/g, '').replace(/<div[^>]*.>/g , ' ').replace(/<\/div>/g , ' ');
-		text = text.replace(/<[^>]*.>/g, ' ');
-		return text;
-	}
-
-	function summarizeIt(text_to_summarize) {
 		$.ajax({
 			type: 'POST',
 			url: 'summarizeIt.php',
@@ -54,17 +56,32 @@ $(document).ready(function(){
 				var result = JSON.parse(response);
 				$('#result-section').html(result['sentences']);
 				//remove loader bar
-				$('#loader-img').remove()
+				loaderImage();
 	        }
 	    });
 	}
 
-	function validateUrl(link) {
-		if(link.match(/https\:\/\/medium\.freecodecamp\.com\//i)) {
+	function validateUrl(link)
+	{
+		//ensure that link belong to medium blog
+		if(link.match(/https\:\/\/medium.*.com\//i)) {
 			return true;
 		} else {
+			$('#status-section').text('Invalid URL')
 			return false;
 		}
+	}
+
+	//display undisplay loader 
+	function loaderImage() 
+	{
+		if($('#loader-img').css('display') == 'block')
+		{
+			$('#loader-img').css('display','none'); 
+		} else {
+			$('#loader-img').css('display','block'); 
+		}
+
 	}
 
 });

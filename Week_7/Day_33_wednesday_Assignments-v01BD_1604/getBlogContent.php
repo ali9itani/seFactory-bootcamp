@@ -4,12 +4,28 @@ if(isset($_POST['blog-link']) && $_POST['blog-link'] != '')
 {
 	$blog_url = $_POST['blog-link'];
 	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, $blog_url);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+	// set URL and other appropriate options
+	$options = array(CURLOPT_URL => $blog_url,
+	                 CURLOPT_RETURNTRANSFER => true,
+	                 CURLOPT_FOLLOWLOCATION => true
+	                );
 
-	$website_page_contents = curl_exec($ch);
-	echo $website_page_contents;
+	curl_setopt_array($ch, $options);
+	$result = curl_exec($ch);
+
+	// Check HTTP status code
+		switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
+			case 200:
+				echo $result;
+				break;
+			case 404:
+				echo "-1";
+				break;
+			 default:
+				echo "-1";
+		}
+
 }
+
 
 ?>

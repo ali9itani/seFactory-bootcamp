@@ -59,6 +59,7 @@ textarea {
 h1 {
     text-align: center;
     width: 100%;
+    color: yellowgreen;
 }
 #container {
     width: 960px;
@@ -68,19 +69,27 @@ h1 {
     width:90%;
 }
 #status-section {
-    height:20px;
-    margin-bottom: 2px;
+    height: 15px;
+    margin-bottom: 4px;
     color: red;
 }
-#result-section {
-    width: 91%;
-    background-color: aliceblue;
+.resulted-texts {
     margin: 20px 0px 0px 0px;
+    width: 91%;
+}
+#result-section {
+    height: 140px;
+    clear: both;
+    color: red;
 }
 #loader-img {
-    height: 10px;
+    height: 15px;
+    display: none;
     width: 90%;
     margin-left: 4px;
+}
+#original-text-section {
+    background-color: aliceblue;
 }
 
 

@@ -15,7 +15,6 @@ if(isset($_POST['text']) && $_POST['text'] != '')
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array(AYLIEN_ID, AYLIEN_KEY));
 	// Edit: prior variable $postFields should be $postfields;
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $postfields);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); // On dev server only!
 	$result = curl_exec($ch);
 	echo $result;
 }

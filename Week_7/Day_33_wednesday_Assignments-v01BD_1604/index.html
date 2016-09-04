@@ -17,6 +17,7 @@
             <h1>SUMMARIZER</h1>
             <!--loader or errors status -->
             <div id="status-section">
+                <img id="loader-img" src="/img/loader256x16.gif" />
             </div>
             <!-- input section -->
             <div>
@@ -27,10 +28,12 @@
                 </form>
             </div>  
             <!-- result section where loading/results are displayed -->
-            <div id="result-section">
+            <h2>Summarized Text:</h2>
+            <div id="result-section" class="resulted-texts">
             </div>
             <!-- original text to summarize -->
-            <div id="original-text-section">
+            <h2>Original Text:</h2>
+            <div id="original-text-section" class="resulted-texts">
             </div>
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
