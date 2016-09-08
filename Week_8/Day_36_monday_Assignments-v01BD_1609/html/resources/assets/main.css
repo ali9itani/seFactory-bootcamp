@@ -55,7 +55,7 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-#container {
+#main-container {
 	width: 980px;
 	color: gray;
 	margin: 0 auto;
@@ -88,6 +88,18 @@ a {
 	display: inline-block;
 	float: right;
 	margin: 0px;
+}
+.col-md-6 #email, .col-md-6 #password{
+    width: 100%;
+}
+.container {
+    background-color: azure;
+}
+.panel {
+    width: 40%;
+    margin: 0 auto;
+    padding-top: 100px;
+    padding-bottom: 100px 
 }
 #add-post-div {
     width: 100%;

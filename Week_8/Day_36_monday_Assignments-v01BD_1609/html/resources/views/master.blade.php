@@ -15,15 +15,21 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <div id="container">
+        <div id="main-container">
             <div id="header">
                 <h1 id="header-title">My Blog</h1>
                 <!-- login/log out -->
-                <h4 id="header-login"><a href="#">login</a></h4>
+                <h4 id="header-login"><a href="/public/log_in">
+                @if (Auth::check())
+                    {!!'logout'!!}
+                @else
+                    {!!'login'!!}
+                @endif
+                </a></h4>
                 <!-- navigation menu -->
                 <ul id="header-menu">
-                    <li><a href="posts">POSTS</a></li>
-                    <li><a href="addpost">ADD POST</a></li>
+                    <li><a href="/public/posts">POSTS</a></li>
+                    <li><a href="/public/addpost">ADD POST</a></li>
                 </ul>
             </div>
             <!-- content differ from one page to another -->
