@@ -17,27 +17,23 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $all_posts = Post::all();
+        $all_posts = Post::orderBy('id', 'DESC')->paginate(3);
 
         $posts = [];
         $data = [];
 
         foreach ($all_posts as $post) {
             $post_author_name = User::find($post->author_id)->name;
-            $post_text = $post->text;
 
             //to just pick first 200 chars for post text
-            if(strlen($post_text)> 300){
-                $post_text = substr($post_text,0,300)."...";
+            if(strlen($post->text)> 300){
+                $post->text = substr($post->text,0,300)."...";
             }
 
-            $data = ['id'=>$post->id, 'title' => $post->title, 'text' => $post_text, 
-                    'created_at' => $post->created_at,'author_name' => $post_author_name];
-            array_push($posts, $data);
+            $post->author_name = $post_author_name;
         }
-
-       // dd($posts);
-        return view('posts')->with('posts',$posts);
+        
+        return view('posts')->with('posts',$all_posts);
     }
 
     /**

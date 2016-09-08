@@ -1,10 +1,8 @@
 @extends('master')
 @section('title','posts')
 @section('content')
-<div id="posts">
-	<h2>Blog Posts</h2>
 	@foreach ($posts as $post)
-
+	@section('main-title','All Posts')
 	<div>
 		<div class="posts-post-div" onclick="location.href=this.getAttribute('redirect');" redirect="post/{!! $post['id'] !!}">
 		<h3 class="posts-post-title">{!! $post['title'] !!}</h3>
@@ -16,4 +14,7 @@
 	</div>
 	@endforeach
 </div>
+<hr/>
+<div id="posts-pagination-div">
+	{!! $posts->links() !!}
 @endsection
