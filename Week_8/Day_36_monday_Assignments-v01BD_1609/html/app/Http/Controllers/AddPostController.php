@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Blog\Http\Requests;
 use Blog\Post;
+use Auth;
 
 class AddPostController extends Controller
 {
@@ -47,9 +48,8 @@ class AddPostController extends Controller
 
         $post->title = $request->title;
         $post->text = $request->text;
-        $post->author_id = 1;
-        $post->created_at = '2011-12-31 23:59:59';
-
+        $post->author_id = Auth::user()->id ;
+        $post->created_at = date("Y-m-d h:i:s");
         $post->save();
 
         //redirect to post details page using route name

@@ -89,7 +89,7 @@ a {
 	float: right;
 	margin: 0px;
 }
-.col-md-6 #email, .col-md-6 #password{
+.col-md-6 input{
     width: 100%;
 }
 .container {
@@ -139,9 +139,10 @@ a {
 }
 .posts-post-div {
     background: aliceblue;
-    margin-bottom: 5px;
     padding: 3px 10px 10px 10px;
     cursor: pointer;
+    margin: 10px auto;
+    width: 80%;
 }
 .posts-post-title {
     text-align: center;

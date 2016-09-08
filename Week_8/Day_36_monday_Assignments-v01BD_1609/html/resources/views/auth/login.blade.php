@@ -11,7 +11,7 @@
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" placeholder="E-Mail Address" name="email" value="{{ old('email') }}" required autofocus>
+                                <input id="email" type="email" class="form-control" style="margin-bottom:10px;" placeholder="E-Mail Address" name="email" value="{{ old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -36,11 +36,12 @@
 
                         <div class="">
                             <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
+                                <div class="checkbox" style="display: inline-block;width: 82%;">
                                     <label>
-                                        <input type="checkbox" name="remember"> Remember Me
+                                        <input type="checkbox" style="width:5px;" name="remember"> Remember Me
                                     </label>
                                 </div>
+                                <a href="/public/register">Register</a>
                             </div>
                         </div>
 
@@ -50,7 +51,6 @@
                                     Login
                                 </button>
                             </div>
-                            <a href="/public/register">Register</a>
                         </div>
                     </form>
                 </div>
