@@ -14,24 +14,27 @@
 Route::get('/',function(){
 	return redirect('posts');
 });
-Route::resource('posts','PostsController');
-Route::resource('post','PostController');
-Auth::routes();
+Route::get('posts','PostsController@index');
 Route::get('/home', 'PostsController@index');
+
+Route::group(['middleware' => ['auth']], function()
+{
+	Route::get('post/add','PostController@create');
+	Route::post('post','PostController@store');
+});
+Route::get('post/{id}','PostController@show');
+
+
+Auth::routes();
 Route::get('/log_in',  function(){
 	if (Auth::check()){
 		@Auth::logout();
 		return redirect('posts');
 	} else {
 		return redirect('login');
-	}
+	}	
+});
 
-	
-});
-Route::group(['middleware' => ['auth']], function()
-{
-	Route::resource('addpost','AddPostController');
-});
 ?>
 
 

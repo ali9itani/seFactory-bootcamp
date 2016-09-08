@@ -20,7 +20,7 @@
                 <!-- navigation menu -->
                 <ul id="header-menu">
                     <li><a href="/public/posts">POSTS</a></li>
-                    <li><a href="/public/addpost">ADD POST</a></li>
+                    <li><a href="/public/post/add">ADD POST</a></li>
                 </ul>
                 <!-- login/log out -->
                 <h4 id="header-login"><a href="/public/log_in">

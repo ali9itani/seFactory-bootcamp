@@ -2,7 +2,7 @@
 @section('title','add post')
 @section('content')
 	@section('main-title','Add New Post')
-	<form method="post" action="addpost">
+	<form method="post" action="/public/post">
 		<input type="hidden" name="_method" value="POST">
 		{{ csrf_field() }}
 		<input type="text" name="title" placeholder="post title" maxlength="200" />

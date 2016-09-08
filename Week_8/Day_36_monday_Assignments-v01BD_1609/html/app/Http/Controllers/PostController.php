@@ -7,19 +7,10 @@ use Illuminate\Http\Request;
 use Blog\Http\Requests;
 use Blog\User;
 use Blog\Post;
+use Auth;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -27,7 +18,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('add_post');
     }
 
     /**
@@ -38,7 +29,22 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // //validate
+        $this->validate($request, array(
+                'title' => 'required|max:200',
+                'text' => 'required'
+            ));
+        //saved to db
+        $post = new Post;
+
+        $post->title = $request->title;
+        $post->text = $request->text;
+        $post->author_id = Auth::user()->id ;
+        $post->created_at = date("Y-m-d h:i:s");
+        $post->save();
+
+        //redirect to post details page using route name
+        return $this->show($post->id);
     }
 
     /**
@@ -49,16 +55,17 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //validation is left
-
         //get post row  from db
         $post = Post::find($id);
-        //find() find items by primary key
-        $author_name = User::find($post->author_id)->name;
-        $data = ['author_name' => '', 'created_at' => $post->created_at , 'title' => $post->title, 'text' => $post->text];
+        if($post) {
+            //find() find items by primary key
+            $author_name = User::find($post->author_id)->name;
+            $data = ['author_name' => '', 'created_at' => $post->created_at , 'title' => $post->title, 'text' => $post->text];
 
-       return view('post')->with('data', $data);
-        
+            return view('post')->with('data', $data);   
+        } else {
+            return redirect('posts');
+        }
     }
 
     /**
