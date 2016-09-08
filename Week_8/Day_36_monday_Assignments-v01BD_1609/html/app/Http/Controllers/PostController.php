@@ -5,6 +5,8 @@ namespace Blog\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Blog\Http\Requests;
+use Blog\User;
+use Blog\Post;
 
 class PostController extends Controller
 {
@@ -49,8 +51,13 @@ class PostController extends Controller
     {
         //validation is left
 
-        $data = ['author_name' => 'Victoria', 'created_at' => '2016 1 2 09:03', 'title' => 'mytitle', 'text' => 'my text  1 2 3'];
-        return view('post')->with('data', $data);
+        //get post row  from db
+        $post = Post::find($id);
+        //find() find items by primary key
+        $author_name = User::find($post->author_id)->name;
+        $data = ['author_name' => '', 'created_at' => $post->created_at , 'title' => $post->title, 'text' => $post->text];
+
+       return view('post')->with('data', $data);
         
     }
 
