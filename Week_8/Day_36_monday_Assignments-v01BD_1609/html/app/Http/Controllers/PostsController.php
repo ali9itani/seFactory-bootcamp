@@ -5,6 +5,8 @@ namespace Blog\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Blog\Http\Requests;
+use Blog\User;
+use Blog\Post;
 
 class PostsController extends Controller
 {
@@ -15,7 +17,27 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return view('posts');
+        $all_posts = Post::all();
+
+        $posts = [];
+        $data = [];
+
+        foreach ($all_posts as $post) {
+            $post_author_name = User::find($post->author_id)->name;
+            $post_text = $post->text;
+
+            //to just pick first 200 chars for post text
+            if(strlen($post_text)> 300){
+                $post_text = substr($post_text,0,300)."...";
+            }
+
+            $data = ['id'=>$post->id, 'title' => $post->title, 'text' => $post_text, 
+                    'created_at' => $post->created_at,'author_name' => $post_author_name];
+            array_push($posts, $data);
+        }
+
+       // dd($posts);
+        return view('posts')->with('posts',$posts);
     }
 
     /**

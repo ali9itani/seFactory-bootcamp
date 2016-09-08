@@ -23,7 +23,7 @@
                 <!-- navigation menu -->
                 <ul id="header-menu">
                     <li><a href="posts">POSTS</a></li>
-                    <li><a href="posts/add">ADD POST</a></li>
+                    <li><a href="addpost">ADD POST</a></li>
                 </ul>
             </div>
             <!-- content differ from one page to another -->

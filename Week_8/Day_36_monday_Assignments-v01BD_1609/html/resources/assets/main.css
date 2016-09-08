@@ -116,6 +116,7 @@ a {
     color: black;
     word-break: break-all;
     border: 1px solid gray;
+    background: aliceblue;
 }
 #post h5 {
     display: inline-block;
@@ -124,9 +125,22 @@ a {
 #post #post-created-at {
     float: right;
 }
-
-
-
+.posts-post-div {
+    background: aliceblue;
+    margin-bottom: 5px;
+    padding: 3px 10px 10px 10px;
+    cursor: pointer;
+}
+.posts-post-title {
+    text-align: center;
+}
+.posts-post-date, .posts-post-author {
+    display: inline-block;
+    margin:0px;
+}
+.posts-post-text {
+    word-break: break-all;
+}
 
 
 
