@@ -39,7 +39,7 @@ class PostController extends Controller
 
         $post->title = $request->title;
         $post->text = $request->text;
-        $post->author_id = Auth::user()->id ;
+        $post->author_id = Auth::user()->id;
         $post->created_at = date("Y-m-d h:i:s");
         $post->save();
 
@@ -57,6 +57,7 @@ class PostController extends Controller
     {
         //get post row  from db
         $post = Post::find($id);
+
         if($post) {
             //find() find items by primary key
             $author_name = User::find($post->author_id)->name;
@@ -68,7 +69,7 @@ class PostController extends Controller
 
             $data = ['post_id' => $post->id, 'allow_delete' => $allow_delete, 'author_name' => $author_name, 'created_at' => $post->created_at , 'title' => $post->title, 'text' => $post->text];
 
-            return view('post')->with('data', $data);   
+           return view('post')->with('data', $data);   
         } else {
             return redirect('posts');
         }

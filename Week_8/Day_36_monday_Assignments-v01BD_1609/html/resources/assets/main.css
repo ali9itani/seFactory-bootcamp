@@ -185,7 +185,13 @@ hr {
     width: 90%;
     margin: 0px auto;
 }
-
+#add-post-form {
+    width:60%;
+    margin: 0 auto;
+}
+#add-post-form input, #add-post-form textarea {
+    width:100%;
+}
 
 
 /* ==========================================================================

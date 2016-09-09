@@ -21,6 +21,7 @@ Route::group(['middleware' => ['auth']], function()
 {
 	Route::get('post/add','PostController@create');
 	Route::post('post','PostController@store');
+	Route::get('posts/my-posts','PostsController@myPosts');
 });
 Route::get('post/{id}','PostController@show');
 Route::delete('post/{post_id}','PostController@destroy');

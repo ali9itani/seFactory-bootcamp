@@ -3,9 +3,8 @@
 @section('content')
 	@foreach ($posts as $post)
 	@section('main-title','All Posts')
-	<h5 id="posts-status">{!! $post['statyus'] !!}</h5>
 	<div>
-		<div class="posts-post-div" onclick="location.href=this.getAttribute('redirect');" redirect="post/{!! $post['id'] !!}">
+		<div class="posts-post-div" onclick="location.href=this.getAttribute('redirect');" redirect="/public/post/{!! $post['id'] !!}">
 		<h3 class="posts-post-title">{!! $post['title'] !!}</h3>
 		<div>
 			By: <h5 class="posts-post-author">{!! $post['author_name'] !!}</h5>

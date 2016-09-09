@@ -19,6 +19,7 @@
                 <h1 id="header-title">My Blog</h1>
                 <!-- navigation menu -->
                 <ul id="header-menu">
+                    <li><a href="/public/posts/my-posts">MY POSTS</a></li>
                     <li><a href="/public/posts">POSTS</a></li>
                     <li><a href="/public/post/add">ADD POST</a></li>
                 </ul>
