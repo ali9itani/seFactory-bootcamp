@@ -23,7 +23,7 @@ Route::group(['middleware' => ['auth']], function()
 	Route::post('post','PostController@store');
 });
 Route::get('post/{id}','PostController@show');
-
+Route::get('post','PostsController@index');
 
 Auth::routes();
 Route::get('/log_in',  function(){

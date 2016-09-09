@@ -1,5 +1,6 @@
 @extends('master')
 @section('title','login')
+@section('main-title', 'User Login')
 @section('content')
 <div class="container">
     <div class="row">
@@ -38,18 +39,18 @@
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox" style="display: inline-block;width: 82%;">
                                     <label>
-                                        <input type="checkbox" style="width:5px;" name="remember"> Remember Me
+                                        <input id="checkitem" type="checkbox" style="width:5px;" name="remember"> Remember Me
                                     </label>
                                 </div>
-                                <a href="/public/register">Register</a>
                             </div>
                         </div>
 
                         <div class="">
                             <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" id="login-button" class="btn btn-primary">
                                     Login
                                 </button>
+                                <a style="margin-right: 43%;" href="/public/register">Register</a>
                             </div>
                         </div>
                     </form>
