@@ -60,35 +60,18 @@ class PostController extends Controller
         if($post) {
             //find() find items by primary key
             $author_name = User::find($post->author_id)->name;
-            $data = ['author_name' => $author_name, 'created_at' => $post->created_at , 'title' => $post->title, 'text' => $post->text];
+
+            $allow_delete = false;
+            if(Auth::check() && $post->author_id == Auth::user()->id) {
+                $allow_delete = true;
+            }
+
+            $data = ['post_id' => $post->id, 'allow_delete' => $allow_delete, 'author_name' => $author_name, 'created_at' => $post->created_at , 'title' => $post->title, 'text' => $post->text];
 
             return view('post')->with('data', $data);   
         } else {
             return redirect('posts');
         }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**
@@ -99,6 +82,14 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+
+        //check if authorized or not
+        if(Auth::check() && $post->author_id == Auth::user()->id) {
+            $post->delete();
+            return redirect('posts');
+        } else {
+            return view('errors/403');   
+        } 
     }
 }

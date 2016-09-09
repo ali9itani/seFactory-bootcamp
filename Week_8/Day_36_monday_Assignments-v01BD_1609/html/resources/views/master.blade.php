@@ -24,7 +24,7 @@
                 </ul>
                 <!-- login/log out -->
                 <h4 id="header-login"><a href="/public/log_in">
-                @if (Auth::check())
+                @if (Auth::check() == Auth::user()->id )
                     {!!'logout'!!}
                 @else
                     {!!'login'!!}
