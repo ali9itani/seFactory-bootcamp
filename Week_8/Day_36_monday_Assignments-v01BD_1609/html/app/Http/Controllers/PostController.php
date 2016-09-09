@@ -60,7 +60,7 @@ class PostController extends Controller
         if($post) {
             //find() find items by primary key
             $author_name = User::find($post->author_id)->name;
-            $data = ['author_name' => '', 'created_at' => $post->created_at , 'title' => $post->title, 'text' => $post->text];
+            $data = ['author_name' => $author_name, 'created_at' => $post->created_at , 'title' => $post->title, 'text' => $post->text];
 
             return view('post')->with('data', $data);   
         } else {
