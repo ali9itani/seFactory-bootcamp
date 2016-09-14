@@ -19,6 +19,7 @@ class CreatePostCommentsTable extends Migration
             $table->foreign('post_id')->references('post_id')->on('posts');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->string('comment_text',2000);
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();
