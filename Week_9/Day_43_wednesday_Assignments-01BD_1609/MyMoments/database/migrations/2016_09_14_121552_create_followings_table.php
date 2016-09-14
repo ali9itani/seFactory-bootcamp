@@ -19,6 +19,7 @@ class CreateFollowingsTable extends Migration
             $table->integer('follower_id')->unsigned();
             $table->foreign('follower_id')->references('id')->on('users');
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
