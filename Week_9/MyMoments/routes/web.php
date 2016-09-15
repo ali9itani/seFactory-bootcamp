@@ -11,14 +11,19 @@
 |
 */
 
-Route::get('/', function () {
+Route::group(['middleware' => ['auth']], function()
+{
+	Route::get('/', function () {
+		Auth::logout();
+	    return view('display_profile');
+	});
+	Route::get('/home', function () {
     return view('display_profile');
+	});
+	Route::get('/image/upload', 'UploadImageController@index');
+	Route::post('image/upload', 'UploadImageController@store');
 });
-Route::get('/image/upload', 'UploadImageController@index');
-Route::post('image/upload', 'UploadImageController@store');
+
 
 Auth::routes();
 
-Route::get('/home', function () {
-    return view('display_profile');
-});

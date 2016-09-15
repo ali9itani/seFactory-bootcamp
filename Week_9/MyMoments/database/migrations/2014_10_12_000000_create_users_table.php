@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('username',30)->unique();
             $table->string('password');
             // 0:male 1:female
-            $table->boolean('gender');
+            $table->boolean('gender')->nullable();
             // 0:public 1:private
             $table->boolean('private_account')->default(0);
             // 0:no 1:disabled
