@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use MyMoments\Http\Requests;
 use MyMoments\Post;
+use Auth;
+
 class UploadImageController extends Controller
 {
     /**
@@ -15,7 +17,7 @@ class UploadImageController extends Controller
      */
     public function index()
     {
-        return view('upload_image');
+        return view('upload_image')->with('uploaded');;
     }
 
     /**
@@ -26,11 +28,13 @@ class UploadImageController extends Controller
      */
     public function store(Request $request)
     {
-         // //validate
+        
+        //validate inputs
         $this->validate($request, array(
                 'hashtags' => 'max:300',
-                'image-caption' => 'required|max:2200'
-            ));
+                'imagecaption' => 'required|max:2200',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ));
 
         //saved to db
         $post = new Post;
@@ -38,13 +42,19 @@ class UploadImageController extends Controller
         $post->hashtags = $request->hashtags;
         $post->image_caption = $request->imagecaption;
         $post->created_at = date("Y-m-d h:i:s");
-        $post->post_image_link = "xx";
-        $post->post_user_id = Auth::user()->id;
+        
+        $user_id = Auth::user()->id;
+        $post->post_user_id = $user_id;
+
+        $imageName = $user_id.time().'.'.$request->image->getClientOriginalExtension();
+        $request->image->move(public_path('images'), $imageName);
+
+        $post->post_image_link = $imageName;
 
         $post->save();
 
-        echo "ok";
-        //redirect to post details page using route name
-        //return $this->show($post->id);
+
+        //refresh with success status
+        return view('upload_image')->with('uploaded', 'Uploaded Successfully');
     }
 }

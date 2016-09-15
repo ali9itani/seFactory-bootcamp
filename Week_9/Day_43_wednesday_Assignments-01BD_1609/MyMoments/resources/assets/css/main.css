@@ -89,8 +89,11 @@ footer {
 #upload-image-box {
     border: 1px solid rgba(0, 0, 0, .08);
 }
-
-
+#upload-status {
+    text-align: center;
+    background-color: yellow;
+    margin: 15px auto;
+}
 
 
 
