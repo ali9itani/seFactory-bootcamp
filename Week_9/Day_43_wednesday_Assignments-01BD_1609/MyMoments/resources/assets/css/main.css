@@ -94,9 +94,23 @@ footer {
     background-color: yellow;
     margin: 15px auto;
 }
-
-
-
+#profile-user-name {
+    font-size: 15px;
+}
+#insta-profile-details a {
+    border: 1px gray solid;
+    text-decoration: none;
+}
+.insta-profile-details-row {
+    margin-top: 20px;
+    text-align: left;
+}
+#profile-posts-div {
+    margin-top: 50px;
+}
+#profile-posts-div img {
+    margin-bottom: 10px;
+}
 
 
 

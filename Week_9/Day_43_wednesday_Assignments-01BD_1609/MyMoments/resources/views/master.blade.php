@@ -35,7 +35,7 @@
                         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
                     </div>
                     <div class="col-sm-2 col-xs-3 div-as-link">
-                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-user" onclick="location.href='/MyMoments/public/profile';"  aria-hidden="true"></span>
                     </div>
                 </div>
             </div>

@@ -14,12 +14,12 @@
 Route::group(['middleware' => ['auth']], function()
 {
 	Route::get('/', function () {
-		Auth::logout();
-	    return view('display_profile');
+		return view('posts');
 	});
 	Route::get('/home', function () {
-    return view('display_profile');
+	return view('posts');
 	});
+	Route::get('/profile', 'ProfileController@index');
 	Route::get('/image/upload', 'UploadImageController@index');
 	Route::post('image/upload', 'UploadImageController@store');
 });
