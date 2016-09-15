@@ -71,6 +71,9 @@ footer {
 .div-as-link {
     cursor: pointer;
 }
+#content {
+    margin-top:20px;
+}
 @media (min-width: 1000px) {
   .container {
     width: 800px;
@@ -82,7 +85,6 @@ footer {
 }
 #upload-image-section {
     text-align: center;
-    margin-top: 20px;
 }
 #upload-image-box {
     border: 1px solid rgba(0, 0, 0, .08);

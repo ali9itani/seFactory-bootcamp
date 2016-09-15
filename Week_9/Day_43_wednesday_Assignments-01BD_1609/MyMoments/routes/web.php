@@ -14,11 +14,11 @@
 Route::get('/', function () {
     return view('display_profile');
 });
-Route::get('/image/upload', function () {
-    return view('upload_image');
-});
-
+Route::get('/image/upload', 'UploadImageController@index');
+Route::post('image/upload', 'UploadImageController@store');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', function () {
+    return view('display_profile');
+});

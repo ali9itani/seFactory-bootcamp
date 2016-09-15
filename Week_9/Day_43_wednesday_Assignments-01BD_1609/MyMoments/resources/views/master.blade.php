@@ -44,7 +44,7 @@
             @yield('content')
         </div>
         <footer class="col-sm-12">
-            All Rights Reserved.
+            All Rights Are Reserved.
         </footer>
     </header>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
