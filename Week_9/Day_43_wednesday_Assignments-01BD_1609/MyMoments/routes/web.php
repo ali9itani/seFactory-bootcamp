@@ -12,8 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('display_profile');
 });
+Route::get('/image/upload', function () {
+    return view('upload_image');
+});
+
 
 Auth::routes();
 
