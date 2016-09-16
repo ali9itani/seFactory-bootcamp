@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 	<div class="row" >
-		<div class="col-sm-2 col-xs-hidden"></div>
+		<div class="col-sm-2 hidden-xs"></div>
 		<div class="col-sm-3 col-xs-4" >
 			<img  class="img-responsive img-rounded" src="/MyMoments/public/images/profile-default.png" />
 		</div>
@@ -25,7 +25,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-2 col-xs-hidden"></div>
+		<div class="col-sm-2 hidden-xs"></div>
 	</div>
 	<div id="profile-posts-div" class="row">
 		@foreach ($data['posts'] as $post)

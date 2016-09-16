@@ -21,14 +21,14 @@
         <header id="header-row">
             <div class="container">
                 <div class="row" >
-                    <div class="col-sm-4 hidden-xs div-as-link"  onclick="location.href='/MyMoments/public/';">
+                    <div class="col-sm-4 col-xs-2 div-as-link"  onclick="location.href='/MyMoments/public/';">
                         <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
-                        | MyMoments
+                        <span class="hidden-xs">| MyMoments</span>
                     </div>
-                    <div class="col-sm-2 col-xs-3 div-as-link">
+                    <div class="col-sm-2 col-xs-2 div-as-link">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </div>
-                    <div class="col-sm-2 col-xs-3 div-as-link">
+                    <div class="col-sm-2 col-xs-2 div-as-link">
                         <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
                     </div>
                     <div class="col-sm-2 col-xs-3 div-as-link">

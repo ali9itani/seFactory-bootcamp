@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('phone_number',30)->nullable();
             $table->string('bio',150)->nullable();
             $table->string('website',2083)->nullable();
-            $table->string('image_link',2083)->default('https://www.google.ie/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png');
+            $table->string('image_link',2083)->default('profile-default.png');
             $table->rememberToken();
             $table->timestamps();
         });
