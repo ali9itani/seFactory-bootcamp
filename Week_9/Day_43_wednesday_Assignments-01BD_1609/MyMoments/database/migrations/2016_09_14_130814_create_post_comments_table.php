@@ -13,7 +13,7 @@ class CreatePostCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('post-comments', function (Blueprint $table) {
+        Schema::create('post_comments', function (Blueprint $table) {
             $table->increments('comment_id');
             $table->integer('post_id')->unsigned();
             $table->foreign('post_id')->references('post_id')->on('posts');

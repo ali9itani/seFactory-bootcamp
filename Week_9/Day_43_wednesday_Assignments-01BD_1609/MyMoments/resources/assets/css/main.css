@@ -68,7 +68,7 @@ footer {
     height: 50px;
     padding-top: 15px;
 }
-.div-as-link {
+.div-as-link, .like-image{
     cursor: pointer;
 }
 #content {
@@ -123,8 +123,13 @@ footer {
 .post-hours-ago {
     text-align: right;
 }
-
-
+.posts-item-image-caption, .post-item-image-comments {
+    border-bottom: 1px solid #efefef;
+    margin-top: 2px;
+}
+.post-comment-and-like {
+    margin:10px 0;
+}
 
 
 /* ==========================================================================

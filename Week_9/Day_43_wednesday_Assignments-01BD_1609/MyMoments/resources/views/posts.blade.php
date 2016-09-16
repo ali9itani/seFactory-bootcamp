@@ -18,11 +18,31 @@
 			<div class="post-item col-xs-12  col-sm-6 col-sm-offset-3 ">
 				<div class="">
 					<div class="row post-item-details">
-						<span class="col-xs-5 col-xs-offset-1 col-sm-3 col-sm-offset-1">author</span>
-						<span class="col-xs-5 col-sm-offset-2 post-hours-ago">2hrs ago</span>
+						<span class="col-xs-5 col-xs-offset-1 col-sm-3 col-sm-offset-1">{!!$post->post_author_name!!}</span>
+						<span class="col-xs-5 col-sm-offset-2 post-hours-ago">{!!$post->time!!}</span>
 					</div>
-					<div class="posts-item-image-box">
+					<div class="row posts-item-image-box">
 						<img  class="col-xs-12 img-responsive" src="/MyMoments/public/images/{!!$post->post_image_link!!}" />		
+					</div>
+					<div class="row posts-item-image-caption col-sm-10 col-sm-offset-1">
+						<p>{!!$post->image_caption!!}</p>		
+					</div>
+					<div class="row post-likes col-sm-10 col-sm-offset-1">
+						{!!$post->likes_count!!} likes
+					</div>
+					<div class="row post-item-image-comments col-sm-10 col-sm-offset-1">
+					@if($post->comments)
+						@foreach ($post->comments as $comment)
+							<div class="post-comment">
+								<p>{!!$comment!!}</p>	
+							</div>	
+						@endforeach
+					@endif
+					</div>
+					<div class="row post-comment-and-like col-sm-11 col-sm-offset-1">
+						<img class="like-image col-xs-3 col-xs-offset-5 col-sm-offset-0 col-sm-3" class="img-responsive" src="/MyMoments/public/images/emptyheart.png" />
+						<input type="text" class="col-xs-12 col-sm-8" placeholder="Add a comment ..."/>
+						
 					</div>
 				</div>
 			</div>

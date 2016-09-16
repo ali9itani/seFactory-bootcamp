@@ -20,7 +20,7 @@ class PostsCommentsTableSeeder extends Seeder
         for ($i = 0; $i < $limit; $i++) {
         	$random_user = User::orderBy(DB::raw('RAND()'))->take(1)->get();
         	$random_post = Post::orderBy(DB::raw('RAND()'))->take(1)->get();
-            DB::table('post-comments')->insert([
+            DB::table('post_comments')->insert([
                 'comment_text' => $faker->word,
                 'post_id' => $random_post[0]['post_id'],          
                 'user_id' => $random_user[0]['id'],
