@@ -87,6 +87,7 @@
                                 </button>
                             </div>
                         </div>
+                        <a  href="{{ url('/login') }}">Login</a>
                     </form>
                 </div>
             </div>

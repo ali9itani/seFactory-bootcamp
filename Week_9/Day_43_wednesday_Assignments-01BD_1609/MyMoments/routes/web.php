@@ -18,6 +18,7 @@ Route::group(['middleware' => ['auth']], function()
 	Route::get('/profile', 'ProfileController@index');
 	Route::get('/image/upload', 'UploadImageController@index');
 	Route::post('image/upload', 'UploadImageController@store');
+	Route::post('/home/like', 'PostsController@like');
 });
 
 
