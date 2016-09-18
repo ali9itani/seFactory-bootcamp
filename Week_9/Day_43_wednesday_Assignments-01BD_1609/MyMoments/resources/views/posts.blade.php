@@ -6,7 +6,7 @@
 		<div class="row">
 			<section class="div-as-link" id="upload-image-section" onclick="window.open('image/upload');">
 				<div id="upload-image-box" class="col-xs-10 col-xs-offset-1 col-sm-offset-3 col-sm-6" >
-					<img id="add-image-icon" class="img-responsive" src="/MyMoments/resources/assets/img/plus-5-xxl.png" />
+					<img id="add-image-icon" class="img-responsive" src="/MyMoments/resources/assets/img/camera-2-xxl.png" />
 					Tap To Upload Image
 				</div>
 			</section>
@@ -28,27 +28,31 @@
 						<p>{!!$post->image_caption!!}</p>		
 					</div>
 					<div class="row post-likes col-sm-10 col-sm-offset-1">
-						{!!$post->likes_count!!} likes
+						<span id="post-{!!$post->post_id!!}-likes-count">{!!$post->likes_count!!}</span> likes
 					</div>
-					<div class="row post-item-image-comments col-sm-10 col-sm-offset-1">
+					<div class="row post-item-image-comments col-sm-10 col-sm-offset-1" id="post-item-image-comments-{!!$post->post_id!!}">
 					@if($post->comments)
 						@foreach ($post->comments as $comment)
-							<div class="post-comment">
-								<p>{!!$comment!!}</p>	
-							</div>	
+							<p>{!!$comment!!}</p>
 						@endforeach
 					@endif
 					</div>
 					<div class="row post-comment-and-like col-sm-11 col-sm-offset-1">
-						<img class="like-image col-xs-3 col-xs-offset-5 col-sm-offset-0 col-sm-3 img-responsive" onclick="like('{!!$post->post_id!!}')" x-data="{!!$post->is_liked!!}" id="img-{!!$post->post_id!!}"
+						<img class="like-image col-xs-4 col-xs-offset-4 col-sm-offset-0 col-sm-2 img-responsive" onclick="like('{!!$post->post_id!!}')" x-data="{!!$post->is_liked!!}" id="img-{!!$post->post_id!!}" style="margin-top: 5px;"
 						@if($post->is_liked)
 							{!!'src="/MyMoments/public/images/liked.png"'!!}
 						@else
 							{!!'src="/MyMoments/public/images/emptyheart.png"'!!}
 						@endif
 						 />
-						<input type="text" class="col-xs-12 col-sm-8" placeholder="Add a comment ..."/>
-						
+						<div class="row col-xs-12 col-sm-10" style="margin: 0px;padding: 0px;" >
+						    <div class="input-group">
+						      <input type="text" id="comment-input-{!!$post->post_id!!}" class="form-control" placeholder="Add a comment...">
+						      <span class="input-group-btn">
+						        <button class="btn btn-secondary" onclick="comment('{!!$post->post_id!!}');" type="button">go</button>
+						      </span>
+						    </div>
+						 </div>
 					</div>
 				</div>
 			</div>
