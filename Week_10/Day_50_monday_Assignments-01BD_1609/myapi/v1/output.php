@@ -8,7 +8,12 @@ class output
 	private $result;
 	private $status_code;
 	private $status_code_meaning = [501 => 'server error, cannot serve you',
-									402 => 'Invalid data in post request'];
+									402 => 'Invalid data in post request',
+									403 => 'Post request has no data',
+									404 => 'Requested page not found',
+									412 => 'Invalid data in get request',
+									413 => 'Get request has no data'
+									];
 
 	function output($status_code, $message = '' ) {
 		$this->status_code = $status_code;
@@ -19,17 +24,16 @@ class output
 		} else {
 			$this->message = $this->status_code_meaning[$this->status_code].' '.$message;
 		}
-
+		//to json + change key
 		$this->returnResult();
 	}
 
 	//encode message in json
 	//and change all keys from snake_case to camel_case
 	public function returnResult() {
-
 		//change array_keys to camel case
 		if($this->status_code == 200) {
-			foreach ($this->message as $key => $value) {
+			foreach ($this->message[0] as $key => $value) {
 
 				// replace underscores with spaces, uppercase first letter of all words,
 				// join them, lowercase the very first letter of the name
@@ -42,7 +46,7 @@ class output
 		}
 
 		$result_array = ['statusCode' => $this->status_code , 'message' => $this->message];
-		print_r(json_encode($result_array));
+		echo json_encode($result_array);
 	}
 }
 ?>

@@ -8,7 +8,5 @@ require_once('payment.php');
 require_once('rental.php');
 require_once('staff.php');
 require_once('store.php');
-
-$actor = new actor();
-
+require_once('output.php');
 ?>

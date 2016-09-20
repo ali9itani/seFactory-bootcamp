@@ -10,7 +10,7 @@ class MySqlAPI
 	function MySqlAPI(){
 		$this->mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-		if ($mysqli->connect_errno) {
+		if ($this->mysqli->connect_errno) {
 			$this->connection_status = false;
 		} else {
 			$this->connection_status = true;
@@ -36,13 +36,24 @@ class MySqlAPI
 	//method used to select a rowfrom db based on id
 	public function getRowById($table_name, $id_key, $id_value) {
 
-		$sql = "SELECT * FROM {$table_name} where $id_key = '{$id_value}' ";
+		$sql = "SELECT * FROM {$table_name} where $id_key = '{$id_value}';";
 
 		$result = $this->mysqli->query($sql);
 		$this->closeConnection();
 
 		//fetch row as associative array
 		return $result->fetch_array(MYSQLI_ASSOC);
+	}
+
+	//select * from a specific table
+	public function getAll($table_name) {
+		$sql = "SELECT * FROM {$table_name};";
+
+		$result = $this->mysqli->query($sql);
+		$this->closeConnection();
+
+		//fetch all rows as associative arrays in 1 array
+		return mysqli_fetch_all($result,MYSQLI_ASSOC);
 	}
 
 	//closes db connection
