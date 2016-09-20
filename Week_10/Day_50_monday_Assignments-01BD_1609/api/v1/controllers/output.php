@@ -13,7 +13,9 @@ class output
 									403 => 'Post request has no data',
 									404 => 'Requested page not found',
 									412 => 'Invalid data in get request',
-									413 => 'Get request has no data'
+									413 => 'Get request has no data',
+									422 => 'Invalid data in put request',
+									423 => 'Put request has no data'
 									];
 
 	function output($status_code, $message = '' ) {

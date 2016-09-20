@@ -19,8 +19,8 @@ class MySqlAPI
 	}
 
 	//method used to insert to any db table
-	public function insertData($table_name, $data_array, $id_key) {
-
+	public function insertData($table_name, $data_array, $id_key)
+	{
 		$columns = implode(', ',array_keys($data_array));
 		$values = "'".implode("' , '",array_values($data_array))."'";
 
@@ -34,8 +34,8 @@ class MySqlAPI
 	}
 
 	//method used to select a rowfrom db based on id
-	public function getRowById($table_name, $id_key, $id_value) {
-
+	public function getRowById($table_name, $id_key, $id_value)
+	{
 		$sql = "SELECT * FROM {$table_name} where $id_key = '{$id_value}';";
 
 		$result = $this->mysqli->query($sql);
@@ -52,7 +52,8 @@ class MySqlAPI
 	}
 
 	//select * from a specific table
-	public function getAll($table_name) {
+	public function getAll($table_name)
+	{
 		$sql = "SELECT * FROM {$table_name};";
 
 		$result = $this->mysqli->query($sql);
@@ -62,8 +63,29 @@ class MySqlAPI
 		return mysqli_fetch_all($result,MYSQLI_ASSOC);
 	}
 
+	//method used to do update in any db table
+	public function updateRow($table_name, $data_array, $id_key, $id_value)
+	{
+		$set_columns_values="";
+		foreach ($data_array as $field => $value)
+		{
+			$set_columns_values .= $field." = '".$value."',";
+		}
+		//remove last comma 
+		$set_columns_values = trim($set_columns_values, ",");
+
+		$sql = "UPDATE {$table_name} SET {$set_columns_values} WHERE {$id_key} = '{$id_value}'";
+		$this->mysqli->query($sql);
+		
+		//return inserted row 
+		return $this->getRowById($table_name, $id_key, $id_value);
+
+		$this->closeConnection();
+	}
+
 	//closes db connection
-	public function closeConnection() {
+	public function closeConnection()
+	{
 		$this->mysqli->close();
 	}
 

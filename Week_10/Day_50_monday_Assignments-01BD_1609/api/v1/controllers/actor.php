@@ -18,7 +18,8 @@ class Actor
 	private $columns_name = ['firstName','lastName']; 
 
 	//connection initializer - initialize a mysql db connection 
-	public function initializeConnection(){
+	public function initializeConnection()
+	{
 		$db_conx  = new MySqlAPI();
 
 		//if an error in db connection exist
@@ -31,12 +32,13 @@ class Actor
 	}
 
 	/* used to create a new actor in db */
-	function create(){
+	function create()
+	{
 		$db_conx = $this->initializeConnection();
 
 		if($db_conx) {
 			$data_array = $_POST;
-			if($this->validData($_POST)){
+			if($this->validateData($_POST)){
 				$data_array = ['first_name' => $_POST['firstName'], 'last_name' => $_POST['lastName']];
 				$result = $db_conx->insertData('sakila.actor',$data_array, 'actor_id');
 				$ouput = new output(200, $result);
@@ -48,7 +50,8 @@ class Actor
 	}
 
 	//check if data is valid and complete
-	public function validData($data_array) {
+	public function validateData($data_array)
+	{
 		//check if all necessary data exist and valid
 		for ($i=0; $i < count($this->columns_name); $i++) { 
 			//get value of each required record
@@ -71,7 +74,8 @@ class Actor
 	}
 
 	//select actor by actor id
-	public function getActor($actor_id_value) {
+	public function getActor($actor_id_value)
+	{
 		if(is_numeric($actor_id_value)){
 			$db_conx = $this->initializeConnection();
 			$result = $db_conx->getRowById('actor', 'actor_id', $actor_id_value);
@@ -81,12 +85,34 @@ class Actor
 			} else {
 				$ouput = new output(101);
 			}
-			
 		} else {
 			$ouput = new output(412,', actor id');
-		}
-		
+		}		
 	}
+
+	//update data
+	public function updateActor($id_value) 
+	{
+		if(is_numeric($id_value)){
+
+			//get data from put request
+			$put_data;
+			parse_str(file_get_contents("php://input"),$put_data);
+
+			if($this->validateData($put_data)){
+				$db_conx = $this->initializeConnection();
+				$data_array = ['first_name' => $put_data['firstName'], 'last_name' => $put_data['lastName']];
+				$result = $db_conx->updateRow('actor', $data_array, 'actor_id', $id_value);
+				$ouput = new output(200, $result);
+			} else {
+				$ouput =  new output(422, '(create actor)');
+			}
+		
+		} else {
+			$ouput = new output(422,', actor id');
+		}	
+	}
+
 }
 
 

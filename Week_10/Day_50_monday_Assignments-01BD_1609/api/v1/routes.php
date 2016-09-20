@@ -23,13 +23,17 @@ switch($method) {
 	case 'GET':
 		getRoutes($main_dir, $requested_uri);
 		break;
+	case 'PUT':
+		putRoutes($main_dir, $requested_uri);
+		break;
 	default:
 		$ouput =  new output(404);
 
 }
 
 //validate that post data exist and then call class to create
-function postRoutes($main_dir, $requested_uri){
+function postRoutes($main_dir, $requested_uri)
+{
 	if(isset($_POST)){
 		//   /myapi/v1/examples/ => create example
 		switch ($requested_uri) {
@@ -45,8 +49,9 @@ function postRoutes($main_dir, $requested_uri){
 	}
 }
 
-//validate that get data exist and then call class to display
-function getRoutes($main_dir, $requested_uri){
+//call class to display
+function getRoutes($main_dir, $requested_uri)
+{
 	//   /myapi/v1/examples/ => get all examples
 	switch ($requested_uri) {
 		case $main_dir.'actors/':
@@ -62,5 +67,27 @@ function getRoutes($main_dir, $requested_uri){
 			$ouput =  new output(404);
 	}
 }
+
+
+function putRoutes($main_dir, $requested_uri)
+{
+	if(file_get_contents("php://input")){
+			//   /myapi/v1/examples/ => get all examples
+		switch ($requested_uri) {
+			case (preg_match('/actors\/([0-9])*/', $requested_uri) ? true : false):
+				$actor = new Actor();
+				$id = str_replace($main_dir."actors/","",$requested_uri);
+				$actor->updateActor($id);
+				break;			
+			default:
+				$ouput =  new output(404);
+		}
+	} else {
+			$ouput =  new output(423);
+	}
+
+
+}
+
 
 ?>
