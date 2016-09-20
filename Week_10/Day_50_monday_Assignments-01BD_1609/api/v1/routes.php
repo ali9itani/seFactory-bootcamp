@@ -10,7 +10,7 @@
 //all required classes + an instance of each one is defined in that file
 include_once('routes_included_classes.php');
 
-$main_dir = '/myapi/v1/';
+$main_dir = '/api/v1/';
 
 $requested_uri = $_SERVER['REQUEST_URI'];
 $method = $_SERVER['REQUEST_METHOD'];

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/configuration/auth_config.php';
+require_once '/var/www/html/api/v1/configuration/auth_config.php';
 
 class MySqlAPI
 {
@@ -41,8 +41,14 @@ class MySqlAPI
 		$result = $this->mysqli->query($sql);
 		$this->closeConnection();
 
-		//fetch row as associative array
-		return $result->fetch_array(MYSQLI_ASSOC);
+		//ensure the there is result
+		if($result->num_rows){
+			//fetch row as associative array
+			return $result->fetch_array(MYSQLI_ASSOC);
+		} else {
+			return [];
+		}
+		
 	}
 
 	//select * from a specific table

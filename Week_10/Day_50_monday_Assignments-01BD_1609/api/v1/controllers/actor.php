@@ -2,7 +2,7 @@
 require_once 'MySqlAPI.php';
 require_once 'output.php';
 
-class Customer 
+class Actor 
 {
 	/*
 	*
@@ -17,16 +17,25 @@ class Customer
 	*/
 	private $columns_name = ['firstName','lastName']; 
 
-	/* used to create a new actor in db */
-	function create(){
+	//connection initializer - initialize a mysql db connection 
+	public function initializeConnection(){
 		$db_conx  = new MySqlAPI();
 
 		//if an error in db connection exist
 		if(!$db_conx->connection_status) {
 			$ouput =  new output(501);
+			return [];
 		} else {
-			$data_array = $_POST;
+			return $db_conx;
+		}
+	}
 
+	/* used to create a new actor in db */
+	function create(){
+		$db_conx = $this->initializeConnection();
+
+		if($db_conx) {
+			$data_array = $_POST;
 			if($this->validData($_POST)){
 				$data_array = ['first_name' => $_POST['firstName'], 'last_name' => $_POST['lastName']];
 				$result = $db_conx->insertData('sakila.actor',$data_array, 'actor_id');
@@ -52,6 +61,31 @@ class Customer
 			}
 		}
 		return true;
+	}
+
+	//select all actors from db
+	public function getAllActors() {
+		$db_conx = $this->initializeConnection();
+		$result = $db_conx->getAll('actor');
+		$ouput = new output(200, $result);
+	}
+
+	//select actor by actor id
+	public function getActor($actor_id_value) {
+		if(is_numeric($actor_id_value)){
+			$db_conx = $this->initializeConnection();
+			$result = $db_conx->getRowById('actor', 'actor_id', $actor_id_value);
+
+			if($result){
+				$ouput = new output(200, $result);
+			} else {
+				$ouput = new output(101);
+			}
+			
+		} else {
+			$ouput = new output(412,', actor id');
+		}
+		
 	}
 }
 
