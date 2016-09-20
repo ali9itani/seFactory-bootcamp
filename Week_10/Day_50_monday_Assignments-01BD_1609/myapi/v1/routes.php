@@ -5,10 +5,14 @@ include_once('routes_included_classes.php');
 $main_dir = '/myapi/v1/';
 
 $requested_uri = $_SERVER['REQUEST_URI'];
+$method = $_SERVER['REQUEST_METHOD'];
 
 switch ($requested_uri) {
 	case $main_dir.'actor':
-		$actor->actorName();
+		if($method == 'POST' && isset($_POST))
+			$actor->create();
+		if($method == 'GET')
+			$actor->create();
 		break;
 	
 	default:
