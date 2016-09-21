@@ -50,6 +50,10 @@ function postRoutes($requested_uri)
 				$actor = new Customer();
 				$actor->create();
 				break;
+			case 'films':
+				$film = new Film();
+				$film->create();
+				break;
 			default:
 				$ouput =  new output(404);
 		}

@@ -7,7 +7,7 @@ class Main
 {
 	/*
 	*
-	*customer actions - create update delete read
+	*actions - create update delete read
 	*
 	*lastname/firstname/ be lenght > 3|lenght < 46|chars&spaces are allowed 
 	*email be lenght < 51| valid email format
