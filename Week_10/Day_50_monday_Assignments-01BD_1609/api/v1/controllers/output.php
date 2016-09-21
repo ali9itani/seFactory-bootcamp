@@ -9,6 +9,7 @@ class output
 	private $status_code;
 	private $status_code_meaning = [101 => 'No records in database',
 									501 => 'server error, cannot serve you',
+									401 => 'Invalid data',
 									402 => 'Invalid data in post request',
 									403 => 'Post request has no data',
 									404 => 'Requested page not found',

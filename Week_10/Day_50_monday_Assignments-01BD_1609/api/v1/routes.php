@@ -10,24 +10,22 @@
 //all required classes + an instance of each one is defined in that file
 include_once('routes_included_classes.php');
 
-$main_dir = '/api/v1/';
-
 $requested_uri = $_SERVER['REQUEST_URI'];
 $method = $_SERVER['REQUEST_METHOD'];
 
 //redirect acc. to request method type
 switch($method) {
 	case 'POST':
-		postRoutes($main_dir, $requested_uri);
+		postRoutes($requested_uri);
 		break;
 	case 'GET':
-		getRoutes($main_dir, $requested_uri);
+		getRoutes($requested_uri);
 		break;
 	case 'PUT':
-		putRoutes($main_dir, $requested_uri);
+		putRoutes($requested_uri);
 		break;
 	case 'DELETE':
-		deleteRoutes($main_dir, $requested_uri);
+		deleteRoutes($requested_uri);
 		break;
 	default:
 		$ouput =  new output(404);
@@ -35,7 +33,7 @@ switch($method) {
 }
 
 //validate that post data exist and then call class to create
-function postRoutes($main_dir, $requested_uri)
+function postRoutes($requested_uri)
 {
 	if(isset($_POST)){
 		//   /myapi/v1/examples/ => create example
@@ -43,7 +41,11 @@ function postRoutes($main_dir, $requested_uri)
 			case $main_dir.'actors/':
 				$actor = new Actor();
 				$actor->create();
-				break;		
+				break;
+			case $main_dir.'customers/':
+				$actor = new Customer();
+				$actor->create();
+				break;
 			default:
 				$ouput =  new output(404);
 		}
@@ -53,34 +55,62 @@ function postRoutes($main_dir, $requested_uri)
 }
 
 //call class to display
-function getRoutes($main_dir, $requested_uri)
+function getRoutes($requested_uri)
 {
-	//   /myapi/v1/examples/ => get all examples
-	switch ($requested_uri) {
-		case $main_dir.'actors/':
-			$actor = new Actor();
-			$actor->getAllActors();
-			break;
-		case (preg_match('/actors\/([0-9])*/', $requested_uri) ? true : false):
-			$actor = new Actor();
-			$id = str_replace($main_dir."actors/","",$requested_uri);
-			$actor->getActor($id);
-			break;			
-		default:
-			$ouput =  new output(404);
+	// $requested_uri_parts[3] => entity name, $requested_uri_parts[4] => id
+	$requested_uri_parts  = explode("/", $requested_uri);
+	$entity_name = $requested_uri_parts[3];
+	$id = $requested_uri_parts[4];
+
+	if($id){
+		//   /myapi/v1/examples/1 => get all for example with id=1
+		switch ($entity_name) {
+			case 'actors':
+				$actor = new Actor();
+				$actor->getActor($id);
+				break;
+			case 'customers':
+				$customer = new Customer();
+				$customer->getById($id);
+				break;
+			default:
+				$ouput =  new output(404);
+		}
+	}else {
+		// /myapi/v1/examples/ => get all examples
+		switch ($entity_name) {
+			case 'actors':
+				$actor = new Actor();
+				$actor->getAllActors();
+				break;
+			case 'customers':
+				$customer = new Customer();
+				$customer->getAll();
+				break;
+			default:
+				$ouput =  new output(404);
+		}
 	}
 }
 
 
-function putRoutes($main_dir, $requested_uri)
+function putRoutes($requested_uri)
 {
+	// $requested_uri_parts[3] => entity name, $requested_uri_parts[4] => id
+	$requested_uri_parts  = explode("/", $requested_uri);
+	$entity_name = $requested_uri_parts[3];
+	$id = $requested_uri_parts[4];
+
 	if(file_get_contents("php://input")){
 			//   /myapi/v1/examples/1 => update all data for example with id=1
-		switch ($requested_uri) {
-			case (preg_match('/actors\/([0-9])*/', $requested_uri) ? true : false):
+		switch ($entity_name) {
+			case 'actors':
 				$actor = new Actor();
-				$id = str_replace($main_dir."actors/","",$requested_uri);
 				$actor->updateActor($id);
+				break;
+			case 'customers':
+				$customer = new Customer();
+				$customer->updateOne($id);
 				break;			
 			default:
 				$ouput =  new output(404);
@@ -90,15 +120,23 @@ function putRoutes($main_dir, $requested_uri)
 	}
 }
 
-function deleteRoutes($main_dir, $requested_uri)
+function deleteRoutes($requested_uri)
 {
+	// $requested_uri_parts[3] => entity name, $requested_uri_parts[4] => id
+	$requested_uri_parts  = explode("/", $requested_uri);
+	$entity_name = $requested_uri_parts[3];
+	$id = $requested_uri_parts[4];
+
 	//   /myapi/v1/examples/1 => delete example with id=1
-	switch ($requested_uri) {
-		case (preg_match('/actors\/([0-9])*/', $requested_uri) ? true : false):
+	switch ($entity_name) {
+		case 'actors':
 			$actor = new Actor();
-			$id = str_replace($main_dir."actors/","",$requested_uri);
 			$actor->deleteActor($id);
-			break;			
+			break;
+		case 'customers':
+			$customer = new Customer();
+			$customer->deleteOne($id);
+			break;	
 		default:
 			$ouput =  new output(404);
 	}

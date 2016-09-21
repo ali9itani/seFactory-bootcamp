@@ -6,13 +6,9 @@ class Actor
 {
 	/*
 	*
-	*post request to create an actor
+	*actor operation - create update delete read
 	*data should be lenght > 3|lenght < 46|chars&spaces are allowed 
 	*post parameters - firstName LastName ex: {firstName=ali&lastName=itani}
-	*
-	*errors status code meanings
-	*501 -> error in db conx - 402 -> error in request post data 
-	*200 -> everything is ok  -- message {"statusCode":200,"message":...
 	*
 	*/
 	private $columns_name = ['firstName','lastName']; 
