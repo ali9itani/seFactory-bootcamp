@@ -26,7 +26,7 @@ class MySqlAPI
 
 		$sql = "INSERT INTO {$table_name} ({$columns}) VALUES ({$values})";
 		$result = $this->mysqli->query($sql);
-		echo $sql;
+
 		//return inserted row 
 		return $this->getRowById($table_name, $id_key, $this->mysqli->insert_id);
 	}

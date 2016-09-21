@@ -35,14 +35,18 @@ switch($method) {
 //validate that post data exist and then call class to create
 function postRoutes($requested_uri)
 {
+	// $requested_uri_parts[3] => entity name, $requested_uri_parts[4] => id
+	$requested_uri_parts  = explode("/", $requested_uri);
+	$entity_name = $requested_uri_parts[3];
+
 	if(isset($_POST)){
 		//   /myapi/v1/examples/ => create example
-		switch ($requested_uri) {
-			case $main_dir.'actors/':
+		switch ($entity_name) {
+			case 'actors':
 				$actor = new Actor();
 				$actor->create();
 				break;
-			case $main_dir.'customers/':
+			case 'customers':
 				$actor = new Customer();
 				$actor->create();
 				break;
@@ -73,6 +77,10 @@ function getRoutes($requested_uri)
 				$customer = new Customer();
 				$customer->getById($id);
 				break;
+			case 'films':
+				$film = new Film();
+				$film->getById($id);
+				break;
 			default:
 				$ouput =  new output(404);
 		}
@@ -86,6 +94,10 @@ function getRoutes($requested_uri)
 			case 'customers':
 				$customer = new Customer();
 				$customer->getAll();
+				break;
+			case 'films':
+				$film = new Film();
+				$film->getAll();
 				break;
 			default:
 				$ouput =  new output(404);
@@ -111,6 +123,10 @@ function putRoutes($requested_uri)
 			case 'customers':
 				$customer = new Customer();
 				$customer->updateOne($id);
+				break;	
+			case 'films':
+				$film = new Film();
+				$film->updateOne($id);
 				break;			
 			default:
 				$ouput =  new output(404);
