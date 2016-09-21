@@ -29,8 +29,6 @@ class MySqlAPI
 
 		//return inserted row 
 		return $this->getRowById($table_name, $id_key, $this->mysqli->insert_id);
-	
-		$this->closeConnection();
 	}
 
 	//method used to select a rowfrom db based on id
@@ -39,7 +37,6 @@ class MySqlAPI
 		$sql = "SELECT * FROM {$table_name} where $id_key = '{$id_value}';";
 
 		$result = $this->mysqli->query($sql);
-		$this->closeConnection();
 
 		//ensure the there is result
 		if($result->num_rows){
@@ -47,8 +44,7 @@ class MySqlAPI
 			return $result->fetch_array(MYSQLI_ASSOC);
 		} else {
 			return [];
-		}
-		
+		}		
 	}
 
 	//select * from a specific table
@@ -57,7 +53,6 @@ class MySqlAPI
 		$sql = "SELECT * FROM {$table_name};";
 
 		$result = $this->mysqli->query($sql);
-		$this->closeConnection();
 
 		//fetch all rows as associative arrays in 1 array
 		return mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -75,12 +70,25 @@ class MySqlAPI
 		$set_columns_values = trim($set_columns_values, ",");
 
 		$sql = "UPDATE {$table_name} SET {$set_columns_values} WHERE {$id_key} = '{$id_value}'";
+
 		$this->mysqli->query($sql);
 		
 		//return inserted row 
 		return $this->getRowById($table_name, $id_key, $id_value);
+	}
 
-		$this->closeConnection();
+	//method used to select a rowfrom db based on id
+	public function deleteRowById($table_name, $id_key, $id_value)
+	{
+		$sql = "DELETE FROM {$table_name} where $id_key = '{$id_value}';";
+
+		$result = $this->mysqli->query($sql);
+
+		if($result){
+			return "deleted succesfully";
+		} else {
+			return "failed to delete";
+		}
 	}
 
 	//closes db connection

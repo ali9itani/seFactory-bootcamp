@@ -45,6 +45,8 @@ class Actor
 			} else {
 				$ouput =  new output(402, '(create actor)');
 			}
+			//close fb conx
+			$db_conx->closeConnection();
 		}
 		
 	}
@@ -71,6 +73,9 @@ class Actor
 		$db_conx = $this->initializeConnection();
 		$result = $db_conx->getAll('actor');
 		$ouput = new output(200, $result);
+		//close fb conx
+		$db_conx->closeConnection();
+
 	}
 
 	//select actor by actor id
@@ -79,6 +84,9 @@ class Actor
 		if(is_numeric($actor_id_value)){
 			$db_conx = $this->initializeConnection();
 			$result = $db_conx->getRowById('actor', 'actor_id', $actor_id_value);
+
+			//close fb conx
+			$db_conx->closeConnection();
 
 			if($result){
 				$ouput = new output(200, $result);
@@ -90,24 +98,52 @@ class Actor
 		}		
 	}
 
-	//update data
+	//update all actor's data
 	public function updateActor($id_value) 
 	{
 		if(is_numeric($id_value)){
-
 			//get data from put request
 			$put_data;
 			parse_str(file_get_contents("php://input"),$put_data);
 
 			if($this->validateData($put_data)){
 				$db_conx = $this->initializeConnection();
-				$data_array = ['first_name' => $put_data['firstName'], 'last_name' => $put_data['lastName']];
-				$result = $db_conx->updateRow('actor', $data_array, 'actor_id', $id_value);
+
+				//check if actor id exist
+				$recent_actor_data = $db_conx->getRowById('actor', 'actor_id', $id_value);	
+
+				if($recent_actor_data){
+					$data_array = ['first_name' => $put_data['firstName'], 'last_name' => $put_data['lastName']];
+					$result = $db_conx->updateRow('actor', $data_array, 'actor_id', $id_value);
+					$ouput = new output(200, $result);
+				} else {
+					$ouput =  new output(422, '-actor id (update actor)');
+				}
+				$db_conx->closeConnection();
+			} else {
+				$ouput =  new output(422, '(update actor)');
+			}
+		} else {
+			$ouput = new output(422,', actor id');
+		}	
+	}
+
+	//delete an actor
+	public function deleteActor($id_value) 
+	{
+		if(is_numeric($id_value)){
+			$db_conx = $this->initializeConnection();
+
+			//check if actor id exist
+			$recent_actor_data = $db_conx->getRowById('actor', 'actor_id', $id_value);	
+
+			if($recent_actor_data){
+				$result = $db_conx->deleteRowById('actor', 'actor_id', $id_value);
 				$ouput = new output(200, $result);
 			} else {
-				$ouput =  new output(422, '(create actor)');
+				$ouput =  new output(432, '-actor id (delete actor)');
 			}
-		
+			$db_conx->closeConnection();
 		} else {
 			$ouput = new output(422,', actor id');
 		}	

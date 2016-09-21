@@ -26,6 +26,9 @@ switch($method) {
 	case 'PUT':
 		putRoutes($main_dir, $requested_uri);
 		break;
+	case 'DELETE':
+		deleteRoutes($main_dir, $requested_uri);
+		break;
 	default:
 		$ouput =  new output(404);
 
@@ -72,7 +75,7 @@ function getRoutes($main_dir, $requested_uri)
 function putRoutes($main_dir, $requested_uri)
 {
 	if(file_get_contents("php://input")){
-			//   /myapi/v1/examples/ => get all examples
+			//   /myapi/v1/examples/1 => update all data for example with id=1
 		switch ($requested_uri) {
 			case (preg_match('/actors\/([0-9])*/', $requested_uri) ? true : false):
 				$actor = new Actor();
@@ -85,9 +88,20 @@ function putRoutes($main_dir, $requested_uri)
 	} else {
 			$ouput =  new output(423);
 	}
-
-
 }
 
+function deleteRoutes($main_dir, $requested_uri)
+{
+	//   /myapi/v1/examples/1 => delete example with id=1
+	switch ($requested_uri) {
+		case (preg_match('/actors\/([0-9])*/', $requested_uri) ? true : false):
+			$actor = new Actor();
+			$id = str_replace($main_dir."actors/","",$requested_uri);
+			$actor->deleteActor($id);
+			break;			
+		default:
+			$ouput =  new output(404);
+	}
+}
 
 ?>

@@ -15,7 +15,8 @@ class output
 									412 => 'Invalid data in get request',
 									413 => 'Get request has no data',
 									422 => 'Invalid data in put request',
-									423 => 'Put request has no data'
+									423 => 'Put request has no data',
+									432 => 'Invalid data in delete request'
 									];
 
 	function output($status_code, $message = '' ) {
