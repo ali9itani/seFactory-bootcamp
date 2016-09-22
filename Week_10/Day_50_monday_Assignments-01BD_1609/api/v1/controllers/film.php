@@ -3,6 +3,7 @@ require_once 'main.php';
 
 class Film extends Main
 {
+	//film colmuns names for the sender 
 	function Film()
 	{
 		$this->table_name = 'film';

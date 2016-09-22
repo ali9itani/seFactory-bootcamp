@@ -1,44 +1,39 @@
 <?php
-/*a router to direct each request to destination function in a specific class
-*
-*errors code meaning 
-*404:page not found
-*403:post request has no data
-*413:get request has no data
-*/
+//a router to direct each request to destination function in a specific class
 
-//all required classes + an instance of each one is defined in that file
+//all required classesn is defined in that file
 include_once('routes_included_classes.php');
 
 $requested_uri = $_SERVER['REQUEST_URI'];
 $method = $_SERVER['REQUEST_METHOD'];
 
+// $requested_uri_parts[3] => entity name, $requested_uri_parts[4] => id
+$requested_uri_parts  = explode("/", $requested_uri);
+$entity_name = $requested_uri_parts[3];
+$id = $requested_uri_parts[4];
+
+
 //redirect acc. to request method type
 switch($method) {
 	case 'POST':
-		postRoutes($requested_uri);
+		postRoutes($entity_name);
 		break;
 	case 'GET':
-		getRoutes($requested_uri);
+		getRoutes($entity_name, $id);
 		break;
 	case 'PUT':
-		putRoutes($requested_uri);
+		putRoutes($entity_name, $id);
 		break;
 	case 'DELETE':
-		deleteRoutes($requested_uri);
+		deleteRoutes($entity_name);
 		break;
 	default:
 		$ouput =  new output(404);
-
 }
 
 //validate that post data exist and then call class to create
-function postRoutes($requested_uri)
+function postRoutes($entity_name)
 {
-	// $requested_uri_parts[3] => entity name, $requested_uri_parts[4] => id
-	$requested_uri_parts  = explode("/", $requested_uri);
-	$entity_name = $requested_uri_parts[3];
-
 	if(isset($_POST)){
 		//   /myapi/v1/examples/ => create example
 		switch ($entity_name) {
@@ -63,19 +58,14 @@ function postRoutes($requested_uri)
 }
 
 //call class to display
-function getRoutes($requested_uri)
+function getRoutes($entity_name, $id)
 {
-	// $requested_uri_parts[3] => entity name, $requested_uri_parts[4] => id
-	$requested_uri_parts  = explode("/", $requested_uri);
-	$entity_name = $requested_uri_parts[3];
-	$id = $requested_uri_parts[4];
-
 	if($id){
 		//   /myapi/v1/examples/1 => get all for example with id=1
 		switch ($entity_name) {
 			case 'actors':
 				$actor = new Actor();
-				$actor->getActor($id);
+				$actor->getById($id);
 				break;
 			case 'customers':
 				$customer = new Customer();
@@ -93,7 +83,7 @@ function getRoutes($requested_uri)
 		switch ($entity_name) {
 			case 'actors':
 				$actor = new Actor();
-				$actor->getAllActors();
+				$actor->getAll();
 				break;
 			case 'customers':
 				$customer = new Customer();
@@ -109,20 +99,14 @@ function getRoutes($requested_uri)
 	}
 }
 
-
-function putRoutes($requested_uri)
+function putRoutes($entity_name, $id)
 {
-	// $requested_uri_parts[3] => entity name, $requested_uri_parts[4] => id
-	$requested_uri_parts  = explode("/", $requested_uri);
-	$entity_name = $requested_uri_parts[3];
-	$id = $requested_uri_parts[4];
-
 	if(file_get_contents("php://input")){
 			//   /myapi/v1/examples/1 => update all data for example with id=1
 		switch ($entity_name) {
 			case 'actors':
 				$actor = new Actor();
-				$actor->updateActor($id);
+				$actor->updateOne($id);
 				break;
 			case 'customers':
 				$customer = new Customer();
@@ -140,22 +124,21 @@ function putRoutes($requested_uri)
 	}
 }
 
-function deleteRoutes($requested_uri)
+function deleteRoutes($entity_name)
 {
-	// $requested_uri_parts[3] => entity name, $requested_uri_parts[4] => id
-	$requested_uri_parts  = explode("/", $requested_uri);
-	$entity_name = $requested_uri_parts[3];
-	$id = $requested_uri_parts[4];
-
 	//   /myapi/v1/examples/1 => delete example with id=1
 	switch ($entity_name) {
 		case 'actors':
 			$actor = new Actor();
-			$actor->deleteActor($id);
+			$actor->deleteOne($id);
 			break;
 		case 'customers':
 			$customer = new Customer();
 			$customer->deleteOne($id);
+			break;
+		case 'film':
+			$film = new Film();
+			$film->deleteOne($id);
 			break;	
 		default:
 			$ouput =  new output(404);

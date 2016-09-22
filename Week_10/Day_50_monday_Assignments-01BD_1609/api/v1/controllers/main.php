@@ -156,7 +156,7 @@ class Main
 
 			$db_conx->closeConnection();
 		} else {
-			$ouput = new output(422,', id of '.$this->table_name);
+			$ouput = new output(432,', id of '.$this->table_name);
 		}	
 	}
 
