@@ -1,5 +1,5 @@
 <?php
-require_once 'main.php';
+require_once 'main_controller/main.php';
 
 class Customer extends Main
 {

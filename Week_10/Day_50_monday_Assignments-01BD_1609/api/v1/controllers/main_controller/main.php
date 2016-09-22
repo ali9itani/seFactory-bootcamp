@@ -1,7 +1,7 @@
 <?php
-require_once 'MySqlAPI.php';
-require_once 'output.php';
-require_once 'Validator.php';
+require_once '/var/www/html/api/v1/MySqlAPI.php';
+require_once '/var/www/html/api/v1/output.php';
+require_once '/var/www/html/api/v1/Validator.php';
 
 class Main 
 {

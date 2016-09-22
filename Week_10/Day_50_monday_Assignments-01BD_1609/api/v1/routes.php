@@ -1,8 +1,11 @@
 <?php
 //a router to direct each request to destination function in a specific class
+//requires all controllers
+foreach(glob('controllers/*.php') as $file) {
+     require_once $file;
+}
+require_once('output.php');
 
-//all required classesn is defined in that file
-include_once('routes_included_classes.php');
 
 $requested_uri = $_SERVER['REQUEST_URI'];
 $method = $_SERVER['REQUEST_METHOD'];
