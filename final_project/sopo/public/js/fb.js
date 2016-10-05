@@ -1,4 +1,4 @@
-  // This is called with the results from from FB.getLoginStatus().
+// This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
@@ -8,7 +8,7 @@
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
-      redirectAfterConnected();
+      testAPI();
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +
@@ -79,14 +79,14 @@
 
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
-  function redirectAfterConnected() {
-    //console.log('Welcome!  Fetching your information.... ');
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      // document.getElementById('status').innerHTML =
+      //   'Thanks for logging in, ' + response.name + '!';
       if(window.top.location == "http://localhost/final_project/sopo/public/"){
         window.top.location = "home";
       }
-      // console.log('Successful login for: ' + response.name);
-      // document.getElementById('status').innerHTML =
-      //   'Thanks for logging in, ' + response.name + '!';
     });
   }

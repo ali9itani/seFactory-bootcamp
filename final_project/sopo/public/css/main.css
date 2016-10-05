@@ -59,11 +59,22 @@ textarea {
     width: 980px;
     margin: 0 auto;
 }
+@media screen and (max-width: 980px) {
+
+    html {
+        -webkit-text-size-adjust: none;
+    }
+    .container-980px {
+        width:100%;
+    }
+}
 .container-height-default {
     height: 580px;
 }
 body{
-    background-color: #f5f5f5;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: linear-gradient(to bottom, rgba(133,80,133, 0.5), rgba(0, 0, 0, 0.5)), url('../img/landing_page_background.jpg');
 }
 header {
     background-color: #855085;
@@ -71,12 +82,13 @@ header {
     color: white;
     font-weight: bold;
 }
+header .container-980px {
+    position: relative
+}
 footer {
     padding: 10px 0px;
-    background-color: white;
-}
-.background-color-white {
-    background-color: white;
+    font-weight: bold;
+    color: white;
 }
 .text-color-maincolor {
     color: #855085;
@@ -102,10 +114,13 @@ footer {
 .cursor-pointer {
     cursor: pointer;
 }
+
+/*landing page styles*/
 .landing-page-body-divs {
     width: 45%;
     display: inline-block;
-    margin-top: 50px;
+    margin-top: 120px;
+    background-color: rgba(255,255,255,0.8);
 }
 .landing-page-intro-p {
     text-align: justify;
@@ -120,7 +135,7 @@ footer {
     margin-bottom: 55px;
 }
 
-/*logout styling */
+/*header options menu styling */
 .arrow-down {
     width: 0;
     height: 0;
@@ -136,23 +151,35 @@ footer {
     border-left: 6px solid transparent;
     border-bottom: 8px solid white;
 }
-.logout-ul {
+.header-options-ul {
     margin-top: 0px;
     margin-left: -29px;
     background-color: white;
 }
-/*contains logout menu and arrow*/
-#logout-block {
-    margin-top: 11px;
+.header-options-ul li {
+    padding: 5px;
 }
-.logout-menu {
+.header-icons {
+    font-size: 25px;
+}
+#header-user-div {
+    position: absolute;
+    top: -5px;
+    right: 10px;
+}
+/*contains logout menu and arrow*/
+#header-options-block {
+    margin-top: 29px;
+    visibility: hidden;
+}
+.header-options-menu {
     width: 100px;
     background-color: white;
     color: black;
     font-size: 12px;
     font-weight: normal;
     line-height: 22px;
-    margin-left: -83px;
+    margin-left: -75px;
 }
 
 
