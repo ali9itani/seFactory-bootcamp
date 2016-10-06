@@ -1,7 +1,17 @@
 @extends('master')
 @section('page-title','Welcome')
 @section('body-content')
-<div class="container-980px container-height-default text-align-center">
+<style type="text/css">
+	body {
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-image: linear-gradient(to bottom, rgba(133,80,133, 0.5), rgba(0, 0, 0, 0.5)), url('img/	landing_page_background.jpg');
+	}
+	footer {
+		color: white;
+	}
+</style>
+<div id="landing-page-body-container" class="container-980px container-height-default text-align-center">
 	<div class="landing-page-body-divs">
 		<h1>Social Media Hub</h1>
 		<!-- an intro for the website and its purpose -->
@@ -15,6 +25,7 @@
 		statistics and plan with you to decrease that time.
 		</p>
 	</div>
+	<!-- list of buttons to connect to different social media  -->
 	<div class="landing-page-body-divs float-right">
 		<h1>Get started</h1>
 		<!-- login box via twitter or facebook -->

@@ -71,13 +71,8 @@ textarea {
 .container-height-default {
     height: 580px;
 }
-body{
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: linear-gradient(to bottom, rgba(133,80,133, 0.5), rgba(0, 0, 0, 0.5)), url('../img/landing_page_background.jpg');
-}
 header {
-    background-color: #855085;
+    background-color: #182945;
     padding: 15px 0px;
     color: white;
     font-weight: bold;
@@ -85,13 +80,23 @@ header {
 header .container-980px {
     position: relative
 }
+#logo {
+    height: 30px;
+    width: 75px;
+}
+#logo-section span{
+    vertical-align: bottom;
+}
+body {
+    background-color: #F5F8FA;
+}
 footer {
     padding: 10px 0px;
     font-weight: bold;
-    color: white;
+    color: #182945;
 }
 .text-color-maincolor {
-    color: #855085;
+    color: #182945;
 }
 .text-color-white {
     color: white;
@@ -120,7 +125,8 @@ footer {
     width: 45%;
     display: inline-block;
     margin-top: 120px;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(232,232,240,0.8);
+    color: #182945;
 }
 .landing-page-intro-p {
     text-align: justify;
@@ -128,7 +134,7 @@ footer {
 }
 /*landing page login elements styling*/
 #login-via-fb-img {
-    width: 60%;
+    width: 265px;
     height: 60px;
 }
 #login-via-twtr-img{
@@ -169,7 +175,7 @@ footer {
 }
 /*contains logout menu and arrow*/
 #header-options-block {
-    margin-top: 29px;
+    margin-top: 37px;
     visibility: hidden;
 }
 .header-options-menu {
@@ -182,9 +188,67 @@ footer {
     margin-left: -75px;
 }
 
-
-
-
+/*connect_to page styles*/
+#connect_to-page-main-container {
+    padding-top: 1px;
+}
+#connect_to-page-inner-div {
+    width: 60%;
+    background-color: white;
+    margin: 0 auto;
+    margin-top: 80px;
+    padding: 10px;
+    padding-bottom: 30px;
+    border: 2px solid rgb(251, 246, 206);
+}
+#connect_to-page-inner-div h1, #connect_to-page-inner-div p {
+    margin: 0px;
+}
+#connect_to-page-inner-div h1 {
+    text-align: left;
+}
+#connect_to-social-buttons-div {
+    margin-top: 50px;
+}
+#connect_to-social-buttons-div div {
+    margin-bottom: 10px;
+}
+.social-connect-button {
+    width: 300px;
+    height: 56px;
+    border: 1px white solid;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+}
+#social-twtr-btn:enabled {
+    background-color: #1da1f2;
+}
+#social-fb-btn:enabled {
+    background-color: #6d84b4;
+}
+#social-insta-btn:enabled {
+    background-color: orange;
+}
+.social-connect-button:disabled {
+    background-color: #E8E8F0;
+}
+.social-icons {
+    font-size: 40px;
+    vertical-align: middle;
+}
+#connect_to-done-div {
+    background-color: #A1C436;
+    display: inline-block;
+    color: white;
+    padding: 5px;
+    border: solid 1px lightgreen;
+    box-shadow: 3px 3px 3px #888888;
+    width: 70px;
+    margin-top: 30px;
+}
 
 /* ==========================================================================
    Media Queries

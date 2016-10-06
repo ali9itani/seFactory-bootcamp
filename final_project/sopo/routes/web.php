@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('landing_page');
 });
-Route::get('/home', function () {
+Route::get('/connect_to', function () {
     return view('connect_to');
+});
+Route::get('/wall', function () {
+    return view('wall');
 });

@@ -17,11 +17,6 @@ document.addEventListener('click', function(e) {
 	}
 });
 
-
-// function logoutDispaly(){
-	
-// }
-
 // get value of specific applied attribute
 function getStyleValue(elem, style_name) {
 	var win = document.defaultView || window, style;
