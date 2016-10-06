@@ -113,6 +113,9 @@ footer {
 .float-right {
     float: right;
 }
+.float-left {
+    float: left;
+}
 .display-inline-block {
     display: inline-block;
 }
@@ -250,6 +253,73 @@ footer {
     margin-top: 30px;
 }
 
+/*wall page styles*/
+#wall-page-wall-div {
+    margin: 0 auto;
+    width: 600px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+.wall-page-post-div {
+    background-color: white;
+    margin-bottom: 20px;
+}
+.wall-page-post-info {
+    width: 90%;
+}
+.wall-page-post-profile-image {
+    width: 60px;
+    height: 60px;
+}
+.wall-page-post-username {
+    margin: 0px 10px 1px 0px;
+    font-weight: bold;
+}
+.fa-map-marker {
+    font-size: 13px;
+    margin-top: 5px;
+}
+.wall-page-post-additional-info {
+    font-size: 10px;
+    margin: 0px;
+    width: 90%;
+    text-align: left;
+}
+.wall-page-post-time {
+    margin: 0px;
+    margin-right: 5px;
+    font-size: 13px;
+}
+.social-i {
+    font-size: 20px;
+    margin-right: 5px;
+}
+#wall-page-wall-div .fa-facebook-square {
+    color: blue;
+}
+#wall-page-wall-div .fa-twitter-square {
+    color: #1da1f2;
+}
+#wall-page-wall-div .fa-instagram {
+    color: orange;
+}
+.wall-page-post-text {
+    text-align: justify;
+    font-size: 12px;
+    padding: 10px;
+}
+#wall-page-wall-div  hr{
+    height: 3px;
+}
+.horizantal-line-facebook {
+    background-color: blue;
+}
+.horizantal-line-twitter {
+    background-color: #1da1f2;
+}
+.horizantal-line-instagram {
+    background-color: orange;
+}
 /* ==========================================================================
    Media Queries
    ========================================================================== */

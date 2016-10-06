@@ -1,6 +1,6 @@
 @extends('master')
 @section('page-title','Connect to')
-<!-- add a logout menu from a file  -->
+<!-- add a options menu from a file  -->
 @section('header-logout')
 		@include('options_menu')
 @endsection
