@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'full_name', 'birth_date', 'email', 'password',
+        'username', 'full_name', 'birth_date', 'email', 'password', 'bio'
     ];
 
     /**
@@ -26,4 +26,47 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the followings for the user.
+     */
+    public function followings()
+    {
+        return $this->hasMany('App\Following');
+    }
+    /**
+     * Get the arts for the user.
+     */
+    public function artist_arts()
+    {
+        return $this->hasMany('App\Artist_art');
+    }
+    /**
+     * Get the post votes for the user.
+     */
+    public function post_votes()
+    {
+        return $this->hasMany('App\Post_vote');
+    }
+    /**
+     * Get the posts for the user.
+     */
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
+    /**
+     * Get the team_members for the blog user.
+     */
+    public function team_members()
+    {
+        return $this->hasMany('App\Team_member');
+    }
+    /**
+     * Get the followings for the blog post.
+     */
+    public function teams()
+    {
+        return $this->hasMany('App\Team');
+    }
 }
