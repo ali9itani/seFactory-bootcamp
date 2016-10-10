@@ -12,5 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	if(Auth::guest()){
+    	return view('landing_page');    	
+	} else {
+    	return Redirect::to('home');
+	}
+});
+
+Auth::routes();
+
+Route::get('/explore', function () {
+    return view('explore');
+});
+Route::get('/home', function () {
+    return view('home');
 });
