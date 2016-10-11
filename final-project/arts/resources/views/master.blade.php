@@ -17,7 +17,7 @@
       <header id="page-header">
         <div class="container-980px">
           <div id="logo-section" class="display-inline-block">
-            <img id="logo" src="{{ asset('/img/logo.png') }}" />
+            <a href="#"><img id="logo" src="{{ asset('/img/logo.png') }}" /></a>
             <a id="header-explore-a" href="explore" class="fix-anchor">EXPLORE</a>
           </div>
           <div class="display-inline-block float-right">

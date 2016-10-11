@@ -11,15 +11,24 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
 	if(Auth::guest()){
-    	return view('landing_page');    	
+		return view('landing_page');    	
 	} else {
-    	return Redirect::to('home');
+		return Redirect::to('home');
 	}
 });
 
-Auth::routes();
+Route::get('/login', function () {
+	if(Auth::guest()){
+		return view('login');  	
+	} else {
+		return Redirect::to('home');
+	}
+});
+
 
 Route::get('/explore', function () {
     return view('explore');

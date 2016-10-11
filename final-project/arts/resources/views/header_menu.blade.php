@@ -1,6 +1,6 @@
 @if (Auth::guest())
     <div id="header-user-div"  >
-        <a class="text-color-white" href="{{ url('/login') }}">Login</a>
+        <a class="text-color-white fix-anchor" href="{{ url('/login') }}">Login</a>
     </div>
 @else
     <!-- username and user icon tat is clickableto select an option -->

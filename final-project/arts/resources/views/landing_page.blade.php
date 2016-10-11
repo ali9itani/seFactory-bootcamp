@@ -22,7 +22,9 @@
 		can keep in touch with all social posts in one place at the same time.
 		</p>
 		<p class="landing-page-intro-p">It will track how much you spend time on the website, give you 
-		statistics and plan with you to decrease that time.
+		statistics
+		</p>
+		<p class="landing-page-intro-p">It will track how much you spend time on the website
 		</p>
 	</div>
 	<!-- list of buttons to connect to different social media  -->
