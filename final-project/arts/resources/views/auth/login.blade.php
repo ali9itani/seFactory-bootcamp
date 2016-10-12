@@ -11,7 +11,7 @@
                         <h1>Login</h1>
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <div class="col-md-6">
-                                <input id="email" type="email" placeholder="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                <input id="email" type="email" placeholder="email" class="form-control auth-input" name="email" value="{{ old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -24,7 +24,7 @@
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
 
                             <div class="col-md-6">
-                                <input id="password" placeholder="password" type="password" class="form-control" name="password" required>
+                                <input id="password" placeholder="password" type="password" class="form-control auth-input" name="password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">

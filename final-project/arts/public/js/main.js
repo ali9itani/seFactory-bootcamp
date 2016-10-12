@@ -43,3 +43,55 @@ function getStyleValue(elem, style_name) {
 		}
 	}
 }
+
+//send ajax request to save profile new edits
+function saveProfileData(){
+
+	// empty old list of errors
+	$("#profile-save-status-msg").empty();
+
+	var url = "/arts/public/profile/me/edit";
+
+	//getting form data
+	var form = document.getElementById('edit-profile-form');
+	var formData = new FormData(form);
+	formData.append('fullName', form.elements['fullName'].value);
+	formData.append('bio', form.elements['bio'].value);
+	formData.append('birthDate', form.elements['birthDate'].value);
+	
+	imageToUploadCheck = document.getElementById("fileToUpload").files.length
+
+	//check if image is selected
+	if( imageToUploadCheck != 0 ){
+		formData.append('image', $('input[type=file]')[0].files[0]); 
+	}
+	
+	$.ajax({
+	   	url: '/arts/public/profile/me/edit',
+	   	data: formData,
+		type: 'POST',
+	   	contentType: false,
+		cache: false,
+		processData:false,
+	  	success: function(json) {
+			// display new list of errors
+	   		for (var i = 0; i <json.length; i++) {
+	   			$("#profile-save-status-msg").append('<li>'+json[i]+'</li>')
+			}
+
+			//change profile image
+			if( imageToUploadCheck != 0 ) {
+				var  imgId = $("#profile-img").attr("user-data-img-id") ; 
+				document.getElementById("profile-img").src='../../img/profile-photo/'+imgId+'.jpg';
+				
+				// empty uploader
+				$("#fileToUpload").replaceWith($("#fileToUpload").val('').clone(true));
+			}
+
+	  	},
+		error: function() {
+		    $("#profile-save-status-msg").append("<li>failed to save</li>");
+		}
+	});
+
+}

@@ -11,7 +11,7 @@
 
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                             <div class="col-md-6">
-                                <input id="username" type="text" class="form-control" placeholder="username" name="username" value="{{ old('username') }}" required autofocus>
+                                <input id="username" type="text" class="form-control auth-input" placeholder="username" name="username" value="{{ old('username') }}" required autofocus>
 
                                 @if ($errors->has('username'))
                                     <span class="help-block">
@@ -23,7 +23,7 @@
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" placeholder="email" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control auth-input" placeholder="email" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -35,7 +35,7 @@
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" placeholder="password" name="password" required>
+                                <input id="password" type="password" class="form-control auth-input" placeholder="password" name="password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -47,7 +47,7 @@
 
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" placeholder="confrim password" class="form-control" name="password_confirmation" required>
+                                <input id="password-confirm" type="password" placeholder="confrim password" class="form-control auth-input" name="password_confirmation" required>
 
                                 @if ($errors->has('password_confirmation'))
                                     <span class="help-block">

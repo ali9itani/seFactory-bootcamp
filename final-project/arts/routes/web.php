@@ -28,6 +28,11 @@ Route::get('/login', function () {
 		return Redirect::to('home');
 	}
 });
+Route::group(['middleware' => ['auth']], function()
+{
+	Route::get('/profile/me/display','ProfileController@index');
+	Route::post('/profile/me/edit','ProfileController@store');
+});
 
 
 Route::get('/explore', function () {

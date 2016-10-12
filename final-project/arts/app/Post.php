@@ -39,6 +39,6 @@ class Post extends Model
      */
     public function resources()
     {
-        return $this->hasMany('App\Resource');
+        return $this->hasMany('arts\Resource', 'post_id', 'post_id');
     }
 }

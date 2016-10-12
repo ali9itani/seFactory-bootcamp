@@ -69,4 +69,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Team');
     }
+
+    // retrieve photo of user
+    public function photo()
+    {
+        if(file_exists( public_path() . '/img/profile-photo/' . $this->id . '.jpg')) {
+            return '/arts/public/img/profile-photo/' . $this->id .'.jpg';
+        } else {
+            return '/arts/public/img/profile-photo/default.jpg';
+        }      
+    }
 }
