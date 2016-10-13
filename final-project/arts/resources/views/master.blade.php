@@ -17,8 +17,12 @@
       <header id="page-header">
         <div class="container-980px">
           <div id="logo-section" class="display-inline-block">
-            <a href="#"><img id="logo" src="{{ asset('/img/logo.png') }}" /></a>
-            <a id="header-explore-a" href="explore" class="fix-anchor">EXPLORE</a>
+            <a href="/arts/public/home"><img id="logo" src="{{ asset('/img/logo.png') }}" /></a>
+            <a id="header-explore-a" href="/arts/public/explore" class="header-options fix-anchor">EXPLORE</a>
+            @if(Auth::check())
+            <a href="/arts/public/home" class="header-options fix-anchor">Home</a>
+            <a href="/arts/public/post/new" class="fa fa-plus header-options fix-anchor">Post</a>
+            @endif
           </div>
           <div class="display-inline-block float-right">
             @include('header_menu')

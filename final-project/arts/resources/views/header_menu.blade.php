@@ -12,7 +12,7 @@
       <div class="arrow-up"></div>
       <div class="header-options-menu">
         <ul class="fix-list-ul header-options-ul">
-            <li><a href="">Edit Profile</a></li>
+            <li><a href="/arts/public/profile/me/display">Edit Profile</a></li>
             <li><a href="">Teams</a></li>
             <li><a href="">Followings</a></li>
             <li><a  class="fix-anchor" href="{{ url('/logout') }}"

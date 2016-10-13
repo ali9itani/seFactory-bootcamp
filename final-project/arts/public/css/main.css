@@ -98,15 +98,15 @@ header {
 header .container-980px {
     position: relative
 }
-#logo {
-    height: 50px;
-    width: 110px;
-}
-#header-explore-a {
+.header-options{
     color: #FBF6CE;
     vertical-align: sub;
     margin-left: 20px;
     font-size: 14px;
+}
+#logo {
+    height: 50px;
+    width: 110px;
 }
 body {
     background-color: #F5F8FA;

@@ -17,7 +17,6 @@ class CreateResourcesTable extends Migration
             $table->increments('resource_id');
             $table->integer('post_id')->unsigned();
             $table->foreign('post_id')->references('post_id')->on('posts');
-            $table->string('type', 10);
             $table->string('resource_name', 100);
             $table->timestamps();
         });

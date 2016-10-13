@@ -28,16 +28,17 @@ Route::get('/login', function () {
 		return Redirect::to('home');
 	}
 });
+
 Route::group(['middleware' => ['auth']], function()
 {
 	Route::get('/profile/me/display','ProfileController@index');
 	Route::post('/profile/me/edit','ProfileController@store');
+	Route::get('/home','HomeController@index');
+	Route::get('/post/new','PostController@create');
+	Route::post('/post/new','PostController@store');
 });
 
 
 Route::get('/explore', function () {
     return view('explore');
-});
-Route::get('/home', function () {
-    return view('home');
 });

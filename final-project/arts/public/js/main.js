@@ -73,25 +73,55 @@ function saveProfileData(){
 	   	contentType: false,
 		cache: false,
 		processData:false,
-	  	success: function(json) {
+	  	success: function(results) {
 			// display new list of errors
-	   		for (var i = 0; i <json.length; i++) {
-	   			$("#profile-save-status-msg").append('<li>'+json[i]+'</li>')
+	   		for (var i = 0; i < results.length; i++) {
+	   			$("#profile-save-status-msg").append('<li>'+results[i]+'</li>')
 			}
 
 			//change profile image
 			if( imageToUploadCheck != 0 ) {
-				var  imgId = $("#profile-img").attr("user-data-img-id") ; 
-				document.getElementById("profile-img").src='../../img/profile-photo/'+imgId+'.jpg';
+				var  imgId = $("#profile-img").attr("user-data-img-id"); 
 				
-				// empty uploader
-				$("#fileToUpload").replaceWith($("#fileToUpload").val('').clone(true));
-			}
+				var newDate = new Date();
+				$("#profile-img").attr("src", '../../img/profile-photo/'+
+								  imgId+'.jpg?'+newDate.getTime());
 
+				// empty uploader
+				$("#fileToUpload").replaceWith($("#fileToUpload").val('')
+								  .clone(true));
+			}
 	  	},
 		error: function() {
 		    $("#profile-save-status-msg").append("<li>failed to save</li>");
 		}
 	});
-
 }
+
+
+var postImageForm = document.getElementById('post-images-form');
+
+postImageForm.addEventListener('submit', function(e){
+	e.preventDefault();
+
+    var form = postImageForm;
+    var formdata = false;
+    if (window.FormData){
+        formdata = new FormData(postImageForm);
+    }
+
+    $.ajax({
+        url         : '/arts/public/post/new',
+        data        : formdata ? formdata : form.serialize(),
+        cache       : false,
+        contentType : false,
+        processData : false,
+        type        : 'POST',
+        success     : function(data, textStatus, jqXHR){
+            console.log(data);
+        },
+        errors		:  function() {
+		    console.log('error');
+		}
+    });
+});

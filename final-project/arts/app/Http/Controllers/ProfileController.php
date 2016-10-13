@@ -74,7 +74,7 @@ class ProfileController extends Controller
                     $user->id.'.jpg'
                 );
             }
-    
+            
             $user->save();
             return "s";
         }
