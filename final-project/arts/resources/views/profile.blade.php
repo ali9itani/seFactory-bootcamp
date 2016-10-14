@@ -43,6 +43,13 @@
 			<button onclick="saveProfileData()" class="float-right">Save</button>
 		</div>
 	<hr/>
+
+	@foreach ($posts as $post)
+    <p>{{ $post->post_id }}</p>
+    <p>{{ $post->resources }}</p>
+    ------
+	@endforeach
+
 </div>
 @endsection
 

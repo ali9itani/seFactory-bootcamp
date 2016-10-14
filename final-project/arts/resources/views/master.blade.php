@@ -29,14 +29,23 @@
           </div>
         </div>
       </header>
+
+      <!-- body and footer -->
+      <div id="content">
+
         <!-- body -->
-    <div id="body-content-div">
-      @yield('body-content')
+        <div id="body-content-div">
+          @yield('body-content')
+        </div>
+
+        <!-- footer -->
+        <footer>
+          <p class="container-980px text-align-center">All RIGHTS ARE RESERVED</p>
+        </footer>
+
       </div>
-      <!-- footer -->
-      <footer>
-        <p class="container-980px text-align-center">All RIGHTS ARE RESERVED</p>
-      </footer>
+
       <script  type="text/javascript" src="{{ asset('/js/main.js') }}"></script>
     </body>
+
 </html>

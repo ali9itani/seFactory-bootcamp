@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth']], function()
 });
 
 
-Route::get('/explore', function () {
-    return view('explore');
-});
+Route::get('/explore', 'ExploreController@random');
+Route::get('/explore/top_rated', 'ExploreController@topRated');
+Route::get('/explore/trending', 'ExploreController@trending');
+Route::get('/explore/most_viewed', 'ExploreController@mostViewed');

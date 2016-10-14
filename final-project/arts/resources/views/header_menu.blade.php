@@ -1,6 +1,10 @@
 @if (Auth::guest())
     <div id="header-user-div"  >
-        <a class="text-color-white fix-anchor" href="{{ url('/login') }}">Login</a>
+        @if(Request::path() == 'login')
+            <a class="text-color-white fix-anchor" href="{{ url('/register') }}">Register</a>
+        @else 
+            <a class="text-color-white fix-anchor" href="{{ url('/login') }}">Login</a>
+        @endif
     </div>
 @else
     <!-- username and user icon tat is clickableto select an option -->
@@ -12,7 +16,7 @@
       <div class="arrow-up"></div>
       <div class="header-options-menu">
         <ul class="fix-list-ul header-options-ul">
-            <li><a href="/arts/public/profile/me/display">Edit Profile</a></li>
+            <li><a href="{{ url('/arts/public/profile/me/display') }}" >Edit Profile</a></li>
             <li><a href="">Teams</a></li>
             <li><a href="">Followings</a></li>
             <li><a  class="fix-anchor" href="{{ url('/logout') }}"

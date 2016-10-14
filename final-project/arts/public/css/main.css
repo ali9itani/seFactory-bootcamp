@@ -87,13 +87,14 @@ textarea {
     color: #46A5E5;
 }
 .container-height-default {
-    height: 571px;
+    min-height: 571px;
 }
 header {
     background-color: #182945;
     padding: 5px 0px;
     color: white;
     font-weight: bold;
+    height: 50px;
 }
 header .container-980px {
     position: relative
@@ -111,10 +112,26 @@ header .container-980px {
 body {
     background-color: #F5F8FA;
 }
+#content {
+    position:absolute;
+    top: 60px;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    overflow-y:scroll;
+}
 footer {
     padding: 10px 0px;
     font-weight: bold;
-    color: #182945;
+    background-color: #1a2e4f;
+    color: white;
+    height: 15px;
+    font-size: 14px;
+
+    /*add a shadow*/
+    -moz-box-shadow:    2px 2px 5px 4px #1a2e4f;
+    -webkit-box-shadow: 2px 2px 5px 4px #1a2e4f;
+    box-shadow:         2px 2px 5px 4px #1a2e4f;
 }
 .text-color-maincolor {
     color: #182945;
@@ -240,7 +257,10 @@ header span {
 #login-page-body-container .form-horizontal {
     padding-top: 25px;
 }
-
+.help-block {
+    font-size: 12px;
+    color: red;
+}
 
 /*profile page styles*/
 #profile-page-body-container {
@@ -303,7 +323,54 @@ header span {
     margin: 0 0 10px -25px;
 }
 
+/*explore page styling*/
+#explore-body-container {
+    width: 100%;
+    background-color: #cadbf7;
+    position: relative;
+}
+#pagination-div {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+#pagination-div ul {
+    list-style: none;
+    margin: 0px;
+}
+#pagination-div li {
+    display: inline-block;
+    padding: 0px 9px;
+    margin-right: 4px;
+    font-size: .875em;
+    font-weight: bold;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px rgba(255,255,255, 1);
+    text-decoration: none;
+    border: solid 1px #32373b;
+    background: #1a2e4f;
+    box-shadow: inset 0px 1px 1px rgba(255,255,255, .1), 0px 1px 3px rgba(0,0,0, .1);
+    color: #feffff;
+    text-shadow: 0px 1px 0px rgba(0,0,0, .5);
+}
+#pagination-div *{
+    color: white;
+    text-decoration: none;
+}
+#pagination-div a:hover, #pagination-div a.gradient:hover {
+    background: #182945;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#547085), to(#3d4f5d));
+    background: -moz-linear-gradient(0% 0% 270deg,#547085, #3d4f5d);
+}
 
+#pagination-div .active {
+    border: none;
+    background-color: #182945;
+    box-shadow: inset 0px 0px 8px rgba(0,0,0, .5), 0px 1px 0px rgba(255,255,255, .1);
+}
+
+#pagination-div a.gradient {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#565b5f), to(#3e4347));
 /* ==========================================================================
    Media Queries
    ========================================================================== */

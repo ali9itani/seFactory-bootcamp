@@ -41,6 +41,15 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Artist_art');
     }
+
+    /**
+     * Get the tags of this user
+     */
+    public function tags()
+    {
+        return $this->hasMany('arts\Tag', 'id', 'artist_id');
+    }
+
     /**
      * Get the post votes for the user.
      */

@@ -17,8 +17,6 @@ class CreatePostsTable extends Migration
             $table->increments('post_id');
             $table->integer('publisher_id')->unsigned();
             $table->foreign('publisher_id')->references('id')->on('users');
-            $table->integer('team_id')->unsigned()->nullable();
-            $table->foreign('team_id')->references('team_id')->on('teams');
             $table->string('location', 100)->nullable();;
             $table->string('title', 200);
             $table->string('text')->nullable();;

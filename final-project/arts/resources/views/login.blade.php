@@ -1,5 +1,5 @@
 @extends('master')
-@section('page-title','Home')
+@section('page-title','Login')
 @section('body-content')
 <style type="text/css">
 	body {

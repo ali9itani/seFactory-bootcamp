@@ -6,14 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-	protected $fillable = ['tag_title'];
-    protected $table = 'tags';
-    
- 	/**
-     * Get the post_ids for the Tag.
+    /**
+     * Get the user in this tag.
      */
-    public function post_tags()
+    public function user()
     {
-        return $this->hasMany('App\Post_tag');
+        return $this->belongsTo('arts\User', 'artist_id', 'id');
     }
+
+    /**
+     * Get the post of this tag.
+     */
+    public function post()
+    {
+        return $this->belongsTo('arts\Post', 'post_id', 'post_id');
+    }
+
 }
