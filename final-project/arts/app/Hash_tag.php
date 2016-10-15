@@ -4,7 +4,7 @@ namespace arts;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Hash_tags extends Model
+class Hash_tag extends Model
 {
 	protected $fillable = ['tag_title'];
     protected $table = 'hash_tags';

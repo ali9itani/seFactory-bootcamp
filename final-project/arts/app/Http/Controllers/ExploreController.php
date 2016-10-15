@@ -11,7 +11,7 @@ use arts\User;
 
 class ExploreController extends Controller
 {
-    private $pagination_num = 2;
+    private $pagination_num = 10;
     /**
      * Display a listing of the posts by a random selection.
      */
@@ -26,7 +26,7 @@ class ExploreController extends Controller
     /**
      * Display a listing of the posts acc to most rated.
      */
-    public function mostRated()
+    public function byRate()
     {
         return view('explore');
     }
@@ -42,9 +42,10 @@ class ExploreController extends Controller
     /**
      * Display a listing of the posts acc to most view.
      */
-    public function mostViewed()
+    public function byViews()
     {
-        $posts = Post::orderBy('view_count', 'desc')->paginate($this->pagination_num);
+        $posts = Post::orderBy('view_count', 'desc')->with('user')->with('resources')
+                ->with('upVotesCount')->with('downVotesCount')->paginate($this->pagination_num);
         
         return view('explore')->with(compact('posts'));
     }

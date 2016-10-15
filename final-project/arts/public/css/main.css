@@ -371,6 +371,93 @@ header span {
 
 #pagination-div a.gradient {
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#565b5f), to(#3e4347));
+}
+/*explore image caption styling*/
+#explore-page-grid {
+    position: relative;
+    bottom: 30px;
+}
+#explore-page-grid h3 {
+  text-align: center;
+  font-size: 1.65em;
+  margin: 0 0 30px;
+}
+
+#explore-page-grid div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#explore-page-grid a {
+  display: inline-block;
+  margin-bottom: 20px;
+  width: calc(50% - 10px);
+  margin-right: 20px;
+  text-decoration: none;
+  color: black;
+}
+
+#explore-page-grid a:nth-of-type(2n) {
+  margin-right: 0;
+}
+
+@media screen and (min-width: 50em) {
+  #explore-page-grid a {
+    width: calc(25% - 6px);
+  }
+  
+  #explore-page-grid a:nth-of-type(2n) {
+    margin-right: 8px;
+  }
+  
+  #explore-page-grid a:nth-of-type(4n) {
+    margin-right: 0;
+  }
+}
+
+#explore-page-grid a:hover img {
+    transform: scale(1.5);
+}
+#explore-page-grid a:hover figcaption {
+    margin-top: 35px;
+    font-size: 12px;
+}
+
+#explore-page-grid figure {
+  margin: 0;
+  overflow: hidden;
+  border: 1px dotted gray;
+}
+
+#explore-page-grid figcaption {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #182945;
+}
+
+#explore-page-grid img {
+    border: none;
+    height: auto;
+    display: block;
+    background: #ccc;
+    transition: transform .2s ease-in-out;
+    width: 100%;
+}
+
+#explore-page-grid .p a {
+    display: inline;
+    font-size: 13px;
+    margin: 0;
+    text-decoration: underline;
+    color: blue;
+}
+
+#explore-page-grid .p {
+  text-align: center;
+  font-size: 13px;
+  padding-top: 100px;
+}
+
 /* ==========================================================================
    Media Queries
    ========================================================================== */

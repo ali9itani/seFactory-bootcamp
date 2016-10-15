@@ -21,6 +21,10 @@ Route::get('/', function () {
 	}
 });
 
+Route::get('/register', function () {
+	return view('landing_page');  	
+});
+
 Route::get('/login', function () {
 	if(Auth::guest()){
 		return view('login');  	
@@ -40,6 +44,6 @@ Route::group(['middleware' => ['auth']], function()
 
 
 Route::get('/explore', 'ExploreController@random');
-Route::get('/explore/top_rated', 'ExploreController@topRated');
+Route::get('/explore/by_rate', 'ExploreController@byRate');
 Route::get('/explore/trending', 'ExploreController@trending');
-Route::get('/explore/most_viewed', 'ExploreController@mostViewed');
+Route::get('/explore/by_views', 'ExploreController@byViews');

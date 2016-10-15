@@ -11,8 +11,8 @@ use uniqid;
 use Validator;
 use arts\Post;
 use arts\Resource;
-use arts\Tag;
-use arts\Post_tag;
+use arts\Hash_tag;
+use arts\Post_hash_tag;
 
 class PostController extends Controller
 {
@@ -55,20 +55,29 @@ class PostController extends Controller
 
             //save hashtags
             $hash_tags = explode(" ",$request->hashtags);
+
             foreach ($hash_tags as $value) {
-                $tag = Tag::firstOrNew([
+                $hash_tag = Hash_tag::firstOrNew([
                     'tag_title' => $value,
                 ]);
 
-                if (!$tag->exists) { 
-                    $tag->save();
+                $hash_tag->save();
 
-                    //relation between post and its hashtag
-                    $post_tag = new Post_Tag();
-                    $post_tag->tag_id =  $tag->id;
-                    $post_tag->post_id = $post->id;
-                    $post_tag->save();
+                //since the tag_title may exist so get its id
+                $tag_id = 0;
+
+                if ($hash_tag->tag_id){
+                    $tag_id = $hash_tag->tag_id;
+                } else {
+                    $tag_id = $hash_tag->id;
                 }
+
+                //relation between post and its hashtag
+                $post_hash_tag = new Post_hash_tag();
+                $post_hash_tag->post_id = $post->id;
+                $post_hash_tag->tag_id = $tag_id;
+                $post_hash_tag->save();
+
             }
 
             //save images 
