@@ -10,13 +10,14 @@
 		  <a href="{{asset('/img/posts-images')}}/{{ $post->resources[0]['resource_name'] }}">
 		    <figure>
 			<img src="{{asset('/img/posts-images')}}/{{ $post->resources[0]['resource_name'] }}" alt="">
-				<figcaption>
+				<figcaption >
 					<div>
 						<section class="post-credit">
 							Credit: {{ $post->user->username }}
 						</section>
 						<section class="post-popularity">
 							<i class="fa fa-eye" aria-hidden="true"></i> {{ $post->view_count }}
+							<i class="fa fa-comment" aria-hidden="true"></i> {{ $post->post_comments->count() }}
 							<i class="fa fa-arrow-up" aria-hidden="true"></i>
 							@if(isset($post->upVotesCount[0]))
 							     {{ $post->upVotesCount[0]['count']}}

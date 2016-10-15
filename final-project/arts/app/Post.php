@@ -55,6 +55,15 @@ class Post extends Model
     {
         return $this->hasMany('arts\Post_hash_tag', 'post_id', 'post_id');
     }
+
+    /**
+     * Get the comments for the post.
+     */
+    public function post_comments()
+    {
+        return $this->hasMany('arts\Post_comment', 'post_id', 'post_id');
+    }
+
     /**
      * Get the resources for the blog post.
      */

@@ -51,6 +51,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the comments of this user
+     */
+    public function comments()
+    {
+        return $this->hasMany('arts\Post_comments', 'id', 'artist_id');
+    }
+
+    /**
      * Get the post votes for the user.
      */
     public function post_votes()

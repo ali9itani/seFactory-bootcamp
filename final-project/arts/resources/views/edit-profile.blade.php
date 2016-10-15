@@ -1,65 +1,49 @@
 @extends('master')
-@section('page-title','Profile')
+@section('page-title','Edit Profile')
 @section('body-content')
 <div id="profile-page-body-container" class="container-980px container-height-default pages-main-container text-align-center">
-	<!-- user info and followings section -->
-	<section id="profile-page-cover-section">
+	<ul id="profile-save-status-msg">
+	</ul>
+	<form id="edit-profile-form" enctype="multipart/form-data">
+		{{ csrf_field() }}
 		<!-- profile image -->
-		<div id="profile-page-spphoto-div" >
+		<div id="profile-page-pphoto-div" class="profile-page-profile-details">
 			<img id="profile-img" user-data-img-id="{{$current_user->id}}" src="{!! Auth::user()->photo() !!}"></img>
+			<span id="profile-page-change-photo-span">Change Your Photo!!</span>
+			<input type="file" name="image" id="fileToUpload">
 		</div>
-
-		<!-- profile info -->
 		<div id="profile-page-profile-text1" class="profile-page-profile-details">
 				<table>
-				  	<col width="110">
+				  	<col width="120">
 					<tr>
-						<td>
-							<label>Username: </label>
-						</td>
-						<td>
-							<span>{{$current_user->username}}</span>
-						</td>
+						<td><label>Username: </label></td>
+						<td><span>{{$current_user->username}}</span></td>
 					</tr>
 					<tr>
 						<td><label>Email: </label></td>
 						<td><span>{{$current_user->email}}</span></td>
 					</tr>
 					<tr>
-						<td>
-							<label>Full name: </label>
-						</td>
-						<td>
-							<span>{{$current_user->full_name}}</span>
-						</td>
+						<td><label>Full name: </label></td>
+						<td><input name="fullName"  value="{{$current_user->full_name}}"/></td>
 					</tr>
 					<tr>
-						<td>
-							<label>Birth date: </label>
-						</td>
-						<td>
-							<span>{{$current_user->birth_date}}</span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<label>Bio: </label>
-						</td>
-						<td>
-							<p>{{$current_user->bio}}</p>
-						</td>
+						<td><label>Birth date: </label></td>
+						<td><input  name="birthDate" type="date" value="{{$current_user->birth_date}}" /></td>
 					</tr>
 				</table>
 		</div>
-		<div id="profile-page-profile-followig-section">
-
+		<div id="profile-page-profile-text2" class="profile-page-profile-details">
+			<label>bio: </label>
+			<br/>
+			<textarea name="bio" maxlength="200" rows="3">{{$current_user->bio}}</textarea>
 		</div>
-
-	</section>
-		
+		</form>
+		<div id="profile-page-profile-submit-div">
+			<button onclick="saveProfileData()" class="float-right">Save</button>
+		</div>
 	<hr/>
-
-	<div id="explore-page-grid">
+<div id="explore-page-grid">
 		@foreach ($posts as $post)
 		  <a href="{{asset('/img/posts-images')}}/{{ $post->resources[0]['resource_name'] }}">
 		    <figure>
@@ -94,8 +78,6 @@
 		  </a>	
 		@endforeach
 	</div>
-
-
 </div>
 @endsection
 

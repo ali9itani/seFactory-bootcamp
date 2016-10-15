@@ -36,7 +36,8 @@ Route::get('/login', function () {
 Route::group(['middleware' => ['auth']], function()
 {
 	Route::get('/profile/me/display','ProfileController@index');
-	Route::post('/profile/me/edit','ProfileController@store');
+	Route::get('/profile/me/edit','EditProfileController@index');
+	Route::post('/profile/me/edit','EditProfileController@store');
 	Route::get('/home','HomeController@index');
 	Route::get('/post/new','PostController@create');
 	Route::post('/post/new','PostController@store');

@@ -19,7 +19,7 @@ class ExploreController extends Controller
     {
         $posts = Post::inRandomOrder()->with('user')->with('resources')
                 ->with('upVotesCount')->with('downVotesCount')
-                ->paginate($this->pagination_num);
+                ->with('post_comments')->paginate($this->pagination_num);
 
         return view('explore')->with(compact('posts'));
     }

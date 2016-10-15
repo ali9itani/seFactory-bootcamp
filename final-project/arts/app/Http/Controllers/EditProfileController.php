@@ -12,7 +12,7 @@ use arts\User;
 use arts\Post;
 use arts\Resource;
 
-class ProfileController extends Controller
+class EditProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +29,7 @@ class ProfileController extends Controller
                        ->with('post_comments')
                        ->with('resources')->get();
                        
-        return view('profile')->with(compact('posts'))
+        return view('edit-profile')->with(compact('posts'))
                               ->with(compact('current_user'));
     }
 
