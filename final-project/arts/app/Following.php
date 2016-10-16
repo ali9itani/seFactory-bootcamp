@@ -21,4 +21,5 @@ class Following extends Model
     {
         return $this->belongsTo('arts\User', 'follower_id', 'id');
     }
+
 }

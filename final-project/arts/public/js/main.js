@@ -148,7 +148,7 @@ function follow()
 		},
 	});
 }
-
+//switch style for follow button in profile pag
 function changeFollowButton(status) {
 	if(status == 0) {
 		//follow 
@@ -160,5 +160,26 @@ function changeFollowButton(status) {
 		document.getElementById('follow-button').className = 'following-button';
 		document.getElementById('follow-icon').className = 'fa fa-times-circle';
 		document.getElementById('follow-text').innerHTML = 'following';
+	}
+}
+
+//toswitch between folowers/following lists in profile page
+function followListDisplay(num) {
+
+	var followers_list = document.getElementById("followers-list");
+	var following_list = document.getElementById("following-list");
+	var following_count_buttons = document.getElementsByClassName("following-count");
+
+	if(num == 0){	
+		following_count_buttons[0].style.backgroundColor = "wheat";
+		following_count_buttons[1].style.backgroundColor = "white";
+		followers_list.style.visibility = "visible";
+		following_list.style.visibility = "hidden";
+
+	} else if (num == 1) {
+		following_count_buttons[0].style.backgroundColor = "white";
+		following_count_buttons[1].style.backgroundColor = "wheat";
+	    followers_list.style.visibility = "hidden";
+		following_list.style.visibility = "visible";
 	}
 }

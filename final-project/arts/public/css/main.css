@@ -310,6 +310,7 @@ header .username-a {
 .following-count{
     background-color: white;
     padding: 6px;
+    cursor: pointer;
 }
 #profile-go-follow-a {
     display: block;
@@ -433,6 +434,52 @@ header .username-a {
     background-color: none;
 }
 
+.profile-following-list-div {
+    background-color: white;
+    overflow-y: scroll;
+    max-height: 75%;
+    margin-top: 15px;
+    position: absolute;
+    width: 95%;
+    top: 40px;
+    overflow-x: hidden;
+}
+.profile-following-list-div  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+ 
+.profile-following-list-div li {
+    font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+    border-bottom: 1px solid #ccc;
+}
+ 
+.profile-following-list-div li:last-child {
+  border: none;
+}
+ 
+.profile-following-list-div li a {
+  text-decoration: none;
+  color: #000;
+  display: block;
+  padding-left: 10px;
+  width: 100%;
+ 
+  -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+  transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+ 
+.profile-following-list-div li a:hover {
+  font-size: 30px;
+  color: white;
+  background: blue;
+}
+
+
 /*explore page styling*/
 #explore-body-container {
     width: 100%;
@@ -440,11 +487,13 @@ header .username-a {
     position: relative;
     padding-top: 10px;
 }
+
 #pagination-div {
     position: absolute;
     bottom: 10px;
     width: 100%;
 }
+
 #pagination-div ul {
     list-style: none;
     margin: 0px;

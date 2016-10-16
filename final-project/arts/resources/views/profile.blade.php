@@ -68,13 +68,35 @@
 			@elseif(Auth::user()->id == $artist[0]->id)
 				<!-- if the current user displaying his account -->
 
-				<span class="following-count" style="margin-left:62px;">{{$artist[0]->followers->count()}} followers</span>
-				<span class="following-count" style="margin-left:11px;">{{$artist[0]->following->count()}} following</span>
-				
+				<span class="following-count" onclick="followListDisplay(0)" style="margin-left:62px;">{{$artist[0]->followers->count()}} followers</span>
+				<span class="following-count" onclick="followListDisplay(1)" style="margin-left:11px;">{{$artist[0]->following->count()}} following</span>
+
 				@if($artist[0]->followers->count() == 0 && $artist[0]->following->count() == 0)
-				<a id="profile-go-follow-a" href="{{ url('/explore/artists')}}">Go Follow Someone 
-					<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-				</a>
+					<a id="profile-go-follow-a" href="{{ url('/explore/artists')}}">Go Follow Someone 
+						<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+					</a>
+				@else
+					
+					<div id="followers-list" class="profile-following-list-div" style="visibility:hidden;">
+						<ul>
+							@foreach ($artist[0]->followers as $follower)
+								<li><a href="{{url('/artist/')}}/{{arts\User::where('id', '=', $follower->follower_id)->pluck('username')[0]}}">
+								{{arts\User::where('id', '=', $follower->follower_id)->pluck('username')[0]}}
+								</a></li>
+							@endforeach
+						</ul>
+					</div>
+
+					<div id="following-list" class="profile-following-list-div" style="visibility: hidden;">
+						<ul>
+							@foreach ($artist[0]->following as $follow)
+								<li><a href="{{url('/artist/')}}/{{arts\User::where('id', '=', $follow->followed_id)->pluck('username')[0]}}">
+								{{arts\User::where('id', '=', $follow->followed_id)->pluck('username')[0]}}
+								</a></li>
+							@endforeach
+						</ul>
+					</div>
+
 				@endif
 
 			@else
