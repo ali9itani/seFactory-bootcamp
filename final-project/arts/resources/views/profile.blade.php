@@ -1,5 +1,9 @@
 @extends('master')
-@section('page-title','Profile')
+
+@section('page-title')
+	{{$artist[0]->username}}
+@endsection
+
 @section('body-content')
 <div id="profile-page-body-container" class="container-980px container-height-default pages-main-container text-align-center">
 	<!-- user info and followings section -->
@@ -18,7 +22,7 @@
 							<label>Username: </label>
 						</td>
 						<td>
-							<span>{{$artist[0]->username}}</span>
+							<span id="profile-username-span">{{$artist[0]->username}}</span>
 						</td>
 					</tr>
 					<tr>
@@ -56,24 +60,42 @@
 			@if(Auth::guest())
 				<!-- if its a guest than change following section to register to follow -->
 
-				{{'1'}}
+				<button id="register-following-button" onclick="location.href='{{ url('/')}}';">
+					Register to follow
+					<i class="fa fa-arrow-circle-right" style="margin-left:10px;" aria-hidden="true"></i>
+				</button>
 
 			@elseif(Auth::user()->id == $artist[0]->id)
 				<!-- if the current user displaying his account -->
 
+				<span class="following-count" style="margin-left:62px;">{{$artist[0]->followers->count()}} followers</span>
+				<span class="following-count" style="margin-left:11px;">{{$artist[0]->following->count()}} following</span>
+				
 				@if($artist[0]->followers->count() == 0 && $artist[0]->following->count() == 0)
-				<span style="margin-left:62px;">{{$artist[0]->followers->count()}} followers</span>
-				<span style="margin-left:11px;">{{$artist[0]->following->count()}} following</span>
 				<a id="profile-go-follow-a" href="{{ url('/explore/artists')}}">Go Follow Someone 
 					<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
 				</a>
 				@endif
 
 			@else
-				<!-- if any registered user is displaying another user account -->
-
-					{{'3'}}
-
+				<section id="following-status">
+					<!-- if any registered user is displaying another user account -->
+					<form id="follow-form">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					</form>
+						<!-- check if this user following that user -->
+						@if($following_exist->exists)
+							<button id="follow-button" class="following-button" onclick="follow()">
+								<span id="follow-text">following</span>
+								<i id="follow-icon" class="fa fa-times-circle" style="margin-left:10px;" aria-hidden="true"></i>
+							</button>
+						@else
+							<button id="follow-button" class="follow-button" onclick="follow()" >
+								<span id="follow-text">follow</span>
+								<i id="follow-icon" class="fa fa-plus-circle" style="margin-left:10px;" aria-hidden="true"></i>
+							</button>
+						@endif
+				</section>
 			@endif
 		</div>
 

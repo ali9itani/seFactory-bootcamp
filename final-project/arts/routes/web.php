@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth']], function()
 	Route::get('/home','HomeController@index');
 	Route::get('/post/new','PostController@create');
 	Route::post('/post/new','PostController@store');
+	Route::post('/follow','ProfileController@follow');
 });
 
 

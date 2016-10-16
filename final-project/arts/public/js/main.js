@@ -99,29 +99,66 @@ function saveProfileData(){
 }
 
 
-var postImageForm = document.getElementById('post-images-form');
+// var postImageForm = document.getElementById('post-images-form');
 
-postImageForm.addEventListener('submit', function(e){
-	e.preventDefault();
+// postImageForm.addEventListener('submit', function(e){
+// 	e.preventDefault();
 
-    var form = postImageForm;
-    var formdata = false;
-    if (window.FormData){
-        formdata = new FormData(postImageForm);
-    }
+//     var form = postImageForm;
+//     var formdata = false;
+//     if (window.FormData){
+//         formdata = new FormData(postImageForm);
+//     }
 
-    $.ajax({
-        url         : '/arts/public/post/new',
-        data        : formdata ? formdata : form.serialize(),
-        cache       : false,
-        contentType : false,
-        processData : false,
-        type        : 'POST',
-        success     : function(data, textStatus, jqXHR){
-            console.log(data);
-        },
-        errors		:  function() {
-		    console.log('error');
-		}
-    });
-});
+//     $.ajax({
+//         url         : '/arts/public/post/new',
+//         data        : formdata ? formdata : form.serialize(),
+//         cache       : false,
+//         contentType : false,
+//         processData : false,
+//         type        : 'POST',
+//         success     : function(data, textStatus, jqXHR){
+//             console.log(data);
+//         },
+//         errors		:  function() {
+// 		    console.log('error');
+// 		}
+//     });
+// });
+
+function follow()
+{
+	//getting form data
+	var form = document.getElementById('follow-form');
+	var formData = new FormData(form);
+
+	var userName = document.getElementById('profile-username-span').innerHTML;
+
+	formData.append('userName', userName);
+
+	$.ajax({
+		url         : '/arts/public/follow',
+		data        : formData,
+		cache       : false,
+		contentType : false,
+		processData : false,
+		type        : 'POST',
+		success     : function(data, textStatus, jqXHR){
+			changeFollowButton(data);
+		},
+	});
+}
+
+function changeFollowButton(status) {
+	if(status == 0) {
+		//follow 
+		document.getElementById('follow-button').className = 'follow-button';
+		document.getElementById('follow-icon').className = 'fa fa-plus-circle';
+		document.getElementById('follow-text').innerHTML = 'follow';
+	} else {
+		//unfollow - following
+		document.getElementById('follow-button').className = 'following-button';
+		document.getElementById('follow-icon').className = 'fa fa-times-circle';
+		document.getElementById('follow-text').innerHTML = 'following';
+	}
+}

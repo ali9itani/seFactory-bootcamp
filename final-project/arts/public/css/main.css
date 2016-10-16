@@ -307,7 +307,7 @@ header .username-a {
     padding-top: 22px;
     padding-left: 15px;
 }
-#profile-page-profile-followig-section  span{
+.following-count{
     background-color: white;
     padding: 6px;
 }
@@ -320,6 +320,30 @@ header .username-a {
     padding: 5px;
     background-color: black;
     font-weight: bold;
+}
+.follow-button {
+    margin: 80px;
+    width: 160px;
+    height: 38px;
+    background-color: green;
+    color: white;
+    border-radius: 10px;
+}
+.following-button{
+    background-color: gray; 
+    margin: 80px;
+    width: 160px;
+    height: 38px;
+    color: white;
+    border-radius: 10px;
+}
+#register-following-button {
+    margin: 80px;
+    width: 185px;
+    height: 38px;
+    background-color: green;
+    color: white;
+    border-radius: 10px;
 }
 #profile-page-body-container hr {
     height: 3px;
@@ -404,6 +428,9 @@ header .username-a {
 }
 #profile-page-body-container #explore-page-grid {
     width: 100%;
+}
+#follow-text {
+    background-color: none;
 }
 
 /*explore page styling*/

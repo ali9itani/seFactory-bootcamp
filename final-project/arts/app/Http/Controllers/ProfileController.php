@@ -11,6 +11,7 @@ use File;
 use arts\User;
 use arts\Post;
 use arts\Resource;
+use arts\Following;
 
 class ProfileController extends Controller
 {
@@ -58,9 +59,14 @@ class ProfileController extends Controller
             $posts = Post::where('publisher_id', '=', $artist[0]->id)
                            ->with('upVotesCount')->with('downVotesCount')
                            ->with('post_comments')->with('resources')->get();
-                           
+
+            $following_exist =  Following::firstOrNew([
+                                ['followed_id', '=', $artist[0]->id],
+                                ['follower_id', '=', Auth::user()->id],
+                            ]);
+             
             return view('profile')->with(compact('posts'))
-                                  ->with(compact('artist'));
+                                  ->with(compact('artist')) ->with(compact('following_exist'));
         } else {
           return 'user doesnt exist';
         }
@@ -112,4 +118,40 @@ class ProfileController extends Controller
         return User::where('id', '=', $user_id); 
     }
 
+    /**
+     * process a follow request
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function follow(Request $request)
+    {
+        if(User::where('username', '=', $request->userName)->exists()){
+
+          $followed_id = User::where('username', '=', $request->userName)
+                        ->first()->id;
+
+          $follower_id = Auth::user()->id;
+
+          // check if exist remove else add
+          $following = Following::firstOrNew(array(
+              'followed_id' => $followed_id, 'follower_id' => $follower_id));
+
+          if ($following->exists) {
+
+              $following->where([
+                                ['followed_id', '=', $followed_id],
+                                ['follower_id', '=', $follower_id],
+                            ])->delete();
+              return 0;
+
+          } else {
+
+              $following->followed_id = $followed_id;
+              $following->follower_id = $follower_id;
+              $following->save();
+              return 1;
+          }
+       }
+    }
 }
