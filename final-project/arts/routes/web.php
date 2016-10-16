@@ -35,8 +35,8 @@ Route::get('/login', function () {
 
 Route::group(['middleware' => ['auth']], function()
 {
-	Route::get('/profile/me/display','ProfileController@index');
-	Route::get('/profile/me/edit','EditProfileController@index');
+	Route::get('/me','ProfileController@displayMyProfile');
+	Route::get('/me/edit','EditProfileController@index');
 	Route::post('/profile/me/edit','EditProfileController@store');
 	Route::get('/home','HomeController@index');
 	Route::get('/post/new','PostController@create');
@@ -45,6 +45,9 @@ Route::group(['middleware' => ['auth']], function()
 
 
 Route::get('/explore', 'ExploreController@random');
-Route::get('/explore/by_rate', 'ExploreController@byRate');
-Route::get('/explore/trending', 'ExploreController@trending');
-Route::get('/explore/by_views', 'ExploreController@byViews');
+Route::get('/explore/rates', 'ExploreController@byRate');
+Route::get('/explore/trendings', 'ExploreController@trending');
+Route::get('/explore/views', 'ExploreController@byViews');
+Route::get('/explore/artists', 'ExploreController@byartists');
+Route::get('/artist/{username}', 'ProfileController@artistProfile');
+

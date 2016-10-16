@@ -6,7 +6,7 @@
 	<section id="profile-page-cover-section">
 		<!-- profile image -->
 		<div id="profile-page-spphoto-div" >
-			<img id="profile-img" user-data-img-id="{{$current_user->id}}" src="{!! Auth::user()->photo() !!}"></img>
+			<img id="profile-img" user-data-img-id="{{$artist[0]->id}}" src="{!! $artist[0]->photo() !!}"></img>
 		</div>
 
 		<!-- profile info -->
@@ -18,19 +18,19 @@
 							<label>Username: </label>
 						</td>
 						<td>
-							<span>{{$current_user->username}}</span>
+							<span>{{$artist[0]->username}}</span>
 						</td>
 					</tr>
 					<tr>
 						<td><label>Email: </label></td>
-						<td><span>{{$current_user->email}}</span></td>
+						<td><span>{{$artist[0]->email}}</span></td>
 					</tr>
 					<tr>
 						<td>
 							<label>Full name: </label>
 						</td>
 						<td>
-							<span>{{$current_user->full_name}}</span>
+							<span>{{$artist[0]->full_name}}</span>
 						</td>
 					</tr>
 					<tr>
@@ -38,7 +38,7 @@
 							<label>Birth date: </label>
 						</td>
 						<td>
-							<span>{{$current_user->birth_date}}</span>
+							<span>{{$artist[0]->birth_date}}</span>
 						</td>
 					</tr>
 					<tr>
@@ -46,13 +46,35 @@
 							<label>Bio: </label>
 						</td>
 						<td>
-							<p>{{$current_user->bio}}</p>
+							<p>{{$artist[0]->bio}}</p>
 						</td>
 					</tr>
 				</table>
 		</div>
+		<hr id="profile-info-verticl-ruler" style="width:4px; height:100%"/>
 		<div id="profile-page-profile-followig-section">
+			@if(Auth::guest())
+				<!-- if its a guest than change following section to register to follow -->
 
+				{{'1'}}
+
+			@elseif(Auth::user()->id == $artist[0]->id)
+				<!-- if the current user displaying his account -->
+
+				@if($artist[0]->followers->count() == 0 && $artist[0]->following->count() == 0)
+				<span style="margin-left:62px;">{{$artist[0]->followers->count()}} followers</span>
+				<span style="margin-left:11px;">{{$artist[0]->following->count()}} following</span>
+				<a id="profile-go-follow-a" href="{{ url('/explore/artists')}}">Go Follow Someone 
+					<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+				</a>
+				@endif
+
+			@else
+				<!-- if any registered user is displaying another user account -->
+
+					{{'3'}}
+
+			@endif
 		</div>
 
 	</section>

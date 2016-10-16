@@ -41,6 +41,14 @@ class ExploreController extends Controller
     }
 
     /**
+     * Display a listing of the trending posts.
+     */
+    public function byartists()
+    {
+        return view('explore');
+    }
+
+    /**
      * Display a listing of the posts acc to most view.
      */
     public function byViews()

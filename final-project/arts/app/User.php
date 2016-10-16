@@ -28,12 +28,21 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the followings for the user.
+     * Get who the user is following
      */
-    public function followings()
+    public function following()
     {
-        return $this->hasMany('App\Following');
+        return $this->hasMany('arts\Following', 'follower_id', 'id');
     }
+
+    /**
+     * Get the user followers
+     */
+    public function followers()
+    {
+        return $this->hasMany('arts\Following', 'followed_id', 'id');
+    }
+
     /**
      * Get the arts for the user.
      */

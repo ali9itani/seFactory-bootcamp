@@ -15,22 +15,55 @@ use arts\Resource;
 class ProfileController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a profile
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function displayMyProfile()
     {
-        $current_user = $this->getCurrentUser();
-        
+        $artist = $this->getCurrentUser()->with('following')
+                       ->with('followers')->get();
+
         //get all user posts
-        $posts = Post::where('publisher_id', '=', $current_user->id)
+        $posts = Post::where('publisher_id', '=', $artist[0]->id)
                        ->with('upVotesCount')->with('downVotesCount')
-                       ->with('post_comments')
-                       ->with('resources')->get();
+                       ->with('post_comments')->with('resources')->get();
                        
         return view('profile')->with(compact('posts'))
-                              ->with(compact('current_user'));
+                              ->with(compact('artist'));
+    }
+
+
+    /**
+     * Display a profile of another artist
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function artistProfile($username)
+    {
+        if(User::where('username', '=', $username)->exists()){
+            //if the authenticated user requested a profile that has his username
+            if(!Auth::guest()){
+              $current_user = $this->getCurrentUser()->get();
+
+              if($current_user[0]->username == $username){
+                $this->displayMyProfile();
+              }
+            } 
+
+            $artist = User::where('username', '=', $username)
+                      ->with('following')->with('followers')->get();
+
+            //get all user posts
+            $posts = Post::where('publisher_id', '=', $artist[0]->id)
+                           ->with('upVotesCount')->with('downVotesCount')
+                           ->with('post_comments')->with('resources')->get();
+                           
+            return view('profile')->with(compact('posts'))
+                                  ->with(compact('artist'));
+        } else {
+          return 'user doesnt exist';
+        }
     }
 
     /**
@@ -76,7 +109,7 @@ class ProfileController extends Controller
     private function getCurrentUser()
     {
         $user_id = Auth::user()->id;
-        return User::find($user_id); 
+        return User::where('id', '=', $user_id); 
     }
 
 }

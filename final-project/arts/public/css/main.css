@@ -291,6 +291,35 @@ header .username-a {
 #profile-page-cover-section p {
     margin: 0px;
     font-size: 12px;
+} 
+#profile-info-verticl-ruler {
+    width: 4px;
+    height: 99%;
+    position: absolute;
+    display: inline-block;
+    top: -16px;
+}
+#profile-page-profile-followig-section {
+    width: 35%;
+    display: inline-block;
+    height: 90%;
+    position: absolute;
+    padding-top: 22px;
+    padding-left: 15px;
+}
+#profile-page-profile-followig-section  span{
+    background-color: white;
+    padding: 6px;
+}
+#profile-go-follow-a {
+    display: block;
+    margin: 66px;
+    border: 1px solid red;
+    color: red;
+    text-decoration: none;
+    padding: 5px;
+    background-color: black;
+    font-weight: bold;
 }
 #profile-page-body-container hr {
     height: 3px;
