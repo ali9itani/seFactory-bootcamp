@@ -46,8 +46,6 @@ Route::group(['middleware' => ['auth']], function()
 
 
 Route::get('/explore', 'ExploreController@random');
-Route::get('/explore/rates', 'ExploreController@byRate');
-Route::get('/explore/trendings', 'ExploreController@trending');
 Route::get('/explore/views', 'ExploreController@byViews');
 Route::get('/explore/artists', 'ExploreController@byartists');
 Route::get('/artist/{username}', 'ProfileController@artistProfile');

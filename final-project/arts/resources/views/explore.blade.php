@@ -4,8 +4,14 @@
 
 @section('body-content')
 <div id="explore-body-container" class="container-height-default text-align-center">
-	@if(Request::path() == 'explore')
-		<h1>Random Exploration</h1>
+	@if(Request::path() == 'explore' || Request::path() == 'explore/views')
+		<h1>
+			@if(Request::path() == 'explore')
+				{{'Random Exploration'}}
+			@else
+				{{'By Views Exploration'}}
+			@endif
+		</h1>
 		<div id="explore-page-grid">
 			@foreach ($posts as $post)
 			  <a href="{{asset('/img/posts-images')}}/{{ $post->resources[0]['resource_name'] }}">

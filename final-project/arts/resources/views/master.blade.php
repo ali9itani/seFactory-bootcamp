@@ -16,13 +16,29 @@
     <!-- header -->
       <header id="page-header">
         <div class="container-980px">
+
           <div id="logo-section" class="display-inline-block">
-            <a href="/arts/public/home"><img id="logo" src="{{ asset('/img/logo.png') }}" /></a>
-            <a id="header-explore-a" href="/arts/public/explore" class="header-options fix-anchor">EXPLORE</a>
-            @if(Auth::check())
-            <a href="/arts/public/home" class="header-options fix-anchor">Home</a>
-            <a href="/arts/public/post/new" class="fa fa-plus header-options fix-anchor">Post</a>
-            @endif
+            <a href="{{url('/home')}}"><img id="logo" src="{{ asset('/img/logo.png') }}" /></a>
+
+              <nav class="nav">
+                <li><a id="header-explore-a" href="{{url('/explore')}}" class="header-options fix-anchor">EXPLORE</a>
+                    <ul class="subs">
+                        <li><a  href="{{url('/explore/artists')}}">Artists</a></li>
+                        <li><a  href="{{url('/explore/views')}}">Most Viewed</a></li>
+                        <li><a  href="{{url('/explore')}}">Random Posts</a></li>
+                    </ul>
+                </li>
+
+                @if(Auth::check())
+                <li>
+                  <a href="{{url('/home')}}" class="header-options fix-anchor">Home</a>
+                </li>
+                <li>
+                  <a href="{{url('/post/new')}}" class="fa fa-plus header-options fix-anchor">Post</a>
+                </li>
+                @endif
+              </nav>
+
           </div>
           <div class="display-inline-block float-right">
             @include('header_menu')

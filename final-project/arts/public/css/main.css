@@ -221,6 +221,55 @@ footer {
     margin-top: 10px;
     right: 10px;
 }
+
+.nav,.nav ul {
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+.nav {
+  position:relative;
+  height: 30px;
+  display: inline-block;
+  top: 18px;
+}
+
+.nav ul {
+  height: 0;
+  left: 20px;
+  overflow: hidden;
+  position: absolute;
+  top: 35px;
+}
+
+.nav li {
+  float:left;
+  position:relative;
+}
+.nav li a:hover, .nav ul.subs a:hover {
+color: #FFD700;
+}
+
+.nav li a {
+  display:block;
+  font-size:16px;
+  line-height:15px;
+  padding:5px 10px;
+  text-decoration:none;
+  padding-bottom: 20px;
+}
+
+.nav ul.subs a{
+  color: white;
+  padding: 10px;
+}
+
+.nav li:hover ul.subs {
+height:auto;
+width:180px;
+background-color: #182945;
+}
 /*contains logout menu and arrow*/
 #header-options-block {
     margin-top: 47px;

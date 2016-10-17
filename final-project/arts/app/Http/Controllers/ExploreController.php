@@ -25,22 +25,6 @@ class ExploreController extends Controller
     }
 
     /**
-     * Display a listing of the posts acc to most rated.
-     */
-    public function byRate()
-    {
-        return view('explore');
-    }
-
-    /**
-     * Display a listing of the trending posts.
-     */
-    public function trending()
-    {
-        return view('explore');
-    }
-
-    /**
      * Display a listing of the trending posts.
      */
     public function byartists()

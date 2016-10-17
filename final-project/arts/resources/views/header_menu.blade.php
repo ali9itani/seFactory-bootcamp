@@ -17,7 +17,6 @@
       <div class="header-options-menu">
         <ul class="fix-list-ul header-options-ul">
             <li><a href="{{ url('/me/edit') }}" >Edit Profile</a></li>
-            <li><a href="">Followings</a></li>
             <li><a  class="fix-anchor" href="{{ url('/logout') }}"
             onclick="event.preventDefault();
                      document.getElementById('logout-form').submit();">
