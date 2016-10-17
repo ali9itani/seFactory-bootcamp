@@ -60,11 +60,13 @@ class ProfileController extends Controller
                            ->with('upVotesCount')->with('downVotesCount')
                            ->with('post_comments')->with('resources')->get();
 
-            $following_exist =  Following::firstOrNew([
+             if(!Auth::guest()){
+               $following_exist =  Following::firstOrNew([
                                 ['followed_id', '=', $artist[0]->id],
                                 ['follower_id', '=', Auth::user()->id],
                             ]);
-             
+             }
+
             return view('profile')->with(compact('posts'))
                                   ->with(compact('artist')) ->with(compact('following_exist'));
         } else {

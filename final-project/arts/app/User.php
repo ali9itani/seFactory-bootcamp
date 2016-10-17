@@ -48,7 +48,7 @@ class User extends Authenticatable
      */
     public function artist_arts()
     {
-        return $this->hasMany('App\Artist_art');
+        return $this->hasMany('arts\Artist_art', 'artist_id', 'id');
     }
 
     /**
@@ -72,28 +72,38 @@ class User extends Authenticatable
      */
     public function post_votes()
     {
-        return $this->hasMany('App\Post_vote');
+        return $this->hasMany('arts\Post_vote');
     }
+
     /**
      * Get the posts for the user.
      */
     public function posts()
     {
-        return $this->hasMany('App\Post');
+        return $this->hasMany('arts\Post', 'publisher_id', 'id');
     }
+
+    /**
+     * Get the limit count of posts for the user.
+     */
+    public function limitedPostsToSix()
+    {
+        return $this->hasMany('arts\Post', 'publisher_id', 'id')->limit(6);;
+    }
+
     /**
      * Get the team_members for the blog user.
      */
     public function team_members()
     {
-        return $this->hasMany('App\Team_member');
+        return $this->hasMany('arts\Team_member');
     }
     /**
      * Get the followings for the blog post.
      */
     public function teams()
     {
-        return $this->hasMany('App\Team');
+        return $this->hasMany('arts\Team');
     }
 
     // retrieve photo of user

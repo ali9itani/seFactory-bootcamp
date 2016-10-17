@@ -11,13 +11,13 @@ class Artist_art extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('arts\User');
     }
     /**
      * Get the art that owns it
      */
     public function art()
     {
-        return $this->belongsTo('App\Art');
+        return $this->belongsTo('arts\Art', 'art_id', 'art_id');
     }
 }

@@ -45,7 +45,9 @@ class ExploreController extends Controller
      */
     public function byartists()
     {
-        return view('explore');
+        $users = User::inRandomOrder()->limit(10)->get();
+
+        return view('explore')->with(compact('users'));
     }
 
     /**
