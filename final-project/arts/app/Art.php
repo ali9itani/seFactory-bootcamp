@@ -3,6 +3,7 @@
 namespace arts;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Art extends Model
 {
@@ -11,13 +12,21 @@ class Art extends Model
      */
     public function artist_arts()
     {
-        return $this->hasMany('App\Artist_art');
+        return $this->hasMany('arts\Artist_art','art_id' ,'art_id');
     }
-    /**
-     * Get the teams for the art.
-     */
-    public function teams()
+
+    //check if current user has a relation to this art
+    public function loggedArtistHasArt()
     {
-        return $this->hasMany('App\Team');
+        $user_id = Auth::user()->id;
+ 
+        foreach ($this->artist_arts as $art_artist) {
+            if($user_id == $art_artist->artist_id) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
     }
 }

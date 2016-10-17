@@ -35,6 +35,24 @@
 					<input class="col-xs-12 col-sm-6 col-md-3"  name="birthDate" type="date" value="{{$current_user->birth_date}}" />
 				</div>
 				<div class="row">
+					<label class="col-xs-12 col-sm-6 col-md-2 col-md-offset-3" >Intrests: </label>
+					<select class="col-xs-12 col-sm-6 col-md-3" multiple>
+
+						@foreach($arts as $art)
+					  		<option
+					  			@if ($art->loggedArtistHasArt())
+					  				{{'selected'}}
+					  			@endif
+								value="{{$art->art_id}}">
+
+					  			{{$art->art_name}}
+
+					  		</option>
+					  	@endforeach
+					 
+					</select> 
+				</div>
+				<div class="row">
 					<label class="col-xs-12 col-sm-6 col-md-2 col-md-offset-3">Bio: </label>
 					<textarea class="col-xs-12 col-sm-6 col-md-3" name="bio" maxlength="200" rows="3">{{$current_user->bio}}</textarea>
 				</div>

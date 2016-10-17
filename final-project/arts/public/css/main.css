@@ -94,7 +94,6 @@ header {
     padding: 5px 0px;
     color: white;
     font-weight: bold;
-    height: 50px;
 }
 header .container-980px {
     position: relative
@@ -126,7 +125,6 @@ footer {
     font-weight: bold;
     background-color: #1a2e4f;
     color: white;
-    height: 15px;
     font-size: 14px;
 
     /*add a shadow*/
@@ -798,6 +796,9 @@ header .username-a {
 }
 
 /*edit profile style*/
+#edit-profile-page-body-container {
+    margin-bottom: 20px;
+}
 #edit-profile-img {
     margin: 0px auto;
     width: 200px;

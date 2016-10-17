@@ -11,6 +11,7 @@ use File;
 use arts\User;
 use arts\Post;
 use arts\Resource;
+use arts\Art;
 
 class EditProfileController extends Controller
 {
@@ -28,9 +29,12 @@ class EditProfileController extends Controller
                        ->with('upVotesCount')->with('downVotesCount')
                        ->with('post_comments')
                        ->with('resources')->get();
+
+        //get list of available arts
+        $arts = Art::get();
                        
         return view('edit-profile')->with(compact('posts'))
-                              ->with(compact('current_user'));
+                ->with(compact('current_user'))->with(compact('arts'));
     }
 
     /**
