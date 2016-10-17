@@ -3,6 +3,8 @@
 namespace arts\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use arts\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user_id = Auth::user()->id;
+        $user = User::where('id', '=', $user_id)->first(); 
+
+        return view('home')->with(compact('user'));
     }
 }
