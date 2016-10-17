@@ -335,12 +335,13 @@ header .username-a {
     font-weight: bold;
 }
 #profile-page-cover-section #profile-page-profile-text1 {
-    width: 40%;
-    margin-left: 220px;
+    width: 41%;
+    margin-left: 205px;
+    margin-right: 10px;
 }
 #profile-page-cover-section p {
     margin: 0px;
-    font-size: 12px;
+    font-size: 11px;
 } 
 #profile-info-verticl-ruler {
     width: 4px;
@@ -408,13 +409,16 @@ header .username-a {
 #profile-img {
     width: 200px;
     height: 200px;
-    margin: -15px 15px 15px;
+    margin: -15px 10px 15px;
 }
 #profile-page-profile-text1 {
     width: 40%;
     position: relative;
     top: 15px;
     left: 10px;
+}
+#profile-page-profile-text1 a {
+    color: black;
 }
 #profile-page-profile-text2 {
     width: 30%;

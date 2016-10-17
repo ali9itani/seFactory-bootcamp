@@ -38,6 +38,14 @@
 						</td>
 					</tr>
 					<tr>
+						<td><label>Website: </label></td>
+						<td><a href="http://{{$artist[0]->website}}" target="_blank" class="fix-anchor">
+								{{$artist[0]->website}}
+								<i class="fa fa-hand-o-right" aria-hidden="true"></i>
+							</a>
+						</td>
+					</tr>
+					<tr>
 						<td>
 							<label>Birth date: </label>
 						</td>
