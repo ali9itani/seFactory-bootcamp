@@ -58,6 +58,7 @@ function saveProfileData(){
 	formData.append('fullName', form.elements['fullName'].value);
 	formData.append('bio', form.elements['bio'].value);
 	formData.append('birthDate', form.elements['birthDate'].value);
+	formData.append('website', form.elements['website'].value);
 	
 	imageToUploadCheck = document.getElementById("fileToUpload").files.length
 
@@ -81,12 +82,13 @@ function saveProfileData(){
 
 			//change profile image
 			if( imageToUploadCheck != 0 ) {
-				var  imgId = $("#profile-img").attr("user-data-img-id"); 
-				
-				var newDate = new Date();
-				$("#profile-img").attr("src", '../../img/profile-photo/'+
-								  imgId+'.jpg?'+newDate.getTime());
+				var  imgId = $("#edit-profile-img").attr("user-data-img-id"); 
 
+				$("#edit-profile-img").load(function() {
+				    $(this).hide();
+				    $(this).fadeIn('slow');
+				}).attr('src', '../img/profile-photo/'+imgId+
+										 ".jpg?" + new Date().getTime());
 				// empty uploader
 				$("#fileToUpload").replaceWith($("#fileToUpload").val('')
 								  .clone(true));

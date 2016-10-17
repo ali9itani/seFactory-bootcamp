@@ -1,83 +1,49 @@
 @extends('master')
 @section('page-title','Edit Profile')
+@section('header-content')
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+@endsection
 @section('body-content')
-<div id="profile-page-body-container" class="container-980px container-height-default pages-main-container text-align-center">
-	<ul id="profile-save-status-msg">
-	</ul>
-	<form id="edit-profile-form" enctype="multipart/form-data">
-		{{ csrf_field() }}
-		<!-- profile image -->
-		<div id="profile-page-pphoto-div" class="profile-page-profile-details">
-			<img id="profile-img" user-data-img-id="{{$current_user->id}}" src="{!! Auth::user()->photo() !!}"></img>
-			<span id="profile-page-change-photo-span">Change Your Photo!!</span>
-			<input type="file" name="image" id="fileToUpload">
-		</div>
-		<div id="profile-page-profile-text1" class="profile-page-profile-details">
-				<table>
-				  	<col width="120">
-					<tr>
-						<td><label>Username: </label></td>
-						<td><span>{{$current_user->username}}</span></td>
-					</tr>
-					<tr>
-						<td><label>Email: </label></td>
-						<td><span>{{$current_user->email}}</span></td>
-					</tr>
-					<tr>
-						<td><label>Full name: </label></td>
-						<td><input name="fullName"  value="{{$current_user->full_name}}"/></td>
-					</tr>
-					<tr>
-						<td><label>Birth date: </label></td>
-						<td><input  name="birthDate" type="date" value="{{$current_user->birth_date}}" /></td>
-					</tr>
-				</table>
-		</div>
-		<div id="profile-page-profile-text2" class="profile-page-profile-details">
-			<label>bio: </label>
-			<br/>
-			<textarea name="bio" maxlength="200" rows="3">{{$current_user->bio}}</textarea>
-		</div>
-		</form>
-		<div id="profile-page-profile-submit-div">
-			<button onclick="saveProfileData()" class="float-right">Save</button>
-		</div>
-	<hr/>
-<div id="explore-page-grid">
-		@foreach ($posts as $post)
-		  <a href="{{asset('/img/posts-images')}}/{{ $post->resources[0]['resource_name'] }}">
-		    <figure>
-		    	<div class="post-image-and-date">
-					<img src="{{asset('/img/posts-images')}}/{{ $post->resources[0]['resource_name'] }}" alt="">
-					<span >{{ $post->created_at->format('Y-m-d') }}</span>
-				</div>
-				<figcaption>
-					<div>
-						<section class="post-popularity" style="width:100%">
-							<br/>
-							<i class="fa fa-eye" aria-hidden="true"></i> {{ $post->view_count }}
-							<i class="fa fa-comment" aria-hidden="true"></i> {{ $post->post_comments->count() }}
-							<i class="fa fa-arrow-up" aria-hidden="true"></i>
-							@if(isset($post->upVotesCount[0]))
-							     {{ $post->upVotesCount[0]['count']}}
-							@else
-								{{'0'}}
-							@endif
-							 
-							<i class="fa fa-arrow-down"  aria-hidden="true"></i> 
-							@if(isset($post->downVotesCount[0]))
-							     {{ $post->downVotesCount[0]['count'] }}
-							@else
-								{{'0'}}
-							@endif
-						</section>
-					</div>
-					<p class="post-title">{{ $post->title }}</p>
-				</figcaption>
-		    </figure>
-		  </a>	
-		@endforeach
+
+<div id="edit-profile-page-body-container" class="container-980px container container-height-default">
+	<div class="row">
+		<ul id="profile-save-status-msg">
+		</ul>
 	</div>
+
+	<div class="row">
+		<form id="edit-profile-form" enctype="multipart/form-data">
+			{{ csrf_field() }}
+			<!-- profile image -->
+			<div class="row">
+				<img id="edit-profile-img" class="img-responsive row" user-data-img-id="{{$current_user->id}}" src="{!! Auth::user()->photo() !!}"></img>
+				<input type="file" name="image" class="row " id="fileToUpload">
+			</div>
+			<div>
+				<div class="row">
+					<label class="col-xs-12 col-sm-6 col-md-2 col-md-offset-3">Full name: </label>
+					<input  class="col-xs-12 col-sm-6 col-md-3" name="fullName"  value="{{$current_user->full_name}}"/>
+				</div>
+				<div class="row">
+					<label class="col-xs-12 col-sm-6 col-md-2 col-md-offset-3">Website: </label>
+					<input  class="col-xs-12 col-sm-6 col-md-3" name="website" type="website" value="{{$current_user->website}}" />
+				</div>
+				<div class="row">
+					<label class="col-xs-12 col-sm-6 col-md-2 col-md-offset-3" >Birth date: </label>
+					<input class="col-xs-12 col-sm-6 col-md-3"  name="birthDate" type="date" value="{{$current_user->birth_date}}" />
+				</div>
+				<div class="row">
+					<label class="col-xs-12 col-sm-6 col-md-2 col-md-offset-3">Bio: </label>
+					<textarea class="col-xs-12 col-sm-6 col-md-3" name="bio" maxlength="200" rows="3">{{$current_user->bio}}</textarea>
+				</div>
+			</div>
+			</form>
+			<div class="row">
+				<button onclick="saveProfileData()" id="edit-profile-save-button" class="col-xs-12 col-md-2 col-md-offset-6 btn btn-default waves-effect waves-light">Save</button>
+			</div>
+		</div>
 </div>
 @endsection
 

@@ -420,51 +420,43 @@ header .username-a {
 #profile-page-profile-text1 a {
     color: black;
 }
+
 #profile-page-profile-text2 {
     width: 30%;
     vertical-align: top;
 }
+
 #profile-page-profile-text2 textarea{
     width: 100%;
 }
+
 #profile-page-pphoto-div img {
     width: 100px;
     height: 100px;
 }
+
 #profile-page-spphoto-div  {
     display: inline-block;
 }
-#profile-page-pphoto-div img:hover + #profile-page-change-photo-span {
-    visibility: visible;
-}
-#profile-page-change-photo-span {
-    visibility: hidden;
-    font-size: 10px;
-    display: block;
-    color: red;
-}
+
 .profile-page-profile-details {
     display: inline-block;
 }
+
 #profile-page-body-container td {
     padding-bottom: 5px;
     vertical-align: top;
 }
+
 #profile-page-body-container label {
     color: #A1C436;
     font-family: Aclonica;
 }
-#fileToUpload {
-    margin-top: 15px;
-}
+
 #profile-page-profile-submit-div {
     padding: 20px;
     margin: 0px auto;
     width: 5%;
-}
-#profile-save-status-msg {
-    color: red;
-    margin: 0 0 10px -25px;
 }
 
 .post-image-and-date { 
@@ -805,6 +797,28 @@ header .username-a {
     color: red;
 }
 
+/*edit profile style*/
+#edit-profile-img {
+    margin: 0px auto;
+    width: 200px;
+    height: 200px;
+}
+
+#fileToUpload {
+    margin: 25px auto;
+    margin-top: 14px;
+    width: 200px;
+}
+
+#edit-profile-save-button {
+    margin-top: 20px;
+}
+
+#profile-save-status-msg {
+    color: red;
+    margin: 13px auto;
+    width: 13%;
+}
 
 /* ==========================================================================
    Media Queries

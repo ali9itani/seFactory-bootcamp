@@ -56,6 +56,7 @@ class EditProfileController extends Controller
             $user->full_name = $request->fullName;
             $user->birth_date = $request->birthDate;
             $user->bio = $request->bio;
+            $user->website = $request->website;
             
             $profile_photos_dir = '/public/img/profile-photo/';
 
@@ -68,7 +69,7 @@ class EditProfileController extends Controller
             }
             
             $user->save();
-            return "s";
+            return ["success"];
         }
     }
 

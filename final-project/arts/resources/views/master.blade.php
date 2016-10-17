@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
         <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
         <script src="{{ asset('/js/vendor/modernizr-2.8.3.min.js') }}" ></script>
+        @yield('header-content')
     </head>
     <body>
     <!-- header -->
