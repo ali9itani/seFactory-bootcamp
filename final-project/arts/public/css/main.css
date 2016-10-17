@@ -790,6 +790,17 @@ header .username-a {
     text-align: left;
 }
 
+/*home page styles*/
+#home-page-go-to-edit-profile {
+    background-color: white;
+    text-align: center;
+    border: 1px solid red;
+}
+
+#home-page-go-to-edit-profile a{
+    color: red;
+}
+
 
 /* ==========================================================================
    Media Queries
