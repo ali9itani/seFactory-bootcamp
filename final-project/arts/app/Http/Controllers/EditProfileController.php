@@ -12,6 +12,7 @@ use arts\User;
 use arts\Post;
 use arts\Resource;
 use arts\Art;
+use arts\Artist_art;
 
 class EditProfileController extends Controller
 {
@@ -62,6 +63,19 @@ class EditProfileController extends Controller
             $user->bio = $request->bio;
             $user->website = $request->website;
             
+            $arts_array = explode(',', $request->select);
+
+            //delete all his old arts 
+            Artist_Art::where('artist_id', Auth::user()->id)->delete();
+
+            //save his selected arts
+            foreach ($arts_array as $value) {
+                 $artist_art = new Artist_art();
+                 
+                 $artist_art->insert(['art_id' => $value,
+                             'artist_id' => Auth::user()->id]);
+            }
+
             $profile_photos_dir = '/public/img/profile-photo/';
 
             //check if there is animage to upload
@@ -83,5 +97,4 @@ class EditProfileController extends Controller
         $user_id = Auth::user()->id;
         return User::find($user_id); 
     }
-
 }

@@ -36,7 +36,7 @@
 				</div>
 				<div class="row">
 					<label class="col-xs-12 col-sm-6 col-md-2 col-md-offset-3" >Intrests: </label>
-					<select class="col-xs-12 col-sm-6 col-md-3" multiple>
+					<select id="edit-profile-select" class="col-xs-12 col-sm-6 col-md-3" multiple>
 
 						@foreach($arts as $art)
 					  		<option
