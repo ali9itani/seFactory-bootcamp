@@ -135,10 +135,10 @@
 
 	<div id="explore-page-grid">
 		@foreach ($posts as $post)
-		  <a href="{{asset('/img/posts-images')}}/{{ $post->resources[0]['resource_name'] }}">
+		  <a href="{{asset('/img/posts-images')}}/{{$post->firstResources()['resource_name']}}">
 		    <figure>
 		    	<div class="post-image-and-date">
-					<img src="{{asset('/img/posts-images')}}/{{ $post->resources[0]['resource_name'] }}" alt="">
+					<img src="{{asset('/img/posts-images')}}/{{$post->firstResources()['resource_name']}}" alt="">
 					<span >{{ $post->created_at->format('Y-m-d') }}</span>
 				</div>
 				<figcaption>

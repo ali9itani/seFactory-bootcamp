@@ -65,10 +65,19 @@ class Post extends Model
     }
 
     /**
-     * Get the resources for the blog post.
+     * Get the resources for the post.
      */
     public function resources()
     {
         return $this->hasMany('arts\Resource', 'post_id', 'post_id');
     }
+
+    /**
+     * Get the first resource for post only.
+     */
+    public function firstResources()
+    {
+        return $this->resources()->first();
+    }
+
 }

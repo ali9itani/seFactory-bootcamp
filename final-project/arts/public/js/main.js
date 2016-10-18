@@ -123,34 +123,74 @@ function getSelectValues(select) {
 
 
 
+/*for sending a add post with data to server*/
 
+//to display images in browser before upload
+ function displayImages(input) {
 
-// var postImageForm = document.getElementById('post-images-form');
+ 		var inputs = input.files;
+ 		//display images in areverse order 
+ 		for (var i = inputs.length - 1; i >= 0; i--) {
+ 			
+ 			var reader = new FileReader();
+ 			reader.onload = function (e) {
 
-// postImageForm.addEventListener('submit', function(e){
-// 	e.preventDefault();
+ 				var newImg = document.createElement("img");
+ 				newImg.src = e.target.result;
+ 				newImg.style.width= '100px';
+ 				newImg.style.height= '100px';
 
-//     var form = postImageForm;
-//     var formdata = false;
-//     if (window.FormData){
-//         formdata = new FormData(postImageForm);
-//     }
+                document.getElementById('message').appendChild(newImg); 
+            }
+            
+            reader.readAsDataURL(inputs[i]);
+ 		}
+    }
+    
+$("#post-images-uploader").change(function(){
+    displayImages(this);
+});
 
-//     $.ajax({
-//         url         : '/arts/public/post/new',
-//         data        : formdata ? formdata : form.serialize(),
-//         cache       : false,
-//         contentType : false,
-//         processData : false,
-//         type        : 'POST',
-//         success     : function(data, textStatus, jqXHR){
-//             console.log(data);
-//         },
-//         errors		:  function() {
-// 		    console.log('error');
-// 		}
-//     });
-// });
+function validateImageUploader(){
+    var imgUploader = document.getElementById('post-images-uploader');
+    if(imgUploader.files.length === 0){
+        alert("Image/s Required");
+        imgUploader.focus();
+        return false;
+    } else {
+    	return true;
+    }
+}
+
+//on clicking a submit of post - it sends ajax request
+$( "#submit-post" ).click(function() {
+
+	if(validateImageUploader()){
+		var postImageForm = document.getElementById('post-images-form');
+	    var form = postImageForm;
+	    var formdata = false;
+
+	    if (window.FormData){
+	        formdata = new FormData(postImageForm);
+	    }
+
+	    $.ajax({
+	        url         : '/arts/public/post/new',
+	        data        : formdata ? formdata : form.serialize(),
+	        cache       : false,
+	        contentType : false,
+	        processData : false,
+	        type        : 'POST',
+	        success     : function(data, textStatus, jqXHR){
+	            console.log(data);
+	        },
+	        errors		:  function() {
+			    console.log('error');
+			}
+	    });
+	}
+	
+});
 
 function follow()
 {

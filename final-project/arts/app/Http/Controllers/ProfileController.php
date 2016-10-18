@@ -28,7 +28,7 @@ class ProfileController extends Controller
         //get all user posts
         $posts = Post::where('publisher_id', '=', $artist[0]->id)
                        ->with('upVotesCount')->with('downVotesCount')
-                       ->with('post_comments')->with('resources')->get();
+                       ->orderBy('post_id', 'DESC')->get();
                        
         return view('profile')->with(compact('posts'))
                               ->with(compact('artist'));
