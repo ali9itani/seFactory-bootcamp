@@ -1,54 +1,42 @@
 @extends('master')
-
 @section('page-title','Explore')
-
+@section('header-content')
+	<link  href="{{ asset('/grid/style.css') }}" rel="stylesheet" type="text/css" media="all" /> 
+	<link  href="{{ asset('/grid/jphotogrid.css') }}" rel="stylesheet" type="text/css" media="screen" /> 
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script src="{{ asset('/grid/jphotogrid.js') }}"></script>
+	<script src="{{ asset('/grid/jflickrfeed.js') }}"></script>
+	<script src="{{ asset('/grid/setup.js') }}"></script>
+@endsection
 @section('body-content')
-<div id="explore-body-container" class="container-height-default text-align-center">
+<style>
+#body-content-div {
+    background-color: white;
+}
+</style>
+<div class="row">
 	@if(Request::path() == 'explore' || Request::path() == 'explore/views')
-		<h1>
+		<h1 class="row " style="margin: 0px;padding: 20px;">
 			@if(Request::path() == 'explore')
 				{{'Random Exploration'}}
 			@else
 				{{'By Views Exploration'}}
 			@endif
 		</h1>
-		<div id="explore-page-grid">
-			@foreach ($posts as $post)
-			  <a href="{{asset('/img/posts-images')}}/{{ $post->resources[0]['resource_name'] }}">
-			    <figure>
-					<img src="{{asset('/img/posts-images')}}/{{ $post->resources[0]['resource_name'] }}" alt="">
-					<figcaption >
-						<div>
-							<section class="post-credit">
-								Credit: {{ $post->user->username }}
-							</section>
-							<section class="post-popularity">
-								<i class="fa fa-eye" aria-hidden="true"></i> {{ $post->view_count }}
-								<i class="fa fa-comment" aria-hidden="true"></i> {{ $post->post_comments->count() }}
-								<i class="fa fa-arrow-up" aria-hidden="true"></i>
-								@if(isset($post->upVotesCount[0]))
-								     {{ $post->upVotesCount[0]['count']}}
-								@else
-									{{'0'}}
-								@endif
-								 
-								<i class="fa fa-arrow-down"  aria-hidden="true"></i> 
-								@if(isset($post->downVotesCount[0]))
-								     {{ $post->downVotesCount[0]['count'] }}
-								@else
-									{{'0'}}
-								@endif
-							</section>
-						</div>
-						<p class="post-title">{{ $post->title }}</p>
-					</figcaption>
-				</figure>
-			  </a>	
-			@endforeach
+		<div class="container">
+			<ul id="pg" class="row">
+				@foreach ($posts as $post)
+					<li class="col-xs-12 col-md-3 col-lg-1">
+						<img class="col-xs-12" class="img-responsive" src="{{asset('/img/posts-images')}}/{{ $post->firstResources()['resource_name'] }}"
+						 alt="{{ $post->title }}">
+						<p>{{ $post->title }}</p>
+					</li> 
+				@endforeach
+			</ul>
 		</div>
 
 		<!-- pagination div -->
-		<div id="pagination-div">{{ $posts->links() }}</div>
+		<div class="row"  >{{ $posts->links() }}</div>
 
 	<!-- artists exploration section -->
 	@elseif(Request::path() == 'explore/artists')
@@ -106,5 +94,10 @@
 
 <!-- end of main container of page -->
 </div>
+<script type="text/javascript">
+    $(function() {
+        $(".flex").flex();
+    });
+</script>
 @endsection
 

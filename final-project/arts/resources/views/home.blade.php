@@ -5,9 +5,12 @@
 @section('body-content')
 
 @if(!$user->full_name || !isset($user->artist_arts[0]))
-<div id="home-page-go-to-edit-profile">
-	<a href="{{url('/me/edit')}}" class="fix-anchor">Click on to complete your account information.</a>
-</div>
+
+<a href="{{url('/me/edit')}}" class="alert alert-info fade in">
+	<a class="close" data-dismiss="alert">&times;</a>
+	<strong>Note!</strong> Please complete your account information.
+</a>
+
 @endif
 <div id="home-body-container" class="container-980px container-height-default text-align-center">
 

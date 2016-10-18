@@ -6,62 +6,87 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 @endsection
 @section('body-content')
-
-<div id="edit-profile-page-body-container" class="container-980px container container-height-default">
-	<div class="row">
-		<ul id="profile-save-status-msg">
-		</ul>
-	</div>
-
-	<div class="row">
-		<form id="edit-profile-form" enctype="multipart/form-data">
-			{{ csrf_field() }}
-			<!-- profile image -->
-			<div class="row">
-				<img id="edit-profile-img" class="img-responsive row" user-data-img-id="{{$current_user->id}}" src="{!! Auth::user()->photo() !!}"></img>
-				<input type="file" name="image" class="row " id="fileToUpload">
-			</div>
-			<div>
-				<div class="row">
-					<label class="col-xs-12 col-sm-6 col-md-2 col-md-offset-3">Full name: </label>
-					<input  class="col-xs-12 col-sm-6 col-md-3" name="fullName"  value="{{$current_user->full_name}}"/>
-				</div>
-				<div class="row">
-					<label class="col-xs-12 col-sm-6 col-md-2 col-md-offset-3">Website: </label>
-					<input  class="col-xs-12 col-sm-6 col-md-3" name="website" type="website" value="{{$current_user->website}}" />
-				</div>
-				<div class="row">
-					<label class="col-xs-12 col-sm-6 col-md-2 col-md-offset-3" >Birth date: </label>
-					<input class="col-xs-12 col-sm-6 col-md-3"  name="birthDate" type="date" value="{{$current_user->birth_date}}" />
-				</div>
-				<div class="row">
-					<label class="col-xs-12 col-sm-6 col-md-2 col-md-offset-3" >Intrests: </label>
-					<select id="edit-profile-select" class="col-xs-12 col-sm-6 col-md-3" multiple>
+	<div class="container">
+	    <h1>Edit Profile</h1>
+	  	<hr>
+	  	<form id="edit-profile-form" enctype="multipart/form-data">
+				{{ csrf_field() }}
+		<div class="row">
+	      <!-- left column -->
+	      <div class="col-md-3">
+	        <div class="text-center">
+	          <img  id="edit-profile-img" user-data-img-id="{{$current_user->id}}" src="{!! Auth::user()->photo() !!}" class="avatar img-circle" alt="avatar">
+	          <h6>Upload a different photo...</h6>
+	          <input type="file" class="form-control" name="image" id="fileToUpload">
+	        </div>
+	      </div>
+	      
+	      <!-- edit form column -->
+	      <div class="col-md-9 personal-info">
+	        <div id="profile-page-alert" class="alert alert-info alert-dismissable">
+	          <a class="panel-close close" data-dismiss="alert">×</a> 
+	          <i class="fa fa-coffee"></i>
+	        </div>
+	        <h3>Personal info</h3>
+	        
+	        <form class="form-horizontal" role="form">
+	          <div class="form-group">
+	            <label class="col-lg-3 control-label">Full name:</label>
+	            <div class="col-lg-8">
+	              <input class="form-control" type="text" name="fullName"  value="{{$current_user->full_name}}"/>
+	            </div>
+	          </div>
+	          <div class="form-group">
+	            <label class="col-lg-3 control-label">Birthdate:</label>
+	            <div class="col-lg-8">
+	              <input class="form-control" name="birthDate" type="date" value="{{$current_user->birth_date}}" />
+	            </div>
+	          </div>
+	          <div class="form-group">
+	            <label class="col-lg-3 control-label">Website:</label>
+	            <div class="col-lg-8">
+	              <input class="form-control" type="text" name="website" type="website" value="{{$current_user->website}}" />
+	            </div>
+	          </div>
+	          <div class="form-group">
+	            <label class="col-lg-3 control-label">Intrests:</label>
+	            <div class="col-lg-8">
+	              <div class="ui-select">
+					<select id="edit-profile-select" class="form-control" multiple>
 
 						@foreach($arts as $art)
-					  		<option
-					  			@if ($art->loggedArtistHasArt())
-					  				{{'selected'}}
-					  			@endif
-								value="{{$art->art_id}}">
+							<option
+								@if ($art->loggedArtistHasArt())
+									{{'selected'}}
+								@endif
+							value="{{$art->art_id}}">
 
-					  			{{$art->art_name}}
+								{{$art->art_name}}
 
-					  		</option>
-					  	@endforeach
-					 
+							</option>
+						@endforeach
+
 					</select> 
-				</div>
-				<div class="row">
-					<label class="col-xs-12 col-sm-6 col-md-2 col-md-offset-3">Bio: </label>
-					<textarea class="col-xs-12 col-sm-6 col-md-3" name="bio" maxlength="200" rows="3">{{$current_user->bio}}</textarea>
-				</div>
-			</div>
-			</form>
-			<div class="row">
-				<button onclick="saveProfileData()" id="edit-profile-save-button" class="col-xs-12 col-md-2 col-md-offset-6 btn btn-default waves-effect waves-light">Save</button>
-			</div>
-		</div>
-</div>
+	              </div>
+	            </div>
+	          </div>
+	          <div class="form-group">
+	            <label class="col-md-3 control-label">Bio:</label>
+	            <div class="col-md-8">
+	              <textarea  class="form-control"  name="bio" maxlength="200" rows="3">{{$current_user->bio}}</textarea>
+	            </div>
+	          </div>
+	          <div class="form-group">
+	            <label class="col-md-3 control-label"></label>
+	            <div class="col-md-8">
+	              <input type="button" style="margin-bottom: 40px;" onclick="saveProfileData()" id="edit-profile-save-button" class="btn btn-primary" value="Save Changes">
+	            </div>
+	          </div>
+	        </form>
+	      </div>
+	      </form>
+	  </div>
+	</div>
+
 @endsection
 

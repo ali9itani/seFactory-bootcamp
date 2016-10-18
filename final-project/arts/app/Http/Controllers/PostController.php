@@ -57,9 +57,7 @@ class PostController extends Controller
             $hash_tags = explode(" ",$request->hashtags);
 
             foreach ($hash_tags as $value) {
-                $hash_tag = Hash_tag::firstOrNew([
-                    'tag_title' => $value,
-                ]);
+                $hash_tag = Hash_tag::firstOrNew(['tag_title' => $value,]);
 
                 $hash_tag->save();
 
@@ -79,6 +77,16 @@ class PostController extends Controller
                 $post_hash_tag->save();
 
             }
+
+            //save tags
+            $tags = explode(",",$request->tags);
+
+            foreach ($tags as $value) {
+                $tag = new Tag();
+                $tag->insert(['post_id' => $post->id, 'artist_id'=> $value]);
+            }
+
+
 
             //save images 
             $posts_photos_dir = '/public/img/posts-images/';

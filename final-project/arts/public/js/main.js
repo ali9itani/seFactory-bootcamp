@@ -81,7 +81,8 @@ function saveProfileData(){
 	  	success: function(results) {
 			// display new list of errors
 	   		for (var i = 0; i < results.length; i++) {
-	   			$("#profile-save-status-msg").append('<li>'+results[i]+'</li>')
+	   			$("#profile-page-alert").append(results[i]);
+	   			$("#profile-page-alert").css('display', 'block');
 			}
 
 			//change profile image
@@ -99,7 +100,8 @@ function saveProfileData(){
 			}
 	  	},
 		error: function() {
-		    $("#profile-save-status-msg").append("<li>failed to save</li>");
+		    $("#profile-page-alert").append("failed to save");
+		    $("#profile-page-alert").css('display', 'block');
 		}
 	});
 }

@@ -11,7 +11,7 @@ use arts\User;
 
 class ExploreController extends Controller
 {
-    private $pagination_num = 10;
+    private $pagination_num = 30;
     /**
      * Display a listing of the posts by a random selection.
      */

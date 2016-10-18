@@ -12,46 +12,71 @@
         <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
         <script src="{{ asset('/js/vendor/modernizr-2.8.3.min.js') }}" ></script>
         @yield('header-content')
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
+    <style>
+    header .navbar-inverse {
+      background-color:#182945
+    }
+    .container-fluid {
+      padding-bottom: 25px;
+      height: 0px;
+    }
+    .nav {
+      background-color: #182945;
+    }
+    header .navbar-header a, nav navbar-nav a{
+      padding: 0px;
+
+    } 
+    .nav {
+      top: 4px
+    }
+    </style>
+
     <!-- header -->
-      <header id="page-header">
-        <div class="container-980px">
-
-          <div id="logo-section" class="display-inline-block">
-            <a href="{{url('/home')}}"><img id="logo" src="{{ asset('/img/logo.png') }}" /></a>
-
-              <nav class="nav">
-                <li><a id="header-explore-a" href="{{url('/explore')}}" class="header-options fix-anchor">EXPLORE</a>
-                    <ul class="subs">
-                        <li><a  href="{{url('/explore/artists')}}">Artists</a></li>
-                        <li><a  href="{{url('/explore/views')}}">Most Viewed</a></li>
-                        <li><a  href="{{url('/explore')}}">Random Posts</a></li>
-                    </ul>
-                </li>
-
-                @if(Auth::check())
+      <header class="container-fluid">
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="{{url('/home')}}" class="hidden-xs"><img id="logo" src="{{ asset('/img/logo.png') }}" /></a>
+            </div>
+            <ul class="nav navbar-nav">
+               <li class="dropdown"><a class="dropdown-toggle"  href="{{url('/explore')}}">EXPLORE<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a  href="{{url('/explore/artists')}}">Artists</a></li>
+                    <li><a  href="{{url('/explore/views')}}">Most Viewed</a></li>
+                    <li><a  href="{{url('/explore')}}">Random Posts</a></li>
+                </ul>
+              </li>
+              @if(Auth::check())
                 <li>
                   <a href="{{url('/home')}}" class="header-options fix-anchor">Home</a>
                 </li>
                 <li>
-                  <a href="{{url('/post/new')}}" class="fa fa-plus header-options fix-anchor">Post</a>
+                  <a href="{{url('/post/new')}}" class="header-options fix-anchor">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    <span class="xs-hidden">Post</span>
+                  </a>
                 </li>
-                @endif
-              </nav>
+              @endif
+            </ul>
+            <div class="display-inline-block float-right">
+              @include('header_menu')
+            </div
+          </div>
+        </nav>
 
-          </div>
-          <div class="display-inline-block float-right">
-            @include('header_menu')
-          </div>
-        </div>
-      </header>
+
+     </header>
 
       <!-- body and footer -->
       <div id="content">
 
         <!-- body -->
-        <div id="body-content-div">
+        <div id="body-content-div" class="container">
           @yield('body-content')
         </div>
 
