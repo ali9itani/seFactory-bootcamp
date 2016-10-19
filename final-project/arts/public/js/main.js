@@ -79,10 +79,10 @@ function saveProfileData(){
 		cache: false,
 		processData:false,
 	  	success: function(results) {
-			// display new list of errors
+			// display new list of results
+			$('#profile-page-alert').html('<div id="new-post-msg-box" class="alert alert-info alert-dismissable"><a class="panel-close close" data-dismiss="alert">×</a><i class="fa fa-coffee"></i></div>');
 	   		for (var i = 0; i < results.length; i++) {
-	   			$("#profile-page-alert").append(results[i]);
-	   			$("#profile-page-alert").css('display', 'block');
+	   			$("#new-post-msg-box").append(results[i]);
 			}
 
 			//change profile image
@@ -100,8 +100,7 @@ function saveProfileData(){
 			}
 	  	},
 		error: function() {
-		    $("#profile-page-alert").append("failed to save");
-		    $("#profile-page-alert").css('display', 'block');
+			  $('#profile-page-alert').html('<div id="new-post-msg-box" class="alert alert-info alert-dismissable"><a class="panel-close close" data-dismiss="alert">×</a><i class="fa fa-coffee"></i>failed to save</div>');
 		}
 	});
 }
@@ -142,7 +141,7 @@ function getSelectValues(select) {
  				newImg.style.width= '100px';
  				newImg.style.height= '100px';
 
-                document.getElementById('message').appendChild(newImg); 
+                document.getElementById('new-post-photos-display').appendChild(newImg); 
             }
             
             reader.readAsDataURL(inputs[i]);
@@ -184,15 +183,26 @@ function uploadPost() {
 	        processData : false,
 	        type        : 'POST',
 	        success     : function(data, textStatus, jqXHR){
-	            console.log(data);
+	            bootstrap_alert.warning(data);
+
+	            // empty uploader and form
+	            document.getElementById("post-images-form").reset();
+				$("#post-images-uploader").replaceWith($("#post-images-uploader").val('')
+								  .clone(true));
 	        },
 	        errors		:  function() {
-			    console.log('error');
+			   bootstrap_alert.warning('Error');
 			}
 	    });
 	}
 	
 }
+
+bootstrap_alert = function() {}
+bootstrap_alert.warning = function(message) {
+            $('#new-post-msg-box').html('<div  class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>'+message+'</span></div>')
+}
+
 
 function follow()
 {

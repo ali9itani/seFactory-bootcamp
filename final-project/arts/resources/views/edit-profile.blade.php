@@ -23,9 +23,8 @@
 	      
 	      <!-- edit form column -->
 	      <div class="col-md-9 personal-info">
-	        <div id="profile-page-alert" class="alert alert-info alert-dismissable">
-	          <a class="panel-close close" data-dismiss="alert">×</a> 
-	          <i class="fa fa-coffee"></i>
+	        <div id="profile-page-alert">
+	          
 	        </div>
 	        <h3>Personal info</h3>
 	        
@@ -33,13 +32,13 @@
 	          <div class="form-group">
 	            <label class="col-lg-3 control-label">Full name:</label>
 	            <div class="col-lg-8">
-	              <input class="form-control" type="text" name="fullName"  value="{{$current_user->full_name}}"/>
+	              <input class="form-control" required="true" type="text" name="fullName"  value="{{$current_user->full_name}}"/>
 	            </div>
 	          </div>
 	          <div class="form-group">
 	            <label class="col-lg-3 control-label">Birthdate:</label>
 	            <div class="col-lg-8">
-	              <input class="form-control" name="birthDate" type="date" value="{{$current_user->birth_date}}" />
+	              <input class="form-control" required="true" name="birthDate" type="date" value="{{$current_user->birth_date}}" />
 	            </div>
 	          </div>
 	          <div class="form-group">

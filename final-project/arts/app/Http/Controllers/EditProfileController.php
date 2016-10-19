@@ -48,8 +48,8 @@ class EditProfileController extends Controller
     {
         // validation profile info inputs   
         $validator = Validator::make($request->all(), [
-            'fullName' => 'max:50|alpha',
-            'birthDate' => 'date',
+            'fullName' => 'required|max:50',
+            'birthDate' => 'required|date',
             'bio' => 'max:200',
             'image' => 'mimes:jpeg,jpg,png|max:1000'
         ]);
@@ -68,14 +68,16 @@ class EditProfileController extends Controller
             //delete all his old arts 
             Artist_Art::where('artist_id', Auth::user()->id)->delete();
 
-            //save his selected arts
-            foreach ($arts_array as $value) {
-                 $artist_art = new Artist_art();
-                 
-                 $artist_art->insert(['art_id' => $value,
-                             'artist_id' => Auth::user()->id]);
+            if($arts_array[0]){
+                //save his selected arts
+                foreach ($arts_array as $value) {
+                     $artist_art = new Artist_art();
+                     
+                     $artist_art->insert(['art_id' => $value,
+                                 'artist_id' => Auth::user()->id]);
+                }
             }
-
+            
             $profile_photos_dir = '/public/img/profile-photo/';
 
             //check if there is animage to upload

@@ -16,7 +16,7 @@
 </style>
 <div class="row">
 	@if(Request::path() == 'explore' || Request::path() == 'explore/views')
-		<h1 class="row " style="margin: 0px;padding: 20px;">
+		<h1 class="row " style="margin: 0px;padding: 20px;text-decoration: underline;">
 			@if(Request::path() == 'explore')
 				{{'Random Exploration'}}
 			@else
@@ -27,7 +27,7 @@
 			<ul id="pg" class="row">
 				@foreach ($posts as $post)
 					<li class="col-xs-12 col-md-3 col-lg-1">
-						<img class="col-xs-12" class="img-responsive" src="{{asset('/img/posts-images')}}/{{ $post->firstResources()['resource_name'] }}"
+						<img class="col-xs-12" onclick="this.focus()" class="img-responsive" src="{{asset('/img/posts-images')}}/{{ $post->firstResources()['resource_name'] }}"
 						 alt="{{ $post->title }}">
 						<p>{{ $post->title }}</p>
 					</li> 

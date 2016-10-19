@@ -12,19 +12,23 @@
 
 #post-title {
     font-family: times, Times New Roman, times-roman, georgia, serif;
-    font-size: 28px;
+    font-size: 36px;
     line-height: 30px;
     letter-spacing: -1px;
-    color: #444;
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
-    font-weight: 100;
+    margin: 0;
+    padding: 0;
+    color: #111;
+    font-weight: 700;
 }
 
 #post-extras {
   margin-left: 15px;
+  border: 1px solid gray;
+  border-radius: 5px;
 }
-
+#post-extras span {
+  float: left;
+}
 footer {
 	margin-top: 40px;
 }
@@ -247,9 +251,10 @@ footer {
 	
 
     <div id="post-extras" class="row col-lg-4 col-xs-12">
+      <h2>Description & Comments</h2>
       <div class="row panel panel-default">
         <section class="post-popularity">
-        <span class="">{{$post->created_at}}</span>
+        <span class="">{{$post->created_at->format('d/m/Y g:i A')}}</span>
         <i class="fa fa-eye" aria-hidden="true"></i> {{ $post->view_count }}
         <i class="fa fa-comment" aria-hidden="true"></i> {{ $post->post_comments->count() }}
         <i class="fa fa-arrow-up" aria-hidden="true"></i>

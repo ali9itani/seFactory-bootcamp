@@ -111,11 +111,9 @@ class PostController extends Controller
                     $resource->save();
                 }
             }   
-    
-            // $user->save();
-            return "s";
+
+            return "success";
         }
-        // print_r($request->all());
     }
 
     public function rules($request)

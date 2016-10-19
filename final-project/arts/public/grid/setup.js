@@ -7,7 +7,7 @@ $(document).ready(function(){
 			padding: '0px'
 		},
 		selectedCSS: {
-			top: '15%',
+			top: '17%',
 			left: '30%',
 			width: '500px',
 			height: '360px',
