@@ -42,6 +42,10 @@ Route::group(['middleware' => ['auth']], function()
 	Route::get('/post/new','PostController@create');
 	Route::post('/post/new','PostController@store');
 	Route::post('/follow','ProfileController@follow');
+	Route::get('/post/{post_id}','PostDisplayController@display');
+	Route::post('/post/like','PostDisplayController@like');
+	Route::post('/post/comment','PostDisplayController@comment');
+	Route::post('/post/vote','PostDisplayController@vote');
 });
 
 

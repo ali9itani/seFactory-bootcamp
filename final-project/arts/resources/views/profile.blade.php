@@ -135,7 +135,7 @@
 
 	<div id="explore-page-grid">
 		@foreach ($posts as $post)
-		  <a href="{{asset('/img/posts-images')}}/{{$post->firstResources()['resource_name']}}">
+		  <a href="{{url('/post')}}/{{$post->post_id}}">
 		    <figure>
 		    	<div class="post-image-and-date">
 					<img src="{{asset('/img/posts-images')}}/{{$post->firstResources()['resource_name']}}" alt="">

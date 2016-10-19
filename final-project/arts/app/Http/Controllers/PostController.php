@@ -34,6 +34,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        dd(['a'=>'a']);
+        
         $rules = array(
             
         );
@@ -48,8 +50,8 @@ class PostController extends Controller
             //create new post and save it
             $post = new Post();
             $post->title = $request->title;
-            $post->text = $request->text;
-            $post->location = $request->location;
+            // $post->text = $request->text;
+            // $post->location = $request->location;
             $post->publisher_id = Auth::user()->id;
             $post->save();
 

@@ -11,13 +11,13 @@ class Post_comment extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('arts\User', 'artist_id', 'id');
     }
     /**
      * Get the post that owns the post_vote.
      */
     public function post()
     {
-        return $this->belongsTo('App\Post');
+        return $this->belongsTo('arts\Post');
     }
 }

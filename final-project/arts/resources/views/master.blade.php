@@ -81,7 +81,7 @@
         </div>
 
         <!-- footer -->
-        <footer>
+        <footer class="row">
           <p class="container-980px text-align-center">All RIGHTS ARE RESERVED</p>
         </footer>
 
