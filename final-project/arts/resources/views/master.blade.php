@@ -32,14 +32,22 @@
 
     } 
     .nav {
-      top: 4px
+      top: 4px;
     }
-    </style>
+    header .container-fluid {
+      margin: 0px;
+      padding: 0px;
+    }
+    .container-fluid {
+      padding: 0px;
+    }
+
+</style>
 
     <!-- header -->
       <header class="container-fluid">
         <nav class="navbar navbar-inverse">
-          <div class="container-fluid">
+          <div class="container">
             <div class="navbar-header">
               <a class="navbar-brand" href="{{url('/home')}}" class="hidden-xs"><img id="logo" src="{{ asset('/img/logo.png') }}" /></a>
             </div>

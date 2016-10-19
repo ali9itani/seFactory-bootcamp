@@ -10,11 +10,6 @@
     width: 100%;
 }
 
-.container-fluid  .container {
-	 min-height: 572px;
-   background-color: white;
-}
-
 #post-title {
     font-family: times, Times New Roman, times-roman, georgia, serif;
     font-size: 28px;
