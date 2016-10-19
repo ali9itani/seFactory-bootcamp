@@ -13,6 +13,7 @@ use arts\Post;
 use arts\Resource;
 use arts\Hash_tag;
 use arts\Post_hash_tag;
+use arts\Tag;
 
 class PostController extends Controller
 {
@@ -33,9 +34,7 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        dd(['a'=>'a']);
-        
+    {      
         $rules = array(
             
         );
@@ -50,8 +49,8 @@ class PostController extends Controller
             //create new post and save it
             $post = new Post();
             $post->title = $request->title;
-            // $post->text = $request->text;
-            // $post->location = $request->location;
+            $post->text = $request->text;
+            $post->location = $request->location;
             $post->publisher_id = Auth::user()->id;
             $post->save();
 
@@ -80,14 +79,15 @@ class PostController extends Controller
 
             }
 
-            //save tags
-            $tags = explode(",",$request->tags);
-
-            foreach ($tags as $value) {
-                $tag = new Tag();
-                $tag->insert(['post_id' => $post->id, 'artist_id'=> $value]);
-            }
-
+            if(isset($request->tags)){ 
+                //save tags
+               $tags = explode(",",$request->tags);
+   
+               foreach ($tags as $value) {
+                   $tag = new Tag();
+                   $tag->insert(['post_id' => $post->id, 'artist_id'=> $value]);
+               }
+           }
 
 
             //save images 

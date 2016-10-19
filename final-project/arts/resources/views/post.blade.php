@@ -9,8 +9,9 @@
 		<input type="text" name="location" placeholder="location">
 		<input type="text" name="hashtags" placeholder="hashtags">
 	    <input id="post-images-uploader" type="file" name="file[]" multiple><br />
-	    <input id="submit-post" type="submit">
+	    <input type="button" style="margin-bottom: 40px;" onclick="uploadPost()" id="submit-post" class="btn btn-primary" value="Post">
 	</form>
+
 	<div id="message">
 		
 	</div>

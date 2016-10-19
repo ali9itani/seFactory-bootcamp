@@ -165,7 +165,7 @@ function validateImageUploader(){
 }
 
 //on clicking a submit of post - it sends ajax request
-$( "#submit-post" ).click(function() {
+function uploadPost() {
 
 	if(validateImageUploader()){
 		var postImageForm = document.getElementById('post-images-form');
@@ -192,7 +192,7 @@ $( "#submit-post" ).click(function() {
 	    });
 	}
 	
-});
+}
 
 function follow()
 {
