@@ -48,7 +48,7 @@
 	        <div id="explore-page-artists-box">
 	        	@foreach ($users as $user)
 
-					<div class="explore-page-artist-block">
+					<div class="explore-page-artist-block well">
 						<div class="explore-page-artist-info">
 
 							<img class="artists-explore-artist-img" src="{!! $user->photo() !!}" />
@@ -73,13 +73,13 @@
 							 
 						</div>
 
-						@if($user->limitedPostsToSix->count())
+						@if($user->limitedPostsToFive->count())
 							<div class="explore-page-artist-posts">
-								@foreach ($user->limitedPostsToSix as $post)
+								@foreach ($user->limitedPostsToFive as $post)
 									<a 
-									href="{{asset('/img/posts-images')}}/{{ $post->resources[0]['resource_name'] }}">
+									href="{{asset('/img/posts-images')}}/{{ $post->firstResources()['resource_name'] }}">
 										<figure>
-											<img class="explore-artist-post-img" src="{{asset('/img/posts-images')}}/{{ $post->resources[0]['resource_name'] }}" alt="">
+											<img class="explore-artist-post-img" src="{{asset('/img/posts-images')}}/{{ $post->firstResources()['resource_name'] }}" alt="">
 										</figure>
 									</a>	
 								@endforeach

@@ -86,9 +86,9 @@ class User extends Authenticatable
     /**
      * Get the limit count of posts for the user.
      */
-    public function limitedPostsToSix()
+    public function limitedPostsToFive()
     {
-        return $this->hasMany('arts\Post', 'publisher_id', 'id')->limit(6);;
+        return $this->hasMany('arts\Post', 'publisher_id', 'id')->limit(5);;
     }
 
     /**
