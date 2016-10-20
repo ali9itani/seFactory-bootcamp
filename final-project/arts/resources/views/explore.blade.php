@@ -1,6 +1,8 @@
 @extends('master')
 @section('page-title','Explore')
 @section('header-content')
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link  href="{{ asset('/grid/style.css') }}" rel="stylesheet" type="text/css" media="all" /> 
 	<link  href="{{ asset('/grid/jphotogrid.css') }}" rel="stylesheet" type="text/css" media="screen" /> 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>

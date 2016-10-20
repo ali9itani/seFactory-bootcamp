@@ -11,7 +11,7 @@
 		color: white;
 	}
 </style>
-<div id="login-page-body-container" class="container-980px text-align-center">
+<div id="login-page-body-container" class="container-980px text-align-center container">
 	@include('auth/login')
 </div>
 @endsection

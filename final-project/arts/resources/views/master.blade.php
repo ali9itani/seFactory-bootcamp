@@ -77,9 +77,9 @@
                 </li>
               @endif
             </ul>
-            <div class="display-inline-block float-right">
+
               @include('header_menu')
-            </div
+
           </div>
         </nav>
 

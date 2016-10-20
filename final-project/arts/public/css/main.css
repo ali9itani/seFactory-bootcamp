@@ -166,6 +166,7 @@ footer {
 
 /*landing page styles*/
 .landing-page-body-divs {
+    display: inline-block;
     margin-top: 120px;
     background-color: rgba(232,232,240,0.6);
     color: #182945;
@@ -329,7 +330,7 @@ header .username-a {
     top: -16px;
 }
 #profile-page-profile-followig-section {
-    width: 45%;
+    width: 20%;
     display: block;
     position: relative;
     margin: 0 auto;

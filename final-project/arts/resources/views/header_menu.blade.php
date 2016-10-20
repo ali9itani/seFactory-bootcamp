@@ -1,32 +1,34 @@
-@if (Auth::guest())
-    <div id="header-user-div"  >
-        @if(Request::path() == 'login')
-            <a class="text-color-white fix-anchor" href="{{ url('/register') }}">Register</a>
-        @else 
-            <a class="text-color-white fix-anchor" href="{{ url('/login') }}">Login</a>
-        @endif
-    </div>
-@else
-    <!-- username and user icon tat is clickableto select an option -->
-    <div id="header-user-div" class="header-icons" >
-        <a class="username-a fix-anchor" href="{{ url('/me') }}">{{ Auth::user()->username }}</a>
-        <i id="options-icon" class="fa fa-user cursor-pointer"></i>
-    </div>
-    <div  id="header-options-block">
-      <div class="arrow-up"></div>
-      <div class="header-options-menu">
-        <ul class="fix-list-ul header-options-ul">
-            <li><a href="{{ url('/me/edit') }}" >Edit Profile</a></li>
-            <li><a  class="fix-anchor" href="{{ url('/logout') }}"
-            onclick="event.preventDefault();
-                     document.getElementById('logout-form').submit();">
-            Logout
-            </a></li>
+<ul class="nav navbar-nav navbar-right">
+    <!-- Authentication Links -->
+    @if (Auth::guest())
 
-            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                {{ csrf_field() }}
-            </form>
-        </ul>
-      </div>
-    </div>
-@endif
+        @if(Request::path() == 'login')
+             <li><a href="{{ url('/register') }}">Register</a></li>
+        @else 
+            <li><a href="{{ url('/login') }}">Login</a></li>
+        @endif
+
+    @else
+        <li><a href="{{ url('/me') }}">{{ Auth::user()->username }}</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                {{ Auth::user()->name }} <span class="caret"></span>
+            </a>
+
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ url('/me/edit') }}" >Edit Profile</a></li>
+                <li>
+                    <a href="{{ url('/logout') }}"
+                        onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                        Logout
+                    </a>
+
+                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                </li>
+            </ul>
+        </li>
+    @endif
+</ul>
