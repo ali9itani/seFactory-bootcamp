@@ -4,7 +4,7 @@ $(document).ready(function(){
 		baseCSS: {
 			width: '175px',
 			height: '117px',
-			padding: '0px'
+			padding: '15px'
 		},
 		selectedCSS: {
 			top: '17%',
@@ -14,5 +14,5 @@ $(document).ready(function(){
 			padding: '10px'
 		}
 	});
-		
+	
 });

@@ -15,23 +15,28 @@
 #body-content-div {
     background-color: white;
 }
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 </style>
 <div class="row">
 	@if(Request::path() == 'explore' || Request::path() == 'explore/views')
-		<h1 class="row " style="margin: 0px;padding: 20px;text-decoration: underline;">
+		<h1 class="row text-align-center" style="margin: 0px;padding: 20px;text-decoration: underline;">
 			@if(Request::path() == 'explore')
 				{{'Random Exploration'}}
 			@else
 				{{'By Views Exploration'}}
 			@endif
 		</h1>
-		<div class="container">
-			<ul id="pg" class="row">
+		<div >
+			<ul id="pg">
 				@foreach ($posts as $post)
-					<li class="col-xs-12 col-md-3 col-lg-1">
-						<img class="col-xs-12" onclick="this.focus()" class="img-responsive" src="{{asset('/img/posts-images')}}/{{ $post->firstResources()['resource_name'] }}"
+					<li style="width:14.2%;">
+						<img onclick="this.focus()" class="img-responsive" src="{{asset('/img/posts-images')}}/{{ $post->firstResources()['resource_name'] }}"
 						 alt="{{ $post->title }}">
-						<p>{{ $post->title }}</p>
+						<a  class="ellipsis" href="{{url('/post')}}/{{$post->post_id}}">{{ $post->title}}</a>
 					</li> 
 				@endforeach
 			</ul>
@@ -50,7 +55,6 @@
 
 					<div class="explore-page-artist-block well">
 						<div class="explore-page-artist-info">
-
 							<img class="artists-explore-artist-img" src="{!! $user->photo() !!}" />
 							<div class="artist-explore-artist-text-info">
 								<a href="{{url('/artist/')}}/{!! $user->username !!}"
