@@ -2,25 +2,27 @@
 @section('page-title','Welcome')
 @section('body-content')
 <style type="text/css">
-	body {
+	#content {
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-image: linear-gradient(to bottom, rgba(133,80,133, 0.5), rgba(0, 0, 0, 0.5)), url('img/background.jpg');
 	}
 
-	footer {
-		color: white;
-	}
-
-	header .navbar-inverse {
-		background-color: rgba( 24, 41, 69, 0.5);
-	}
-
+	body {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: linear-gradient(to bottom, rgba(133,80,133, 0.5), rgba(0, 0, 0, 0.5)), url('img/background.jpg');
+    }
+    footer {
+        color: white;
+    }
+    header .navbar-inverse {
+      background-color: rgba( 24, 41, 69, 0.5);
+    }   
 	.landing-page-body-divs:nth-child(2) {
 		right: 110px;
 		position: relative;
 	}
-
 </style>
 <div id="landing-page-body-container" class="container-980px container-height-default text-align-center row container">
 	<div class="landing-page-body-divs xs-hidden" >

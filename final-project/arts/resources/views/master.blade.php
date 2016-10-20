@@ -52,13 +52,13 @@
               <a class="navbar-brand" href="{{url('/home')}}" class="hidden-xs"><img id="logo" src="{{ asset('/img/logo.png') }}" /></a>
             </div>
             <ul class="nav navbar-nav">
-               <li class="dropdown"><a class="dropdown-toggle"  href="{{url('/explore')}}">EXPLORE<span class="caret"></span></a>
+               <li class="dropdown"><a class="dropdown-toggle"  data-toggle="dropdown" href="{{url('/explore')}}">EXPLORE<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a  href="{{url('/explore/artists')}}">Artists</a></li>
                     <li><a  href="{{url('/explore/views')}}">Most Viewed</a></li>
                     <li><a  href="{{url('/explore')}}">Random Posts</a></li>
                 </ul>
-              </li>
+              </li>   
               @if(Auth::check())
                 <li>
                   <a href="{{url('/home')}}" class="header-options fix-anchor">Home</a>

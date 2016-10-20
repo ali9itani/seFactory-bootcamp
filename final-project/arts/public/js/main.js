@@ -251,13 +251,13 @@ function followListDisplay(num) {
 	if(num == 0){	
 		following_count_buttons[0].style.backgroundColor = "wheat";
 		following_count_buttons[1].style.backgroundColor = "white";
-		followers_list.style.visibility = "visible";
-		following_list.style.visibility = "hidden";
+		followers_list.style.display = "block";
+		following_list.style.display = "none";
 
 	} else if (num == 1) {
 		following_count_buttons[0].style.backgroundColor = "white";
 		following_count_buttons[1].style.backgroundColor = "wheat";
-	    followers_list.style.visibility = "hidden";
-		following_list.style.visibility = "visible";
+	    followers_list.style.display = "none";
+		following_list.style.display = "block";
 	}
 }

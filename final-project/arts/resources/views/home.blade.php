@@ -41,7 +41,7 @@
 
         <!-- Posts Content Column -->
         <div class="left-column row col-lg-8 col-xs-12">
-
+        @if(isset($posts[0]))
         @foreach($posts[0] as $post)
             <!-- Post -->
            <div class="home-post well row col-lg-11 col-lg-offset-1">
@@ -90,6 +90,9 @@
 	            <hr>
 	        </div>
 	        @endforeach
+            @else 
+                No posts yet, make sure you follow someone
+            @endif
         </div>
 
             <!-- home Sidebar Column -->

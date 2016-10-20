@@ -89,8 +89,6 @@ textarea {
 .container-height-default {
     min-height: 571px;
 }
-header {
-}
 header .container-980px {
     position: relative
 }
@@ -137,6 +135,9 @@ footer {
 }
 .text-align-center {
     text-align: center;
+}
+.text-align-left {
+    text-align: left;
 }
 .fix-anchor {
     text-decoration: none
@@ -271,7 +272,7 @@ background-color: #182945;
 /*contains logout menu and arrow*/
 #header-options-block {
     position: fixed;
-    right: 57px;
+    right: 42px;
     top: 42px;
     visibility: hidden;
 }
@@ -350,12 +351,10 @@ header .username-a {
     top: -16px;
 }
 #profile-page-profile-followig-section {
-    width: 35%;
-    display: inline-block;
-    height: 90%;
-    position: absolute;
-    padding-top: 22px;
-    padding-left: 15px;
+    width: 45%;
+    display: block;
+    position: relative;
+    margin: 0 auto;
 }
 .following-count{
     background-color: white;
@@ -373,7 +372,6 @@ header .username-a {
     font-weight: bold;
 }
 .follow-button {
-    margin: 80px;
     width: 160px;
     height: 38px;
     background-color: green;
@@ -382,7 +380,6 @@ header .username-a {
 }
 .following-button{
     background-color: gray; 
-    margin: 80px;
     width: 160px;
     height: 38px;
     color: white;
@@ -462,7 +459,6 @@ header .username-a {
    position: relative; 
    width: 100%; /* for IE 6 */
 }
-
 .post-image-and-date span { 
     position: absolute;  
     left: 0; 
@@ -478,16 +474,14 @@ header .username-a {
 #follow-text {
     background-color: none;
 }
-
 .profile-following-list-div {
     background-color: white;
     overflow-y: scroll;
-    max-height: 75%;
     margin-top: 15px;
-    position: absolute;
-    width: 95%;
-    top: 40px;
+    position: relative;
+    top: 20px;
     overflow-x: hidden;
+    max-height: 100px;
 }
 .profile-following-list-div  ul {
     list-style-type: none;
@@ -578,7 +572,6 @@ header .username-a {
 #explore-page-grid {
     position: relative;
     bottom: 50px;
-    width: 90%;
     margin: 0 auto;
     /* Prevent vertical gaps */
     line-height: 0;
@@ -807,6 +800,8 @@ header .username-a {
     margin: 25px auto;
     margin-top: 14px;
     width: 200px;
+    padding-bottom: 40px;
+    padding-right: 204px;
 }
 
 #edit-profile-save-button {
