@@ -37,11 +37,11 @@ Route::group(['middleware' => ['auth']], function()
 {
 	Route::get('/me','ProfileController@displayMyProfile');
 	Route::get('/me/edit','EditProfileController@index');
-	Route::post('/profile/me/edit','EditProfileController@store');
+	Route::post('/me/edit','EditProfileController@store');
 	Route::get('/home','HomeController@index');
 	Route::get('/post/new','PostController@create');
 	Route::post('/post/new','PostController@store');
-	Route::post('/follow','ProfileController@follow');
+	Route::post('/artist/{username}','ProfileController@follow');
 	Route::get('/post/{post_id}','PostDisplayController@display');
 	Route::post('/post/like','PostDisplayController@like');
 	Route::post('/post/comment','PostDisplayController@comment');

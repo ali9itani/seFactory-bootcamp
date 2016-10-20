@@ -289,28 +289,29 @@ footer {
             </div>
             <div class="actionBox">
                 <ul class="commentList">
-                  @foreach($post->post_comments as $comment)
-                    <li>
-                        <div class="commenterImage">
-                          <img src="{!! $post->user->photo() !!}"/>
-                        </div>
-                        <div class="commentText">
-                            <b>{!! $comment->user->username !!}</b>
-                            <p class="">{{$comment->comment}}.</p> 
-                            <span class="date sub-text">{{$comment->created_at->format('Y-m-d')}}</span>
+                  <li id="comments-box">
+                    @foreach($post->post_comments as $comment)
+                          <div class="commenterImage">
+                            <img src="{!! $post->user->photo() !!}"/>
+                          </div>
+                          <div class="commentText">
+                              <b>{!! $comment->user->username !!}</b>
+                              <p class="">{{$comment->comment}}.</p> 
+                              <span class="date sub-text">{{$comment->created_at->format('Y-m-d')}}</span>
 
-                        </div>
-                    </li>
-                  @endforeach
+                          </div>
+                    @endforeach
+                  </li>
                 </ul>
-                <form class="form-inline" role="form">
+                <form id="comment-form" data-id="{{$post->post_id}}" class="form-inline" role="form">
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Your comments" />
+                        <input class="form-control" name="comment" max-length="200" type="text" placeholder="Your comments" />
                     </div>
-                    <div class="form-group">
-                        <button class="btn btn-default">Add</button>
-                    </div>
+                    {{ csrf_field() }}
                 </form>
+                <div class="form-group">
+                    <button class="btn btn-default" onclick="comment()">Add</button>
+                </div>
           </div>
         </div>
     </div>

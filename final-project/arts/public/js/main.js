@@ -4,8 +4,6 @@ function saveProfileData(){
 	// empty old list of errors
 	$("#profile-save-status-msg").empty();
 
-	var url = "/arts/public/profile/me/edit";
-
 	//getting form data
 	var form = document.getElementById('edit-profile-form');
 	var formData = new FormData(form);
@@ -26,7 +24,6 @@ function saveProfileData(){
 	}
 	
 	$.ajax({
-	   	url: '/arts/public/profile/me/edit',
 	   	data: formData,
 		type: 'POST',
 	   	contentType: false,
@@ -130,7 +127,6 @@ function uploadPost() {
 	    }
 
 	    $.ajax({
-	        url         : '/arts/public/post/new',
 	        data        : formdata ? formdata : form.serialize(),
 	        cache       : false,
 	        contentType : false,
@@ -169,7 +165,6 @@ function follow()
 	formData.append('userName', userName);
 
 	$.ajax({
-		url         : '/arts/public/follow',
 		data        : formData,
 		cache       : false,
 		contentType : false,
@@ -214,4 +209,47 @@ function followListDisplay(num) {
 	    followers_list.style.display = "none";
 		following_list.style.display = "block";
 	}
+}
+
+//add a comment on post
+function comment()
+{
+	//getting form data
+	var form = document.getElementById('comment-form');
+	var formData = new FormData(form);
+
+	var formData = new FormData(form);
+	formData.append('comment', formData.get('comment'));
+	formData.append('postId', $(form).attr("data-id"));
+
+	//add comment to comments box
+	var commentsBox = document.getElementById('comments-box');
+
+
+	//create comment object
+	var new_comment = document.createElement("p");
+	var b_tag = document.createElement("b");
+
+	var user = document.createTextNode('you : ');
+	var comment_node = document.createTextNode(formData.get('comment'));
+
+	b_tag.appendChild(user);
+	
+
+	//append comment to comments box
+	commentsBox.appendChild(new_comment);
+
+	$.ajax({
+		url         : 'comment',
+		data        : formData,
+		cache       : false,
+		contentType : false,
+		processData : false,
+		type        : 'POST',
+		success     : function(data, textStatus, jqXHR){
+			new_comment.appendChild(b_tag);
+			new_comment.appendChild(comment_node);
+			form.reset()
+		},
+	});
 }

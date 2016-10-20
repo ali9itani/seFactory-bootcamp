@@ -20,6 +20,9 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+h1 {
+	text-align: center;
+}
 </style>
 <div class="row">
 	@if(Request::path() == 'explore' || Request::path() == 'explore/views')
