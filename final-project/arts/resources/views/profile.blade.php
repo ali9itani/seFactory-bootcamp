@@ -123,7 +123,7 @@
 				</section>
 
 			<!-- Two -->
-				<section id="two">
+				<section id="two" style="padding-top: 20px;">
 					<h2>Posts</h2>
 					<div class="row">
 						<div id="explore-page-grid">
