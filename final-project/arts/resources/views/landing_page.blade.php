@@ -19,21 +19,15 @@
     header .navbar-inverse {
       background-color: rgba( 24, 41, 69, 0.5);
     }   
-	.landing-page-body-divs:nth-child(2) {
-		right: 110px;
-		position: relative;
-	}
 </style>
 <div id="landing-page-body-container" class="container-980px container-height-default text-align-center row container">
-	<div class="landing-page-body-divs xs-hidden" >
+	<div class="landing-page-body-divs hidden-xs col-md-4 col-md-offset-2" >
 		<h1>Our arts platform</h1>
 		<!-- an intro for the website and its purpose -->
 		<p class="landing-page-intro-p">DotArts a web platform dedicate for visual artists and arts
 		</p>
 		<p class="landing-page-intro-p">Its a social media look like, where you can share your art
-		and it
-		</p>
-		<p class="landing-page-intro-p">It connect you with your audience and other artists, so you
+		and it. It connect you with your audience and other artists, so you
 		 can get benefit of their feedback or at least you can get inspired by other artists
 		</p>
 		<p class="landing-page-intro-p">It supports up/down voting  mechanism that helps you knowing
@@ -41,7 +35,7 @@
 		</p>
 	</div>
 	<!-- list of buttons to connect to different social media  -->
-	<div class="landing-page-body-divs float-right" style="">
+	<div class="landing-page-body-divs col-xs-12 col-md-4 col-md-offset-1" style="">
 		<h1>Become an artist</h1>
 		<!-- signup new artist account -->
 		<div>

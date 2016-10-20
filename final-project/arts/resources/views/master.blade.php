@@ -52,7 +52,7 @@
         <nav class="navbar navbar-inverse">
           <div class="container">
             <div class="navbar-header">
-              <a class="navbar-brand" href="{{url('/home')}}" class="hidden-xs"><img id="logo" src="{{ asset('/img/logo.png') }}" /></a>
+              <a class="navbar-brand" href="{{url('/home')}}"><img id="logo" src="{{ asset('/img/logo.png') }}" /></a>
             </div>
             <ul class="nav navbar-nav">
 

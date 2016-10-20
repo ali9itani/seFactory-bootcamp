@@ -166,8 +166,6 @@ footer {
 
 /*landing page styles*/
 .landing-page-body-divs {
-    width: 35%;
-    display: inline-block;
     margin-top: 120px;
     background-color: rgba(232,232,240,0.6);
     color: #182945;
