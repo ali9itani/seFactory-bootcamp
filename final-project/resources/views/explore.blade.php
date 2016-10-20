@@ -46,7 +46,7 @@ h1 {
 		</div>
 
 		<!-- pagination div -->
-		<div class="row"  >{{ $posts->links() }}</div>
+		<div class="row" style="min-height: 500px;">{{ $posts->links() }}</div>
 
 	<!-- artists exploration section -->
 	@elseif(Request::path() == 'explore/artists')

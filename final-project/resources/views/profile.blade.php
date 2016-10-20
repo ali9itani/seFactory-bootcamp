@@ -36,7 +36,7 @@
 	<!-- Profile Header -->
 		<div id="header" class="row">
 			<div class="inner">
-				<a href="#"  style="width:auto;" class="image avatar col-md-8 col-md-offset-2"><img style="height: 200px;margin-right: 65px;" src="{!! $artist[0]->photo() !!}" alt="" /></a>
+				<a href="#"  style="width:auto;" class="image avatar col-md-8 col-md-offset-2"><img style="height: 200px;margin-left: 40px;width: 200px;" src="{!! $artist[0]->photo() !!}" alt="" /></a>
 				<div class="row text-align-center" id="artist-details">
 					<h1 class="row col-lg-12"><span id="profile-username-span" class="col-lg-12 text-align-center">{{$artist[0]->username}}</span></h1>
 					<div class="row col-lg-12">

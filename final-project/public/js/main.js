@@ -118,6 +118,10 @@ function validateImageUploader(){
 function uploadPost() {
 
 	if(validateImageUploader()){
+		//uploading
+		var uploadingStat = document.getElementById('uploading-img');
+		uploadingStat.style.display = "block";
+
 		var postImageForm = document.getElementById('post-images-form');
 	    var form = postImageForm;
 	    var formdata = false;
@@ -139,9 +143,21 @@ function uploadPost() {
 	            document.getElementById("post-images-form").reset();
 				$("#post-images-uploader").replaceWith($("#post-images-uploader").val('')
 								  .clone(true));
+
+				document.getElementById('new-post-photos-display').innerHTML = '<p>your photos</p>';
+
+				//end uploading popup
+				var delay=1000; //1 second
+
+				setTimeout(function() {
+				  uploadingStat.style.display = "none";
+				}, delay);
+				
 	        },
 	        errors		:  function() {
-			   bootstrap_alert.warning('Error');
+				bootstrap_alert.warning('Error');
+				//end uploading popup
+				uploadingStat.style.display = "none";
 			}
 	    });
 	}

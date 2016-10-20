@@ -19,6 +19,7 @@
 
 	.left-column {
 		margin-left: 5px;
+		min-height: 500px;
 	}
 
 	#post-img {
@@ -114,11 +115,13 @@
 
                 <!-- Side Widget Well -->
                 <div class="well">
+                <h4>Random Post</h4>
+                @if(isset($random_post->post_id))
                     <a href="{{url('/post')}}/{{$random_post->post_id}}">
-                        <h4>Random Post</h4>
                         <img style="max-height:250px;max-width:300px;" src="{{asset('/img/posts-images')}}/{{$random_post->firstResources()['resource_name']}}" alt="">
                         <p>{{$random_post->text}}</p>
                     </a>
+                @endif
                 </div>
 
             </div>

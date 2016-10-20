@@ -107,9 +107,21 @@
 #post-images-uploader {
 	color: white;
 }
+
+#uploading-img {
+    display: none; /* Hidden by default */
+	width: 600px;
+	margin: 0 auto;
+	height: 10px;
+	left: 330px;
+}
+
+
 </style>
 <div id="post-body-container" class="container-980px container-height-default text-align-center">
-	<div class="row" id="new-post-msg-box"></div>
+	<div class="row" id="new-post-msg-box">	<!-- The Modal for uploading -->
+	</div>
+	<img id="uploading-img" src="{{asset('/img/uploading.gif')}}"/>
 	<!-- post section starts here -->
 	<section class="post">
 		<form id="post-images-form" enctype="multipart/form-data">
@@ -134,20 +146,16 @@
 							
 					<div class="col-md-6 new-post-form">
 							<h3>Description</h3>
-
-								<input required="true" name="title" type="text" placeholder="Title"/>
+								<input required="true" name="title" type="text" value="The arts represent an outlet of expression" maxLength="50" placeholder="Title"/>
 								<input type="text" name="location" placeholder="Location"/>
 								<input type="text"  name="hashtags" placeholder="Hashtags"/>
-								<textarea class="message" name="text" cols="30" rows="10" placeholder="Text"></textarea>
+								<textarea class="message" maxLength="400" name="text" cols="30" rows="10" placeholder="Text">Art is a diverse range of human activities in creating visual, auditory or performing artifacts (artworks), expressing the author's imaginative or technical skill, intended to be appreciated for their beauty or emotional power.</textarea>
 								<input type="button" onclick="uploadPost()" id="submit-post" class="btn btn-primary submit-btn" value="Post">
-
 						</div>
-
 					</div>
 				</div>
 			</div>
 		</form>
-	</section><!-- end of post section -->    
+	</section><!-- end of post section --> 
 </div>
 @endsection
-
