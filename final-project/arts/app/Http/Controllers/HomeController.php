@@ -28,6 +28,8 @@ class HomeController extends Controller
     {
         $user = $this->getCurrentUser()->first();
 
+        $random_post = Post::inRandomOrder()->first();
+
         $posts = [];
         foreach ($user->following as $follows) {
 
@@ -35,7 +37,7 @@ class HomeController extends Controller
             array_push($posts, $post);  
         }
 
-        return view('home')->with(compact('user'))->with(compact('posts'));
+        return view('home')->with(compact('user'))->with(compact('posts'))->with(compact('random_post'));
     }
 
     // get info of current logged user

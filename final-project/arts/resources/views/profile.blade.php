@@ -100,6 +100,11 @@
 					@endif
 
 				@else
+					<style>
+						#profile-page-profile-followig-section {
+							width: 20%;
+						}
+					</style>
 					<section id="following-status">
 						<!-- if any registered user is displaying another user account -->
 						<form id="follow-form">

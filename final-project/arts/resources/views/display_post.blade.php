@@ -1,8 +1,6 @@
 @extends('master')
 @section('page-title','Explore')
 @section('header-content')
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 @endsection
 @section('body-content')
 <style>
@@ -29,6 +27,8 @@
 }
 #post-extras span {
   float: left;
+  font-size: 14px;
+  margin-top: 5px;
 }
 footer {
 	margin-top: 40px;
@@ -180,6 +180,10 @@ footer {
     });
 </script>
 <style>
+    .page-header {
+        padding-bottom: 0px;
+        margin: 20px 0 20px;
+    }
     /* jssor slider arrow navigator skin 05 css */
     /*
     .jssora05l                  (normal)
@@ -215,6 +219,10 @@ footer {
 
   <div class="page-header">
     <h1 id="post-title" class="row">{{$post->title}}</h1>
+    <!-- Author -->
+    <p class="lead">
+        by <a href="{{url('/artist/')}}/{{$post->user->username}}">{{$post->user->username}}</a>
+    </p>
   </div>
 
 	<div id="jssor_1" class="row col-lg-5 col-lg-offset-1 col-xs-12" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 800px; height: 456px; overflow: hidden; visibility: hidden; background-color: #24262e;">

@@ -212,6 +212,6 @@ function followListDisplay(num) {
 		following_count_buttons[0].style.backgroundColor = "white";
 		following_count_buttons[1].style.backgroundColor = "wheat";
 	    followers_list.style.display = "none";
-		following_list.style.visibility = "block";
+		following_list.style.display = "block";
 	}
 }
